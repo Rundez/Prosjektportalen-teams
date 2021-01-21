@@ -1,7 +1,8 @@
 import { Callout } from 'office-ui-fabric-react/lib/Callout'
 import * as React from 'react';
-import { replaceTokens } from 'shared/lib/util/replaceTokens'
 import { IRiskElementCalloutProps } from './types'
+import { ITypedHash } from '@pnp/common'
+
 
 export const RiskElementCallout: React.FunctionComponent<IRiskElementCalloutProps> = ({
   risk,
@@ -10,6 +11,7 @@ export const RiskElementCallout: React.FunctionComponent<IRiskElementCalloutProp
   onDismiss
 }: IRiskElementCalloutProps) => {
   const content = replaceTokens(calloutTemplate, risk.item)
+
   return (
     <Callout
       styles={{ root: { minWidth: 250, padding: 10 } }}
@@ -18,4 +20,16 @@ export const RiskElementCallout: React.FunctionComponent<IRiskElementCalloutProp
       <span dangerouslySetInnerHTML={{ __html: content }}></span>
     </Callout>
   )
+}
+
+
+export function replaceTokens(
+  str: string,
+  obj: ITypedHash<any>,
+  regex: RegExp = /\{[A-Za-z]*\}/gm
+): string {
+  return str.match(regex).reduce((s, value) => {
+    const field = value.substring(1, value.length - 1)
+    return s.replace(value, obj[field] || '')
+  }, str)
 }

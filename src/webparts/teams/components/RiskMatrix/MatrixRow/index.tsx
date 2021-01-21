@@ -1,6 +1,5 @@
 import { Toggle } from 'office-ui-fabric-react/lib/Toggle'
-import * as strings from 'ProjectWebPartsStrings'
-import React, { FunctionComponent } from 'react'
+import * as React from 'react';
 import { RiskElementModel } from '../'
 import { IMatrixCell, MatrixCell, MatrixCellType, MatrixHeaderCell } from '../MatrixCell'
 import { RiskElement } from '../RiskElement'
@@ -8,7 +7,7 @@ import RISK_MATRIX_CELLS from '../RiskMatrixCells'
 import styles from './MatrixRow.module.scss'
 import { IMatrixRowProps } from './types'
 
-export const MatrixRow: FunctionComponent<IMatrixRowProps> = ({ children }: IMatrixRowProps) => {
+export const MatrixRow: React.FunctionComponent<IMatrixRowProps> = ({ children }: IMatrixRowProps) => {
   return <tr className={styles.matrixRow}>{children}</tr>
 }
 
@@ -89,9 +88,9 @@ export const MatrixRows = ({ items, calloutTemplate }) => {
     <>
       {children}
       <Toggle
-        label={strings.RiskMatrix_ToggleElements}
-        onText={strings.Yes}
-        offText={strings.No}
+        label={"Vis før/etter"}
+        onText={"Ja"}
+        offText={"Nei"}
         onChange={(_event, _showPostAction) => setShowPostAction(_showPostAction)}
       />
     </>

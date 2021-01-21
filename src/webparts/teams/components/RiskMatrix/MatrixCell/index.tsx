@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react'
+import * as React from 'react';
 import { IMatrixCellProps } from './types'
 import styles from './MatrixCell.module.scss'
 
-export const MatrixCell: FunctionComponent<IMatrixCellProps> = ({
+export const MatrixCell: React.FunctionComponent<IMatrixCellProps> = ({
   style,
   children
 }: IMatrixCellProps) => {
@@ -17,7 +17,7 @@ export interface IMatrixHeaderCellProps extends React.HTMLProps<HTMLElement> {
   label: string
 }
 
-export const MatrixHeaderCell: FunctionComponent<IMatrixHeaderCellProps> = (
+export const MatrixHeaderCell: React.FunctionComponent<IMatrixHeaderCellProps> = (
   props: IMatrixHeaderCellProps
 ) => {
   return (
