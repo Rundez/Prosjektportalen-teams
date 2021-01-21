@@ -1,5 +1,4 @@
 import { IMatrixCell, MatrixCellType } from './MatrixCell'
-import * as strings from 'ProjectWebPartsStrings'
 
 const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   [
@@ -8,34 +7,34 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
       className: 'risk-header'
     },
     {
-      cellValue: strings.RiskMatrix_Header_Insignificant,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: strings.RiskMatrix_Header_Small,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: strings.RiskMatrix_Header_Moderate,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: strings.RiskMatrix_Header_Serious,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: strings.RiskMatrix_Header_Critical,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     }
   ],
   [
     {
-      cellValue: strings.RiskMatrix_Header_VeryHigh,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -77,7 +76,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: strings.RiskMatrix_Header_High,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -119,7 +118,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: strings.RiskMatrix_Header_Medium,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -161,7 +160,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: strings.RiskMatrix_Header_Low,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -203,7 +202,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: strings.RiskMatrix_Header_VeryLow,
+      cellValue: "strings.RiskMatrix_Header_Insignificant",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },

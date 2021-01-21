@@ -1,14 +1,14 @@
 export interface IRiskMatrixProps {
-  items?: RiskElementModel[]
-  width?: number | string
-  height?: number | string
-  calloutTemplate: string
+  items?: RiskElementModel[];
+  width?: number | string;
+  height?: number | string;
+  calloutTemplate: string;
 }
 
 export interface IRiskElementItem {
-  Id: number
-  Title: string
-  [key: string]: any
+  Id: number;
+  Title: string;
+  [key: string]: any;
 }
 
 export class RiskElementModel {

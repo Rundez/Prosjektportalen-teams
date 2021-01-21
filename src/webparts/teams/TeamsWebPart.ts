@@ -7,7 +7,7 @@ import {
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
-import * as strings from 'TeamsWebPartStrings';
+//import * as strings from 'ProjectWebPartStrings';
 import Teams from './components/Teams';
 import { ITeamsProps } from './components/ITeamsProps';
 import { WebPartContext } from "@microsoft/sp-webpart-base";    
@@ -48,7 +48,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: "Property pane description.. placeholder"
           },
           groups: [
             {
