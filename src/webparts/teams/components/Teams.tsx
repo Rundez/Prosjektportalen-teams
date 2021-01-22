@@ -27,7 +27,9 @@ export default function Teams(props: ITeamsWebPartProps) {
 
     setItems(data);
   }
+
   console.log(items);
+
   return (
     <Router>
       <Provider theme={teamsTheme}>
