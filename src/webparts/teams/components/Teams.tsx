@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import styles from './Teams.module.scss';
 import { ITeamsWebPartProps } from '../TeamsWebPart';
@@ -30,18 +30,23 @@ export default function Teams(props: ITeamsWebPartProps) {
 
   console.log(items);
 
+  const style = {
+    backgroundColor: "rgb(243, 242, 241)"
+  }
+
   return (
     <Router>
       <Provider theme={teamsTheme}>
+        <div style={{backgroundColor: style.backgroundColor}}>
         <Navbar />
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/riskmatrix" component={RiskMatrix}/>
         </Switch>
+        </div>
       </Provider>
     </Router>
-
-
   );
-
 }
+
+
