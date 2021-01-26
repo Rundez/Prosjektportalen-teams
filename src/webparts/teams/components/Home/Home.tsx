@@ -1,11 +1,16 @@
 import * as React from 'react';
-import {Text} from '@fluentui/react-northstar';
+import {Text, Button, Flex} from '@fluentui/react-northstar';
 
 export default function Home() {
 
     return (
         <div>
-            <Text content="This is the homepage" />
+            <Flex>
+                <Text content="This is the homepage" />
+            </Flex>
+            <Flex>
+                <Button content="Hei alle sammen." />
+            </Flex>
         </div>
     )
 }
