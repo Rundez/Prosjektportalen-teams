@@ -1,11 +1,10 @@
 import React, { useState, FunctionComponent } from 'react';
-import { Header } from '@fluentui/react-northstar';
+import { Header, Button, Input } from '@fluentui/react-northstar';
 
 interface ISubProps {
     name1?: string,
     name2?: string,
     name3?: string,
-    children: React.ReactNode,
 }
 
 export const Sub: FunctionComponent<ISubProps> = (props) => {
@@ -14,10 +13,8 @@ export const Sub: FunctionComponent<ISubProps> = (props) => {
         <div>
             <Header content={props.name1} />
             <Header content={props.name2} />
-            <div>
-                {props.children}
-            </div>
-
+            <Button content="Content"  />
+            <Input label="Dette er en input" inverted />
         </div>
     )
 }
