@@ -14,14 +14,14 @@ import "@pnp/sp/items";
 
 export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
   //items = [],
-  //width = 400,
-  //height = 300,
+  width = 400,
+  height = 300,
   calloutTemplate
 }: IRiskMatrixProps) => {
 
   const [data, setData] = React.useState<RiskElementModel[]>([]);
   const [isLoading, setLoading] = React.useState(true);
-
+  
   React.useEffect(() => {
     _getItems();
   }, []);
@@ -48,8 +48,9 @@ export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
   console.log(data);
 
   return (
-    <>
+    <> 
       {isLoading ? <Loader label="Content loading" /> :
+      <div style={{width: width, height: height}}>
         <div className={styles.riskMatrix}>
           <table className={styles.table}>
             <tbody>
@@ -58,6 +59,7 @@ export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
           </table>
           <Divider />
           <Modal />
+        </div>
         </div>
       }
     </>

@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navigation/Navbar';
 import { RiskMatrix } from './RiskMatrix/index'
 import Home from './Home/Home';
+import { ProjectStatus } from './ProjectStatus/index'
 
 
 import { sp } from "@pnp/sp";
@@ -42,6 +43,7 @@ export default function Teams(props: ITeamsWebPartProps) {
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/riskmatrix" component={RiskMatrix}/>
+          <Route path="/projectstatus" component={ProjectStatus}/>
         </Switch>
         </div>
       </Provider>

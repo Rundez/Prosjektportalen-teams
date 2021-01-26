@@ -55,7 +55,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
               groupName: "Prosjektinnstillinger",
               groupFields: [
                 PropertyPaneTextField('projectUrl', {
-                  label: "ProsjektURL"
+                  label: "Høyde"
                 })
               ]
             }

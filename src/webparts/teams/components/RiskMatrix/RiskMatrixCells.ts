@@ -7,34 +7,34 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
       className: 'risk-header'
     },
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Ubetydelig",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Liten",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Moderat",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Alvorlig",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Kritisk",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     }
   ],
   [
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Svært høy",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -76,7 +76,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Høy",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -118,7 +118,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Middels",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -160,7 +160,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Lav",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
@@ -202,7 +202,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   ],
   [
     {
-      cellValue: "strings.RiskMatrix_Header_Insignificant",
+      cellValue: "Svært lav",
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
