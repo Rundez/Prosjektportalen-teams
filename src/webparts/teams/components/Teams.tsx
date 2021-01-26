@@ -41,6 +41,7 @@ export default function Teams(props: ITeamsWebPartProps) {
           <Route path="/" component={Home} exact />
           <Route path="/riskmatrix" render={ () => <RiskMatrix height={props.riskMatrixHeight} width={props.riskMatrixWidth}/>} />
           <Route path="/projectstatus" component={ProjectStatus}/>
+          <Route path="/" component={Home} exact/>
         </Switch>
         </div>
       </Provider>
