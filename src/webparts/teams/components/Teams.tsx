@@ -1,6 +1,5 @@
 import React from 'react';
 
-import styles from './Teams.module.scss';
 import { ITeamsWebPartProps } from '../TeamsWebPart';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Provider, teamsTheme, Button, Text, Header, Flex } from "@fluentui/react-northstar";
@@ -29,7 +28,7 @@ export default function Teams(props: ITeamsWebPartProps) {
     setItems(data);
   }
 
-  console.log(items);
+  console.log(props);
 
   const style = {
     backgroundColor: "rgb(243, 242, 241)"
@@ -42,7 +41,7 @@ export default function Teams(props: ITeamsWebPartProps) {
         <Navbar />
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/riskmatrix" component={RiskMatrix}/>
+          <Route path="/riskmatrix" render={ () => <RiskMatrix height={props.riskMatrixHeight} width={props.riskMatrixWidth}/>} />
           <Route path="/projectstatus" component={ProjectStatus}/>
         </Switch>
         </div>

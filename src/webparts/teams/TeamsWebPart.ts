@@ -3,6 +3,7 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
+  PropertyPaneSlider,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
@@ -18,6 +19,8 @@ import { sp } from "@pnp/sp";
 export interface ITeamsWebPartProps {
   projectUrl: string;
   context: WebPartContext;
+  riskMatrixHeight: number;
+  riskMatrixWidth: number;
 }
 
 export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartProps> {
@@ -48,14 +51,27 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
       pages: [
         {
           header: {
-            description: "Property pane description.. placeholder"
+            description: "Settings for all components"
           },
           groups: [
             {
-              groupName: "Prosjektinnstillinger",
+              groupName: "Risikomatrise",
               groupFields: [
-                PropertyPaneTextField('projectUrl', {
-                  label: "Høyde"
+                PropertyPaneSlider('riskMatrixHeight', {
+                  label: "Høyde",
+                  min: 100,
+                  max: 1000,
+                  value: 500,
+                  showValue: true,
+                  step: 1
+                }),
+                PropertyPaneSlider('riskMatrixWidth', {
+                  label: "Bredde",
+                  min: 100,
+                  max: 1000,
+                  value: 500,
+                  showValue: true,
+                  step: 1
                 })
               ]
             }
