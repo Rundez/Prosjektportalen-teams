@@ -5,7 +5,8 @@ import { Sub } from './Subcomponent';
 export const ProjectStatus = () => {
 
     return (
-        <Sub name1="Martin" name2="Mari" name3="Millie" />
+        <Sub name1="Hello"/>
+        
     )
 }
 

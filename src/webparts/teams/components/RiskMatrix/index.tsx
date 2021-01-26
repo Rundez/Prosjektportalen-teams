@@ -4,7 +4,7 @@ import { MatrixRows } from './MatrixRow'
 import styles from './RiskMatrix.module.scss'
 import * as getValue from 'get-value'
 import { Loader, Divider } from '@fluentui/react-northstar';
-import { Modal } from './Modal'
+import { Popup } from './Modal'
 
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
@@ -58,7 +58,7 @@ export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
             </tbody>
           </table>
           <Divider />
-          <Modal />
+          <Popup />
         </div>
         </div>
       }

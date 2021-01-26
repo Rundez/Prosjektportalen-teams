@@ -3,6 +3,7 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
+  PropertyPaneDropdown,
   PropertyPaneSlider,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
@@ -63,7 +64,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
                   max: 1000,
                   value: 500,
                   showValue: true,
-                  step: 1
+                  step: 1,
                 }),
                 PropertyPaneSlider('riskMatrixWidth', {
                   label: "Bredde",
@@ -72,7 +73,11 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
                   value: 500,
                   showValue: true,
                   step: 1
+                }),
+                PropertyPaneDropdown('riskMatrixWidth', {
+                  label: "Prosjekt",
                 })
+
               ]
             }
           ]
