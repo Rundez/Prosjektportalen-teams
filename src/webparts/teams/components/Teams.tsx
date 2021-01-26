@@ -30,9 +30,7 @@ export default function Teams(props: ITeamsWebPartProps) {
 
   console.log(props);
 
-  const style = {
-    backgroundColor: "rgb(243, 242, 241)"
-  }
+  
 
   return (
     <Router>
@@ -50,4 +48,6 @@ export default function Teams(props: ITeamsWebPartProps) {
   );
 }
 
-
+const style = {
+  backgroundColor: "rgb(243, 242, 241)"
+}

@@ -8,9 +8,6 @@ export default function Home() {
             <Flex>
                 <Text content="This is the homepage" />
             </Flex>
-            <Flex>
-                <Button content="Hei alle sammen." />
-            </Flex>
         </div>
     )
 }

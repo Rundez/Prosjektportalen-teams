@@ -1,37 +1,28 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Portal, Button, Header, Divider, Input, Flex } from '@fluentui/react-northstar'
+import { Modal } from 'office-ui-fabric-react';
 
-export const Modal = (() => {
+export const Popup = (() => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    console.log(isOpen);
 
     return (
         <>
-            <Portal
-                content={
-                    <div
-                        style={{
-                            position: 'fixed',
-                            left: '40%',
-                            top: '45%',
-                            zIndex: 1000,
-                            backgroundColor: '#fff',
-                            padding: '15px',
-                            boxShadow: 'rgb(187, 187, 187) 0px 2px 8px',
-                            border: '1px solid rgba(34,36,38,.15)',
-                            borderRadius: '5px',
-                        }}
-                    >
-                        <Header>Add risk element</Header>
-                        <Flex gap="gap.small">
-                            <Input label="Test1" />
-                        </Flex>
-                        <Flex gap="gap.small">
-                            <Input label="Test2" />
-                        </Flex>
+            <Button onClick={() => setIsOpen(!isOpen)} />
 
-                    </div>
-                }
-                trigger={<Button content={'Add element'} />}
-            />
+
+            <Modal
+                isOpen={isOpen}
+                isBlocking={false}
+                containerClassName="containerBody"
+            >
+                <div className="containerBody" style={{width: 400, height:400}}>
+                    <h1>Hello</h1> <br/>
+                    <Button content="Put me down" onClick={() => setIsOpen(false)}/>
+                </div>
+            </Modal>
+
         </>
     )
 }) 
