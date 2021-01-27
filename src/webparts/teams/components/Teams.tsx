@@ -28,7 +28,6 @@ export default function Teams(props: ITeamsWebPartProps) {
     setItems(data);
   }
 
-  console.log(props);
 
   
 

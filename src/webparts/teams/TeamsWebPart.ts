@@ -39,6 +39,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
   }
 
   public render(): void {
+    console.log(this.context.sdks.microsoftTeams);
 
     ReactDom.render(React.createElement(Teams, this.properties), this.domElement);
   }
