@@ -45,7 +45,6 @@ export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
     setLoading(false);
   }
 
-  console.log(data);
 
   return (
     <> 
