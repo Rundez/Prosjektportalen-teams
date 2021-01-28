@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Text, Button, Flex } from '@fluentui/react-northstar';
+import { Text, Button, Flex, List } from '@fluentui/react-northstar';
 import { TeamMembers } from '../TeamMembers/index'
 import { IHomeProps } from './types'
 //import { IUser } from '../TeamMembers/types';
@@ -20,28 +20,25 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
     useEffect(() => {
         sp.web.siteUsers().
             then((users) => users
-                .filter((user) => user.Email.length > 0))
-            .then((users) => setTeamUsers(users));
+                .filter((user) => user.Email.length > 0)
+                .map((user) => {
+                    const obj =
+                    {
+                        key: user.Id,
+                        header: user.Title,
+                        content: user.Email
+                    }
+                    setTeamUsers(curr => [...curr, obj])
+                }));
     }, []);
-
-
-
     console.log(teamUsers);
 
     return (
         <div>
-            <Flex>
-                <Text content="This is the homepage" />
-            </Flex>
-            <Flex>
-                {
-                    teamUsers.map( (user) => {
-                        return(
-                            
-                        <p>{user.Email}</p>
-                        )
-                    }) 
-                }
+            <Flex hAlign="end">
+                <Flex.Item >
+                    <List items={teamUsers} />
+                </Flex.Item>
             </Flex>
             <Flex>
             </Flex>
@@ -56,5 +53,4 @@ const fetchTeam = async (teamID) => {
 
 const fetchAllUsers = async () => {
 }
-
 
