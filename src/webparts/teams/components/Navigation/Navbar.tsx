@@ -15,7 +15,6 @@ export default function Navigation() {
                 <Button content="Page 3" style={{ marginRight: 10 }} text />
                 <Button content="Page 4" style={{ marginRight: 10 }} text />
                 <Button content="Page 5" style={{ marginRight: 10 }} text />
-           
             </Flex>
             <Divider />
             </div>
