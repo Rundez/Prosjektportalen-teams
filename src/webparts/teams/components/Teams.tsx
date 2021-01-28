@@ -29,7 +29,6 @@ export default function Teams(props: ITeamsWebPartProps) {
   }
 
 
-  
 
   return (
     <Router>
