@@ -7,14 +7,14 @@ import {
   PropertyPaneSlider,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
-//import * as strings from 'ProjectWebPartStrings';
+import { BaseClientSideWebPart, IMicrosoftTeams } from '@microsoft/sp-webpart-base';
 import Teams from './components/Teams';
 import { ITeamsProps } from './components/ITeamsProps';
 import { WebPartContext } from "@microsoft/sp-webpart-base";    
-
 import { sp } from "@pnp/sp";
+import { graph } from "@pnp/graph";
+import "@pnp/graph/groups";
+
 
 
 export interface ITeamsWebPartProps {
@@ -22,16 +22,22 @@ export interface ITeamsWebPartProps {
   context: WebPartContext;
   riskMatrixHeight: number;
   riskMatrixWidth: number;
+  teamsContext: IMicrosoftTeams;
 }
 
 export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartProps> {
 
-  // Init of pnp/sp
   public onInit(): Promise<void> {
     return super.onInit().then(_ => {
 
-      // other init code may be present
-
+      this.properties.teamsContext= this.context.sdks.microsoftTeams;
+      
+      // Init of the graph
+      graph.setup({
+        spfxContext: this.context
+      });  
+      
+      // Init of pnp/js library.
       sp.setup({
         spfxContext: this.context
       });

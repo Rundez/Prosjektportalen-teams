@@ -1,5 +1,13 @@
-import React from 'react';
+import { Header } from '@fluentui/react-northstar';
+import React, { FunctionComponent } from 'react';
+import { sp } from "@pnp/sp";
+import { ITeamMembersProps } from './types';
 
-const TeamMembers = () => {
-    
+export const TeamMembers: FunctionComponent<ITeamMembersProps> = () => {
+
+
+    return (
+        <p>Team members will be shown here..</p>
+        
+    )
 }

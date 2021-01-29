@@ -6,7 +6,7 @@ import { Provider, teamsTheme, Button, Text, Header, Flex } from "@fluentui/reac
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navigation/Navbar';
 import { RiskMatrix } from './RiskMatrix/index'
-import Home from './Home/Home';
+import { Home } from './Home/Home';
 import { ProjectStatus } from './ProjectStatus/index'
 
 
@@ -28,9 +28,6 @@ export default function Teams(props: ITeamsWebPartProps) {
     setItems(data);
   }
 
-  console.log(props);
-
-  
 
   return (
     <Router>
@@ -38,10 +35,9 @@ export default function Teams(props: ITeamsWebPartProps) {
         <div style={{backgroundColor: style.backgroundColor}}>
         <Navbar />
         <Switch>
-          <Route path="/" component={Home} exact />
+          <Route path="/" render={() => <Home teamsContext={props.teamsContext} />} exact />
           <Route path="/riskmatrix" render={ () => <RiskMatrix height={props.riskMatrixHeight} width={props.riskMatrixWidth}/>} />
           <Route path="/projectstatus" component={ProjectStatus}/>
-          <Route path="/" component={Home} exact/>
         </Switch>
         </div>
       </Provider>
