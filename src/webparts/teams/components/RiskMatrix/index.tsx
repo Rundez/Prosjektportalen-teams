@@ -16,7 +16,8 @@ export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
   //items = [],
   width = 400,
   height = 300,
-  calloutTemplate
+  calloutTemplate,
+  listName
 }: IRiskMatrixProps) => {
 
   const [data, setData] = React.useState<RiskElementModel[]>([]);
@@ -28,7 +29,7 @@ export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
 
   async function _getItems() {
     let data = await sp.web.lists
-      .getByTitle("usikkerhet").items.get();
+      .getByTitle(listName).items.get();
 
     console.log(data)
 

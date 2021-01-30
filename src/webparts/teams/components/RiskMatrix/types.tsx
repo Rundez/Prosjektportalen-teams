@@ -3,6 +3,7 @@ export interface IRiskMatrixProps {
   width?: number | string;
   height?: number | string;
   calloutTemplate?: string;
+  listName: string;
 }
 
 export interface IRiskElementItem {

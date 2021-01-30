@@ -1,16 +1,16 @@
 import { Callout } from 'office-ui-fabric-react/lib/Callout'
-import * as React from 'react';
+import React, { FunctionComponent } from 'react'
 import { IRiskElementCalloutProps } from './types'
 import { ITypedHash } from '@pnp/common'
 
 
-export const RiskElementCallout: React.FunctionComponent<IRiskElementCalloutProps> = ({
+export const RiskElementCallout: FunctionComponent<IRiskElementCalloutProps> = ({
   risk,
   calloutTemplate,
   target,
   onDismiss
 }: IRiskElementCalloutProps) => {
-  const content = replaceTokens(calloutTemplate, risk.item)
+  const content = "<h3>{Title}</h3><p><strong>Usikkerhetstrategi: </strong>{GtRiskStrategy}</p><p><strong>Nærhet: </strong>{GtRiskProximity}</p><p><strong>Status usikkerhet: </strong>{GtRiskStatus}</p>";
 
   return (
     <Callout
@@ -21,7 +21,6 @@ export const RiskElementCallout: React.FunctionComponent<IRiskElementCalloutProp
     </Callout>
   )
 }
-
 
 export function replaceTokens(
   str: string,

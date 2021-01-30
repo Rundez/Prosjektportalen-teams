@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react'
 import { IRiskElementProps } from './types'
 import styles from './RiskElement.module.scss'
 import { RiskElementCallout } from './RiskElementCallout'
 
-export const RiskElement: React.FunctionComponent<IRiskElementProps> = ({
+export const RiskElement: FunctionComponent<IRiskElementProps> = ({
   style,
   model,
   calloutTemplate

@@ -22,7 +22,9 @@ export interface ITeamsWebPartProps {
   context: WebPartContext;
   riskMatrixHeight: number;
   riskMatrixWidth: number;
+  riskMatrixListName: string;
   teamsContext: IMicrosoftTeams;
+  calloutTemplate: string;
 }
 
 export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartProps> {
@@ -31,6 +33,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
     return super.onInit().then(_ => {
 
       this.properties.teamsContext= this.context.sdks.microsoftTeams;
+      this.properties.calloutTemplate = "<h3>{Title}</h3><p><strong>Usikkerhetstrategi: </strong>{GtRiskStrategy}</p><p><strong>Nærhet: </strong>{GtRiskProximity}</p><p><strong>Status usikkerhet: </strong>{GtRiskStatus}</p>";
       
       // Init of the graph
       graph.setup({
@@ -80,10 +83,10 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
                   showValue: true,
                   step: 1
                 }),
-                PropertyPaneDropdown('riskMatrixWidth', {
-                  label: "Prosjekt",
-                })
-
+                PropertyPaneTextField('riskMatrixListName', {
+                  label: "Listenavn",
+                  value: "usikkerhet",
+                }),
               ]
             }
           ]
