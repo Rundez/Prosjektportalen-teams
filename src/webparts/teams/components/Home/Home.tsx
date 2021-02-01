@@ -42,7 +42,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
                 <Flex.Item >
                     <List items={teamUsers} />
                 </Flex.Item>
-                <Header content="Hello" />
+                <Header content="Henriette er kul" />
             </Flex>
             <Flex>
             </Flex>
