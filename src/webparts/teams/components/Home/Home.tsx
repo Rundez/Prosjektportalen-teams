@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Text, Button, Flex, List } from '@fluentui/react-northstar';
+import { Text, Button, Flex, List, Header } from '@fluentui/react-northstar';
 import { TeamMembers } from '../TeamMembers/index'
 import { IHomeProps } from './types'
 //import { IUser } from '../TeamMembers/types';
@@ -39,6 +39,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
                 <Flex.Item >
                     <List items={teamUsers} />
                 </Flex.Item>
+                <Header content="Hello" />
             </Flex>
             <Flex>
             </Flex>
