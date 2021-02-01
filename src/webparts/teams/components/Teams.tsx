@@ -24,7 +24,7 @@ export default function Teams(props: ITeamsWebPartProps) {
 
   async function fetchList() {
     const data: [] = await sp.web.lists.getByTitle("usikkerhet").items.get();
-
+ 
     setItems(data);
   }
 
