@@ -11,7 +11,7 @@ import { graph } from "@pnp/graph";
 import "@pnp/graph/teams"
 import "@pnp/graph/users";
 import { ISiteUserInfo } from '@pnp/sp/site-users/types';
-
+import {RiskMatrix} from 'pp365-projectwebparts/lib/components/RiskMatrix/index';
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
     const [teamUsers, setTeamUsers] = useState([]);
@@ -42,6 +42,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
             </Flex>
             <Flex>
             </Flex>
+          <RiskMatrix calloutTemplate="string"/>
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import { IMatrixCell, MatrixCellType } from './MatrixCell'
+import * as strings from 'TeamsWebPartStrings';
 
 const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   [
@@ -7,7 +8,7 @@ const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
       className: 'risk-header'
     },
     {
-      cellValue: "Ubetydelig",
+      cellValue: strings.ChangePhaseText,
       cellType: MatrixCellType.Header,
       className: 'risk-header'
     },
