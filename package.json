@@ -27,7 +27,8 @@
     "office-ui-fabric-react": "6.214.0",
     "react": "16.8.5",
     "react-dom": "16.8.5",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "semantic-ui-react": "^2.0.3"
   },
   "devDependencies": {
     "@types/react": "16.8.8",
