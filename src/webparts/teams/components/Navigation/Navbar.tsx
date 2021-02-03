@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Button, Flex, TeamsIcon, Divider, Text, Image} from '@fluentui/react-northstar';
-import { Link } from 'react-router-dom';
+import { Button, Flex, TeamsIcon, Divider, Text, Image, useCSS} from '@fluentui/react-northstar';
+import { NavLink } from 'react-router-dom';
 
 export default function Navigation() {
 
@@ -8,13 +8,14 @@ export default function Navigation() {
         <>
         <div style={style}>
             <Flex space="between" >
-                <Link to="/" ><Image src="https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png" style={{height:40, width:40, marginLeft:20}} /> </Link>
-                <Link to="/" style={{ textDecoration: 'none' }}><Button content="Home" text /></Link>
-                <Link to="riskmatrix" style={{ textDecoration: 'none' }}><Button content="Risikomatrise" text /></Link>
-                <Link to="/projectstatus" style={{ textDecoration: 'none' }}><Button content="Project status" text /> </Link>
+                <NavLink to="/" ><Image src="https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png" style={{height:40, width:40, marginLeft:20}} /> </NavLink>
+                <NavLink to="/" style={styleButtons}><Button content="Home" text /></NavLink>
+                <NavLink to="riskmatrix" style={styleButtons}><Button content="Risikomatrise" text /></NavLink>
+                <NavLink to="/projectstatus" style={styleButtons}><Button content="Project status" text /> </NavLink>
                 <Button content="Page 3" style={{ marginRight: 10 }} text />
                 <Button content="Page 4" style={{ marginRight: 10 }} text />
                 <Button content="Page 5" style={{ marginRight: 10 }} text />
+                <div className='active'></div>
             </Flex>
             <Divider />
             </div>
@@ -24,4 +25,7 @@ export default function Navigation() {
 const style = {
     marginTop: 0,
     textDecoration: 'none'
+}
+const styleButtons = {
+    textDecoration:'none'
 }
