@@ -1,5 +1,5 @@
 import { IMatrixCell, MatrixCellType } from './MatrixCell'
-import * as strings from 'TeamsWebPartStrings';
+import * as strings from 'ProjectWebPartsStrings';
 
 const RISK_MATRIX_CELLS: Array<IMatrixCell[]> = [
   [

@@ -110,7 +110,7 @@ declare interface IProjectWebPartsStrings {
   CalloutTemplateFieldLabel: string;
 }
 
-declare module 'TeamsWebPartStrings' {
+declare module 'ProjectWebPartsStrings' {
   const strings: IProjectWebPartsStrings
   export = strings;
 }
