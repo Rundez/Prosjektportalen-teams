@@ -1,8 +1,6 @@
-define([], function() {
+/* eslint-disable @typescript-eslint/camelcase */
+define([], function () {
   return {
-    "PropertyPaneDescription": "Description",
-    "BasicGroupName": "Group Name",
-    "DescriptionFieldLabel": "Description Field",
     ChangePhaseText: 'Change to this phase',
     ChangingPhaseDescription: 'Changes phase to {0}',
     PleaseWaitText: 'Please wait',
@@ -60,7 +58,7 @@ define([], function() {
     ViewsGroupName: 'Views',
     ViewVersionHistoryText: 'View version history',
     WebPartNotConfiguredMessage: 'The web part is not configured properly. You need to set web host properties correctly. ',
-    Yes: "Yes",
+    Yes: 'Yes',
     StatusReportsHeaderLabel: 'Heading',
     StatusReportsCountLabel: 'Number of reports to view',
     ProjectStatusGroupName: 'Project Status',
@@ -72,7 +70,8 @@ define([], function() {
     SyncProjectPropertiesSuccessText: 'Project properties were synchronized to the portfolio area. The page will reload in {0} seconds. ',
     SyncProjectPropertiesErrorText: 'Synchronization error occurred',
     SyncProjectPropertiesListProgressDescription: 'Updating Project Properties List',
-    SyncProjectPropertiesValuesProgressDescription: 'Syncing properties',
+    SyncProjectPropertiesValuesProgressLabel: 'Syncing properties',
+    SyncProjectPropertiesValuesProgressDescription: 'Please wait...',
     ProjectStatusDataErrorText: 'No access. You are not allowed to view status reports. ',
     ShowFieldExternalUsers: 'Visible to external users',
     ExternalUsersConfigText: 'Configuration',
@@ -110,6 +109,5 @@ define([], function() {
     WidthFieldLabel: 'Width (pixels)',
     HeightFieldLabel: 'Height (pixels)',
     CalloutTemplateFieldLabel: 'Callout template'
-
   }
-});
+})

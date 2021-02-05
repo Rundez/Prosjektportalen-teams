@@ -13,11 +13,10 @@ import { ISiteUserInfo } from '@pnp/sp/site-users/types';
 import { TeamMembers } from './TeamMembers/index';
 
 
-
 export const Home: FunctionComponent<IHomeProps> = (props) => {
     const [teamUsers, setTeamUsers] = useState([]);
 
-
+    //Fetches the users of the project on site load.
     useEffect(() => {
         sp.web.siteUsers().
             then((users) => users
@@ -37,17 +36,15 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
 
     return (
         <div>
-            <TeamMembers items={teamUsers}/>
-            
+            <Flex gap="gap.medium">
+
+                <Flex hAlign="end">
+                    <Flex.Item >
+                        <List items={teamUsers} />
+                    </Flex.Item>
+                </Flex>
+            </Flex>
         </div>
     )
-}
-
-const fetchTeam = async (teamID) => {
-    const team = await graph.teams.getById(teamID);
-    console.log(team);
-}
-
-const fetchAllUsers = async () => {
 }
 
