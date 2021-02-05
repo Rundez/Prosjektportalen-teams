@@ -1,29 +1,27 @@
 import * as React from 'react';
 import { IRiskMatrixProps, RiskElementModel } from './types';
-import { MatrixRows } from './MatrixRow';
 import styles from './RiskMatrix.module.scss';
 import * as getValue from 'get-value';
 import { Loader, Divider } from '@fluentui/react-northstar';
 import { AddElementDialog } from './DialogPopup/index';
 import { DisplayTable } from './DisplayTable/index';
-
+import { RiskMatrix } from 'pp365-projectwebparts/lib/components/RiskMatrix';
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
 
 
-export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
+export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
   //items = [],
   width = 400,
   height = 300,
-  calloutTemplate,
   listName
 }: IRiskMatrixProps) => {
 
   const [data, setData] = React.useState<RiskElementModel[]>([]);
   const [isLoading, setLoading] = React.useState(true);
-  
+
   React.useEffect(() => {
     _getItems();
   }, []);
@@ -44,24 +42,20 @@ export const RiskMatrix: React.FunctionComponent<IRiskMatrixProps> = ({
     setData(data);
     setLoading(false);
   }
-  console.log(data);
 
+  const callout = `<h3>{Title}</h3>
+  <p><strong>Usikkerhetstrategi: </strong>{GtRiskStrategy}</p>
+  <p><strong>Nærhet: </strong>{GtRiskProximity}</p>
+  <p><strong>Status usikkerhet: </strong>{GtRiskStatus}</p>`
 
   return (
-    <> 
+    <>
       {isLoading ? <Loader label="Content loading" /> :
-      <div style={{width: width, height: height}}>
-        <div className={styles.riskMatrix}>
-          <table className={styles.table}>
-            <tbody>
-              <MatrixRows items={data} calloutTemplate={calloutTemplate} />
-            </tbody>
-          </table>
+        <div>
+          <RiskMatrix calloutTemplate={callout} height={height} width={width} items={data} />
           <Divider />
           <AddElementDialog />
           <DisplayTable />
-
-        </div>
         </div>
       }
     </>

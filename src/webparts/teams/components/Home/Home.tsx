@@ -11,12 +11,11 @@ import { graph } from "@pnp/graph";
 import "@pnp/graph/teams"
 import "@pnp/graph/users";
 import { ISiteUserInfo } from '@pnp/sp/site-users/types';
-import {RiskMatrix} from 'pp365-projectwebparts/lib/components/RiskMatrix/index';
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
     const [teamUsers, setTeamUsers] = useState([]);
 
-
+    //Fetches the users of the project on site load.
     useEffect(() => {
         sp.web.siteUsers().
             then((users) => users
@@ -35,23 +34,15 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
 
     return (
         <div>
-            <Flex hAlign="end">
-                <Flex.Item >
-                    <List items={teamUsers} />
-                </Flex.Item>
+            <Flex gap="gap.medium">
+
+                <Flex hAlign="end">
+                    <Flex.Item >
+                        <List items={teamUsers} />
+                    </Flex.Item>
+                </Flex>
             </Flex>
-            <Flex>
-            </Flex>
-          <RiskMatrix calloutTemplate="string"/>
         </div>
     )
-}
-
-const fetchTeam = async (teamID) => {
-    const team = await graph.teams.getById(teamID);
-    console.log(team);
-}
-
-const fetchAllUsers = async () => {
 }
 
