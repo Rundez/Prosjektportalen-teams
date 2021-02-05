@@ -24,6 +24,7 @@
     "@pnp/logging": "^2.1.0",
     "@pnp/odata": "^2.1.0",
     "@pnp/sp": "^2.1.0",
+    "@pnp/spfx-controls-react": "2.4.0",
     "@types/es6-collections": "^0.5.32",
     "office-ui-fabric-react": "6.214.0",
     "pp365-projectwebparts": "^1.2.6",

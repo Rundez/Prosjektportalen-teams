@@ -7,6 +7,8 @@ import { AddElementDialog } from './DialogPopup/index';
 import { DisplayTable } from './DisplayTable/index';
 import { RiskMatrix } from 'pp365-projectwebparts/lib/components/RiskMatrix';
 import { sp } from "@pnp/sp";
+import { GenericListInput } from '../GenericListInput/index';
+
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
 import "@pnp/sp/items";
@@ -55,6 +57,8 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
           <RiskMatrix calloutTemplate={callout} height={height} width={width} items={data} />
           <Divider />
           <AddElementDialog />
+          <GenericListInput listName="usikkerhet"/>
+
           <DisplayTable />
         </div>
       }
