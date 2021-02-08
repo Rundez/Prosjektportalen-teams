@@ -31,7 +31,9 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
   public onInit(): Promise<void> {
     return super.onInit().then(_ => {
 
+      // Put the teams context and SP context in to the properties. 
       this.properties.teamsContext= this.context.sdks.microsoftTeams;
+      this.properties.context = this.context;
       
       // Init of the graph
       graph.setup({

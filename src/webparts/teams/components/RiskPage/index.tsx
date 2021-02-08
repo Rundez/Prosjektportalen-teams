@@ -18,7 +18,8 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
   //items = [],
   width = 400,
   height = 300,
-  listName
+  listName,
+  context
 }: IRiskMatrixProps) => {
 
   const [data, setData] = React.useState<RiskElementModel[]>([]);
@@ -57,7 +58,6 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
           <RiskMatrix calloutTemplate={callout} height={height} width={width} items={data} />
           <Divider />
           <AddElementDialog />
-          <GenericListInput listName="usikkerhet"/>
 
           <DisplayTable />
         </div>
@@ -66,6 +66,7 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
   )
 }
 
+// Test data for the list. 
 const header = {
   items: ['id', 'Name', 'Picture', 'Age'],
 };

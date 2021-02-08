@@ -17,7 +17,6 @@ import "@pnp/sp/items";
 
 export default function Teams(props: ITeamsWebPartProps) {
   const [items, setItems] = React.useState([]);
-
   return (
     <Router>
       <Provider theme={teamsTheme}>
@@ -25,7 +24,7 @@ export default function Teams(props: ITeamsWebPartProps) {
           <Navbar />
           <Switch>
             <Route path="/" render={() => <Home teamsContext={props.teamsContext} />} exact />
-            <Route path="/riskmatrix" render={() => <RiskPage height={props.riskMatrixHeight} width={props.riskMatrixWidth} listName={props.riskMatrixListName} />} />
+            <Route path="/riskmatrix" render={() => <RiskPage height={props.riskMatrixHeight} width={props.riskMatrixWidth} listName={props.riskMatrixListName} context={props.context}/>} />
             <Route path="/projectstatus" component={ProjectStatus} />
           </Switch>
         </div>
