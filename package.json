@@ -25,8 +25,11 @@
     "@pnp/odata": "^2.1.0",
     "@pnp/sp": "^2.1.0",
     "office-ui-fabric-react": "6.214.0",
+    "pp365-projectwebparts": "^1.2.6",
+    "prosjektportalen365": "^1.2.5",
     "react": "16.8.5",
     "react-dom": "16.8.5",
+    "react-hook-form": "^6.15.1",
     "react-router-dom": "^5.2.0",
     "semantic-ui-react": "^2.0.3"
   },

@@ -17,11 +17,10 @@ export default class NavBarv1 extends Component {
     return (
       <div>
         <Menu pointing secondary color={'purple'}>
-          <Menu.Item as={Link} to={'/home'}
+          <Menu.Item as={Link} to={'/'}
             name='Home'
             active={activeItem === 'Home'}
             onClick={this.handleItemClick}
-            href='//google.com' 
           > <img src='https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png' alt=" "/>
         </Menu.Item>
           <Menu.Item as={Link} to={'/projectstatus'}

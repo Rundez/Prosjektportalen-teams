@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { ITeamsWebPartProps } from '../TeamsWebPart';
-import { escape } from '@microsoft/sp-lodash-subset';
 import { Provider, teamsTheme, Button, Text, Header, Flex } from "@fluentui/react-northstar";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './Navigation/Navbar';
 import { RiskMatrix } from './RiskMatrix/index'
 import { Home } from './Home/Home';
 import { ProjectStatus } from './ProjectStatus/index'
