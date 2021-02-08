@@ -22,6 +22,7 @@ export interface ITeamsWebPartProps {
   context: WebPartContext;
   riskMatrixHeight: number;
   riskMatrixWidth: number;
+  riskMatrixListName: string;
   teamsContext: IMicrosoftTeams;
 }
 
@@ -80,10 +81,10 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
                   showValue: true,
                   step: 1
                 }),
-                PropertyPaneDropdown('riskMatrixWidth', {
-                  label: "Prosjekt",
-                })
-
+                PropertyPaneTextField('riskMatrixListName', {
+                  label: "Listenavn",
+                  value: "usikkerhet",
+                }),
               ]
             }
           ]
