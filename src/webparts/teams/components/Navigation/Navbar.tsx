@@ -1,45 +1,22 @@
 import * as React from 'react';
-import { Button, Flex, TeamsIcon, Divider, Text, Image, useCSS} from '@fluentui/react-northstar';
-import {Menu} from 'semantic-ui-react'
-import { NavLink } from 'react-router-dom';
+import { Button, Flex, TeamsIcon, Divider, Text, Image} from '@fluentui/react-northstar';
+import { Link } from 'react-router-dom';
 
 export default function Navigation() {
-    type MenuName ={
-        name: string
-    }
 
-    /*handleItemClick = (e, { name }) => this.setState({ activeItem: name })*/
-
-    const MenuName: React.FunctionComponent<MenuName> = ({name}) => this.setState({activeItem: name})
-   
-    const {activeItem} = this.state;
     return (
         <>
         <div style={style}>
-        <Menu pointing secondary>
-          <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='messages'
-            active={activeItem === 'messages'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name='friends'
-            active={activeItem === 'friends'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Menu position='right'>
-            <Menu.Item
-              name='logout'
-              active={activeItem === 'logout'}
-              onClick={this.handleItemClick}
-            />
-          </Menu.Menu>
-        </Menu>
+            <Flex space="between" >
+                <Link to="/" ><Image src="https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png" style={{height:40, width:40, marginLeft:20}} /> </Link>
+                <Link to="/" style={{ textDecoration: 'none' }}><Button content="Home" text /></Link>
+                <Link to="riskmatrix" ><Button content="Risikomatrise" text /></Link>
+                <Link to="/projectstatus" style={{ textDecoration: 'none' }}><Button content="Project status" text /> </Link>
+                <Button content="Page 3" style={{ marginRight: 10 }} text />
+                <Button content="Page 4" style={{ marginRight: 10 }} text />
+                <Button content="Page 5" style={{ marginRight: 10 }} text />
+            </Flex>
+            <Divider />
             </div>
         </>
     );
@@ -47,7 +24,4 @@ export default function Navigation() {
 const style = {
     marginTop: 0,
     textDecoration: 'none'
-}
-const styleButtons = {
-    textDecoration:'none'
 }

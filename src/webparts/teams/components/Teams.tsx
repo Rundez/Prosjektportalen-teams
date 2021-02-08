@@ -8,7 +8,7 @@ import Navbar from './Navigation/Navbar';
 import { RiskMatrix } from './RiskMatrix/index'
 import { Home } from './Home/Home';
 import { ProjectStatus } from './ProjectStatus/index'
-
+import  NavbarV1 from './Navigation/NavBarv1'
 
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
@@ -34,7 +34,7 @@ export default function Teams(props: ITeamsWebPartProps) {
     <Router>
       <Provider theme={teamsTheme}>
         <div style={{backgroundColor: style.backgroundColor}}>
-        <Navbar/>
+        <NavbarV1 />
         <Switch>
           <Route path="/" render={() => <Home teamsContext={props.teamsContext} />} exact />
           <Route path="/riskmatrix" render={ () => <RiskMatrix height={props.riskMatrixHeight} width={props.riskMatrixWidth}/>} />
@@ -49,3 +49,8 @@ export default function Teams(props: ITeamsWebPartProps) {
 const style = {
   backgroundColor: "rgb(243, 242, 241)"
 }
+
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+document.head.appendChild(styleLink);
