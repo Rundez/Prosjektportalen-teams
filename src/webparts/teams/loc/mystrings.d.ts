@@ -1,7 +1,4 @@
 declare interface IProjectWebPartsStrings {
-  PropertyPaneDescription: string;
-  BasicGroupName: string;
-  DescriptionFieldLabel: string;
   SkipSyncToHubLabel: string;
   PhaseFieldFieldLabel: string;
   NoLocalPropertiesListWarningText: string;
@@ -76,6 +73,7 @@ declare interface IProjectWebPartsStrings {
   SyncProjectPropertiesSuccessText: string;
   SyncProjectPropertiesErrorText: string;
   SyncProjectPropertiesListProgressDescription: string;
+  SyncProjectPropertiesValuesProgressLabel: string;
   SyncProjectPropertiesValuesProgressDescription: string;
   ProjectStatusDataErrorText: string;
   ShowFieldExternalUsers: string;
