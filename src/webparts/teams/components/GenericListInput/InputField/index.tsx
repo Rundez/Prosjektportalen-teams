@@ -3,21 +3,27 @@ import React, { useState, FunctionComponent } from 'react';
 import { Input, Flex, Dropdown, TextArea } from '@fluentui/react-northstar';
 import { Toggle } from 'office-ui-fabric-react';
 
-export const InputField: FunctionComponent<any> = ({ field }) => {
+export const InputField: FunctionComponent<any> = ({ field, register }) => {
 
 
     // Check the fieldtype and return a corresponding input element..
     switch (field.FieldTypeKind) {
         case FieldTypes.Text: {
             return (
+                <>
                 <Flex>
-                    <Input label={field.Title} fluid/>
+                    <Input label={field.Title} fluid ref={register} />
                 </Flex>
+
+                 <Flex>
+                 <input placeholder="dette er et test felt" ref={register} name="TESTLOL"/>
+                </Flex>
+             </>
             )
         }
         case FieldTypes.Boolean: {
             return (
-                <Toggle label={field.Title} />
+                <Toggle label={field.Title}/>
             )
         }
         case FieldTypes.Choice: {
@@ -27,7 +33,11 @@ export const InputField: FunctionComponent<any> = ({ field }) => {
                         {field.Title}
                     </Flex>
                     <Flex>
-                        <Dropdown placeholder={field.Title} items={field.Choices} fluid/>
+                        <Dropdown
+                         placeholder={field.Title} 
+                         items={field.Choices} 
+                         fluid
+                         />
                     </Flex>
                 </>
             )
@@ -59,7 +69,7 @@ export const InputField: FunctionComponent<any> = ({ field }) => {
                     {field.Title}
                 </Flex>
                 <Flex>
-                    <TextArea placeholder={field.TypeShortDescription} fluid/>
+                    <TextArea placeholder={field.TypeShortDescription} fluid ref={register}/>
                 </Flex>
                 </>
             )

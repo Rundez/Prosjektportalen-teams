@@ -7,12 +7,20 @@ import { InputField } from './InputField/index';
 import { sp, List, IList, ContentTypes, IContentTypes, Fields, IFields, IFieldInfo } from "@pnp/sp/presets/all";
 import { InputTypes } from './InputField/types';
 
+import { useForm } from "react-hook-form";
+
 export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ listName, context }) => {
 
     const [fields, setFields] = useState([]);
     const [contentTypeID, setContentTypeID] = useState([]);
     const [listFields, setListFields] = useState<IFieldInfo[]>([]);
 
+    const { register, handleSubmit } = useForm<any>();
+
+    const onSubmit = handleSubmit((elements) => {
+      console.log(elements);
+    }); // firstName and lastName will have correct type
+    
 
 
     useEffect(() => {
@@ -50,12 +58,12 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
     console.log(listFields);
     return (
         <>
-        <form>
-
+        <form onSubmit={onSubmit}>
             {listFields.map((field, index) => (
-                <InputField field={field} key={index}/>
+                <InputField field={field} key={index} register={register}/>
             )
             )}
+            <Button type="submit" />
         </form>
 
         </>
