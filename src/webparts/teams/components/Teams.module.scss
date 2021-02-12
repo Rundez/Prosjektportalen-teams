@@ -1,6 +1,9 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 
 .teams {
+  .active{
+    text-decoration: overline;
+  }
   .container {
     max-width: 700px;
     margin: 0px auto;

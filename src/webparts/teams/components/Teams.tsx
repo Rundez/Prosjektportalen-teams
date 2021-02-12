@@ -4,11 +4,10 @@ import { ITeamsWebPartProps } from '../TeamsWebPart';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { Provider, teamsTheme, Button, Text, Header, Flex } from "@fluentui/react-northstar";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Navbar from './Navigation/Navbar';
 import { RiskPage } from './RiskPage/index'
 import { Home } from './Home/Home';
 import { ProjectStatus } from './ProjectStatus/index'
-
+import  NavbarV1 from './Navigation/NavBarv1'
 
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
@@ -22,7 +21,7 @@ export default function Teams(props: ITeamsWebPartProps) {
     <Router>
       <Provider theme={teamsTheme}>
         <div style={{ backgroundColor: style.backgroundColor }}>
-          <Navbar />
+          <NavbarV1 />
           <Switch>
             <Route path="/" render={() => <Home teamsContext={props.teamsContext} />} exact />
             <Route path="/riskmatrix" render={() => <RiskPage height={props.riskMatrixHeight} width={props.riskMatrixWidth} listName={props.riskMatrixListName} />} />
@@ -37,3 +36,8 @@ export default function Teams(props: ITeamsWebPartProps) {
 const style = {
   backgroundColor: "rgb(243, 242, 241)"
 }
+
+const styleLink = document.createElement("link");
+styleLink.rel = "stylesheet";
+styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+document.head.appendChild(styleLink);
