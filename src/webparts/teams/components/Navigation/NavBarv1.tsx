@@ -7,7 +7,7 @@ import {
 
 
 export default class NavBarv1 extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: 'Home' }
 
   handleItemClick = (e : any, { name }: any) => this.setState({ activeItem: name })
 
