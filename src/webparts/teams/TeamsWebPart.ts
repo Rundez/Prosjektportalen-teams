@@ -15,18 +15,19 @@ import { sp } from "@pnp/sp";
 import { graph } from "@pnp/graph";
 import "@pnp/graph/groups";
 
-
-
 export interface ITeamsWebPartProps {
   projectUrl: string;
   riskMatrixHeight: number;
   riskMatrixWidth: number;
   riskMatrixListName: string;
+  context: any;
 }
 
 export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartProps> {
 
   public onInit(): Promise<void> {
+    this.properties.context = this.context;
+
     return super.onInit().then(_ => {
 
       // Put the teams context and SP context in to the properties. 
@@ -40,7 +41,9 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
       sp.setup({
         spfxContext: this.context
       });
+
     });
+
   }
 
   public render(): void {

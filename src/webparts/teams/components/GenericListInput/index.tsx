@@ -4,9 +4,8 @@ import { Button } from '@fluentui/react-northstar';
 import { InputField } from './InputField/index';
 //import { IFieldType } from './types';
 
-import { sp, List, IList, ContentTypes, IContentTypes, Fields, IFields, IFieldInfo } from "@pnp/sp/presets/all";
+import { sp, IFieldInfo } from "@pnp/sp/presets/all";
 import { InputTypes } from './InputField/types';
-
 import { useForm } from "react-hook-form";
 
 export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ listName, context }) => {
@@ -15,13 +14,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
     const [contentTypeID, setContentTypeID] = useState([]);
     const [listFields, setListFields] = useState<IFieldInfo[]>([]);
 
-    const { register, handleSubmit } = useForm<any>();
-
-    const onSubmit = handleSubmit((elements) => {
-      console.log(elements);
-    }); // firstName and lastName will have correct type
-    
-
+    const[value, setValue] = useState([{}]);
 
     useEffect(() => {
         fetchViewListData(listName);
@@ -55,15 +48,20 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
             .then(ct => ct.map(ct => setContentTypeID(current => [...current, ct.Id])))
     }
 
-    console.log(listFields);
+    // Handles the input from the child components
+    const handleInput = (value: React.KeyboardEvent, name: string | boolean) => {
+        setValue(curr => [...curr.filter((obj: any) => obj.fieldName !== name), {fieldName: name, fieldValue: value }]);
+    }
+
+    console.log(value);
     return (
         <>
-        <form onSubmit={onSubmit}>
+        <form>
             {listFields.map((field, index) => (
-                <InputField field={field} key={index} register={register}/>
+                <InputField field={field} key={index} onChange={handleInput} context={context}/>
             )
             )}
-            <Button type="submit" />
+            <Button primary type="submit" content="Add Item"/>
         </form>
 
         </>

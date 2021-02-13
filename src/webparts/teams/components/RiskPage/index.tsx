@@ -57,7 +57,7 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
         <div>
           <RiskMatrix calloutTemplate={callout} height={height} width={width} items={data} />
           <Divider />
-          <AddElementDialog />
+          <AddElementDialog context={context}/>
 
           <DisplayTable />
         </div>

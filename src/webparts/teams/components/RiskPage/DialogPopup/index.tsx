@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { GenericListInput } from '../../GenericListInput/index';
 
 
-export const AddElementDialog: FunctionComponent = () => {
+export const AddElementDialog: FunctionComponent<any> = ({context}) => {
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
   const { register, handleSubmit } = useForm();
 
@@ -25,7 +25,7 @@ export const AddElementDialog: FunctionComponent = () => {
       >
         <div>
           <Form onSubmit={handleSubmit(printData)}>
-          <GenericListInput listName="usikkerhet" />
+          <GenericListInput listName="usikkerhet" context={context}/>
             <Flex gap="gap.medium" style={{ marginTop: 10 }}>
               <FlexItem>
                 <Button primary content="Add item" type="submit" />

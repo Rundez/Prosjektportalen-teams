@@ -3444,6 +3444,15 @@
             "resolved": "https://registry.npmjs.org/@quid/stylis-plugin-focus-visible/-/stylis-plugin-focus-visible-4.0.0.tgz",
             "integrity": "sha512-dS4Vl1D4NHN4gAiWxUQLPAN4k2NMmNpfujuAPU2JF5P/XX8OUD7svhM8f9TudWr8dVdWYjQEAMaRtSUcf4720w=="
         },
+        "@semantic-ui-react/event-stack": {
+            "version": "3.1.2",
+            "resolved": "https://registry.npmjs.org/@semantic-ui-react/event-stack/-/event-stack-3.1.2.tgz",
+            "integrity": "sha512-Yd0Qf7lPCIjzJ9bZYfurlNu2RDXT6KKSyubHfYK3WjRauhxCsq6Fk2LMRI9DEvShoEU+AsLSv3NGkqXAcVp0zg==",
+            "requires": {
+                "exenv": "^1.2.2",
+                "prop-types": "^15.6.2"
+            }
+        },
         "@types/adal-angular": {
             "version": "1.0.1",
             "resolved": "https://registry.npmjs.org/@types/adal-angular/-/adal-angular-1.0.1.tgz",
@@ -6027,6 +6036,11 @@
                 "readable-stream": "^2.3.5"
             }
         },
+        "clsx": {
+            "version": "1.1.1",
+            "resolved": "https://registry.npmjs.org/clsx/-/clsx-1.1.1.tgz",
+            "integrity": "sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA=="
+        },
         "co": {
             "version": "4.6.0",
             "resolved": "https://registry.npmjs.org/co/-/co-4.6.0.tgz",
@@ -8054,6 +8068,11 @@
                 "signal-exit": "^3.0.0",
                 "strip-eof": "^1.0.0"
             }
+        },
+        "exenv": {
+            "version": "1.2.2",
+            "resolved": "https://registry.npmjs.org/exenv/-/exenv-1.2.2.tgz",
+            "integrity": "sha1-KueOhdmJQVhnCwPUe+wfA72Ru50="
         },
         "exit": {
             "version": "0.1.2",
@@ -12568,6 +12587,11 @@
             "integrity": "sha1-o6vicYryQaKykE+EpiWXDzia4yo=",
             "dev": true
         },
+        "jquery": {
+            "version": "3.5.1",
+            "resolved": "https://registry.npmjs.org/jquery/-/jquery-3.5.1.tgz",
+            "integrity": "sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg=="
+        },
         "js-base64": {
             "version": "2.6.4",
             "resolved": "https://registry.npmjs.org/js-base64/-/js-base64-2.6.4.tgz",
@@ -12793,6 +12817,11 @@
             "resolved": "https://registry.npmjs.org/just-debounce/-/just-debounce-1.0.0.tgz",
             "integrity": "sha1-h/zPrv/AtozRnVX2cilD+SnqNeo="
         },
+        "keyboard-key": {
+            "version": "1.1.0",
+            "resolved": "https://registry.npmjs.org/keyboard-key/-/keyboard-key-1.1.0.tgz",
+            "integrity": "sha512-qkBzPTi3rlAKvX7k0/ub44sqOfXeLc/jcnGGmj5c7BJpU8eDrEVPyhCvNYAaoubbsLm9uGWwQJO1ytQK1a9/dQ=="
+        },
         "killable": {
             "version": "1.0.1",
             "resolved": "https://registry.npmjs.org/killable/-/killable-1.0.1.tgz",
@@ -12957,6 +12986,11 @@
             "version": "4.17.20",
             "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz",
             "integrity": "sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA=="
+        },
+        "lodash-es": {
+            "version": "4.17.20",
+            "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.20.tgz",
+            "integrity": "sha512-JD1COMZsq8maT6mnuz1UMV0jvYD0E0aUsSOdrr1/nAG3dhqQXwRRgeW0cSqH1U43INKcqxaiVIQNOUDld7gRDA=="
         },
         "lodash._basecopy": {
             "version": "3.0.1",
@@ -16418,6 +16452,11 @@
             "resolved": "https://registry.npmjs.org/react-dom-factories/-/react-dom-factories-1.0.2.tgz",
             "integrity": "sha1-63cFxNs2+1AbOqOP91lhaqD/luA="
         },
+        "react-fast-compare": {
+            "version": "3.2.0",
+            "resolved": "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz",
+            "integrity": "sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA=="
+        },
         "react-fela": {
             "version": "10.8.2",
             "resolved": "https://registry.npmjs.org/react-fela/-/react-fela-10.8.2.tgz",
@@ -16456,6 +16495,15 @@
                 "unified": "^6.1.5",
                 "unist-util-visit": "^1.3.0",
                 "xtend": "^4.0.1"
+            }
+        },
+        "react-popper": {
+            "version": "2.2.4",
+            "resolved": "https://registry.npmjs.org/react-popper/-/react-popper-2.2.4.tgz",
+            "integrity": "sha512-NacOu4zWupdQjVXq02XpTD3yFPSfg5a7fex0wa3uGKVkFK7UN6LvVxgcb+xYr56UCuWiNPMH20tntdVdJRwYew==",
+            "requires": {
+                "react-fast-compare": "^3.0.1",
+                "warning": "^4.0.2"
             }
         },
         "react-quill": {
@@ -17267,6 +17315,53 @@
                 }
             }
         },
+        "semantic-ui-css": {
+            "version": "2.4.1",
+            "resolved": "https://registry.npmjs.org/semantic-ui-css/-/semantic-ui-css-2.4.1.tgz",
+            "integrity": "sha512-Pkp0p9oWOxlH0kODx7qFpIRYpK1T4WJOO4lNnpNPOoWKCrYsfHqYSKgk5fHfQtnWnsAKy7nLJMW02bgDWWFZFg==",
+            "requires": {
+                "jquery": "x.*"
+            }
+        },
+        "semantic-ui-react": {
+            "version": "2.0.3",
+            "resolved": "https://registry.npmjs.org/semantic-ui-react/-/semantic-ui-react-2.0.3.tgz",
+            "integrity": "sha512-a0hGN6XXw64sRSKwWqMCKSI/AGLohxNeWuErS39eswvBbUnLjBij8ZoEdiqDiz/PuWpwYIRjgmQVrut+7h3b2g==",
+            "requires": {
+                "@babel/runtime": "^7.10.5",
+                "@fluentui/react-component-event-listener": "~0.51.6",
+                "@fluentui/react-component-ref": "~0.51.6",
+                "@popperjs/core": "^2.6.0",
+                "@semantic-ui-react/event-stack": "^3.1.2",
+                "clsx": "^1.1.1",
+                "keyboard-key": "^1.1.0",
+                "lodash": "^4.17.19",
+                "lodash-es": "^4.17.15",
+                "prop-types": "^15.7.2",
+                "react-is": "^16.8.6 || ^17.0.0",
+                "react-popper": "^2.2.4",
+                "shallowequal": "^1.1.0"
+            },
+            "dependencies": {
+                "@fluentui/react-component-event-listener": {
+                    "version": "0.51.7",
+                    "resolved": "https://registry.npmjs.org/@fluentui/react-component-event-listener/-/react-component-event-listener-0.51.7.tgz",
+                    "integrity": "sha512-NjVm+crN0T9A7vITL8alZeHnuV8zi2gos0nezU/2YOxaUAB9E4zKiPxt/6k5U50rJs/gj8Nu45iXxnjO41HbZg==",
+                    "requires": {
+                        "@babel/runtime": "^7.10.4"
+                    }
+                },
+                "@fluentui/react-component-ref": {
+                    "version": "0.51.7",
+                    "resolved": "https://registry.npmjs.org/@fluentui/react-component-ref/-/react-component-ref-0.51.7.tgz",
+                    "integrity": "sha512-CX27jVJYaFoBCWpuWAizQZ2se137ku1dmDyn8sw+ySNJa+kkQf7LnMydiPW5K7cRdUSqUJW3eS4EjKRvVAx8xA==",
+                    "requires": {
+                        "@babel/runtime": "^7.10.4",
+                        "react-is": "^16.6.3"
+                    }
+                }
+            }
+        },
         "semver": {
             "version": "5.7.1",
             "resolved": "https://registry.npmjs.org/semver/-/semver-5.7.1.tgz",
@@ -17401,6 +17496,11 @@
             "version": "1.2.1",
             "resolved": "https://registry.npmjs.org/shallow-equal/-/shallow-equal-1.2.1.tgz",
             "integrity": "sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA=="
+        },
+        "shallowequal": {
+            "version": "1.1.0",
+            "resolved": "https://registry.npmjs.org/shallowequal/-/shallowequal-1.1.0.tgz",
+            "integrity": "sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ=="
         },
         "shebang-command": {
             "version": "1.2.0",
@@ -19714,6 +19814,14 @@
             "dev": true,
             "requires": {
                 "makeerror": "1.0.x"
+            }
+        },
+        "warning": {
+            "version": "4.0.3",
+            "resolved": "https://registry.npmjs.org/warning/-/warning-4.0.3.tgz",
+            "integrity": "sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==",
+            "requires": {
+                "loose-envify": "^1.0.0"
             }
         },
         "watch": {

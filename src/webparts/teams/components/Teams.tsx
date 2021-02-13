@@ -23,9 +23,10 @@ export default function Teams(props: ITeamsWebPartProps) {
         <div style={{ backgroundColor: style.backgroundColor }}>
           <Navbar />
           <Switch>
-            <Route path="/" render={() => <Home />} exact />
-            <Route path="/riskmatrix" render={() => <RiskPage height={props.riskMatrixHeight} width={props.riskMatrixWidth} listName={props.riskMatrixListName} />} />
+            <Route path="/riskmatrix" render={() => <RiskPage height={props.riskMatrixHeight} width={props.riskMatrixWidth} listName={props.riskMatrixListName} context={props.context}/>} />
             <Route path="/projectstatus" component={ProjectStatus} />
+            <Route path="*" render={() => <Home />} exact />
+
           </Switch>
         </div>
       </Provider>
