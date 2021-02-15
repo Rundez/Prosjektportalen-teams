@@ -6,8 +6,7 @@ import { TaxonomyPicker, IPickerTerms } from "@pnp/spfx-controls-react/lib/Taxon
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
 
 
-export const InputField: FunctionComponent<any> = ({ field, onChange, context }) => {
-    const [setValue, getValue] = useState("");
+export const InputField: FunctionComponent<any> = ({ field, onChange, context, listName }) => {
 
 
     // Check the fieldtype and return a corresponding input element..
@@ -55,21 +54,29 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context })
             )
         }
         case FieldTypes.Calculated: {
+            console.log(field.Title)
+
             return (
                 <p>Calculated field</p>
             )
         }
         case FieldTypes.Integer: {
+            console.log(field.Title)
+
             return (
                 <p>Integer field</p>
             )
         }
         case FieldTypes.DateTime: {
+            console.log(field.Title)
+
             return (
                 <p>Datetime field</p>
             )
         }
         case FieldTypes.MultiChoice: {
+            console.log(field.Title)
+
             return (
                 <p>Multichoice</p>
             )
@@ -91,24 +98,32 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context })
                 </>
             )
         }
+
+        // ID is appended to the name since it is a lookup field.. 
         case FieldTypes.User: {
             const _getPeoplePickerItems = (items: any[]) => {
                 console.log('Items:', items);
-                onChange(items, field.EntityPropertyName)
+                onChange(items[0].id, field.EntityPropertyName + "Id")
             }
 
             return (
                 <PeoplePicker
                     context={context}
                     titleText={field.Title}
-                    personSelectionLimit={3}
+                    personSelectionLimit={1}
                     onChange={_getPeoplePickerItems}
                     principalTypes={[PrincipalType.User]}
+                    ensureUser
+                    resolveDelay={1000}
+                    groupName=""
                     />            
                     )
         }
         // This should really be a taxonomy field
         case FieldTypes.Invalid: {
+
+            // Get the associated termset name
+            
 
             const onTaxPickerChange = (terms : IPickerTerms) => {
                 console.log("Terms", terms);
@@ -123,6 +138,7 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context })
                 context={context}
                 isTermSetSelectable={false} 
                 onChange={onTaxPickerChange}
+
                 />
                 </>
             )
@@ -139,8 +155,9 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context })
         }
         // This can be a content type
         case FieldTypes.Computed: {
+
             return (
-                <p>{field.Title}</p>
+                <p>Computed field/innholdstype</p>
             )
         }
         case FieldTypes.Attachments: {
@@ -149,6 +166,7 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context })
             )
         }
         case FieldTypes.Lookup: {
+            console.log(field.Title)
             return (
                 <p>Lookup field</p>
             )
