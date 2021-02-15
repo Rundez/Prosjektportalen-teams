@@ -37,11 +37,8 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
     return (
         <div>
             <Flex gap="gap.medium">
-
                 <Flex hAlign="end">
-                    <Flex.Item >
-                        <List items={teamUsers} />
-                    </Flex.Item>
+                    <TeamMembers items={teamUsers} />
                 </Flex>
             </Flex>
         </div>
