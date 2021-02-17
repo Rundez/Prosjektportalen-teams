@@ -1,26 +1,25 @@
-import React, { FunctionComponent } from 'react';
-import { Flex, List, Avatar, Dropdown } from '@fluentui/react-northstar';
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import { Flex, List, Avatar, Dropdown, Button, Text} from '@fluentui/react-northstar';
+import { CloseIcon } from '@fluentui/react-icons-northstar'
 import { ITeamMembersProps } from './types';
 import { noWrap } from 'office-ui-fabric-react';
 import { Accordion, Label, Layout } from '@fluentui/react-northstar';
 import { ErrorIcon, AudienceIcon } from '@fluentui/react-icons-northstar';
 
-
-
+ 
 export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
 
     const newList = [...props.items, ...testMembers]
     return (
         <div>
             <Flex hAlign="end">
-                <div style={{
-                    backgroundColor: "White",
-                    boxShadow: " 2px 2px 2px #888888",
-                    overflow: "auto",
-                    height: "250px",
-                    marginTop: "10px"
-                }}>
-                    <Flex.Item>
+                <div style={{ backgroundColor: "White", 
+                            boxShadow: " 2px 2px 2px #888888", 
+                            overflow: "auto", 
+                            height: "300px", 
+                            marginTop: "10px"
+                            }}>
+                    <Flex.Item >
                         <List items={newList} />
                     </Flex.Item>
                 </div>
@@ -31,36 +30,25 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
     )
 }
 
-const sortByName = () => {
-    testMembers.sort((a, b) => a.header.localeCompare(b.header));
-    console.log(testMembers);
-}
 
-const sortByMail = () => {
-    testMembers.sort((a, b) => a.content.localeCompare(b.content));
-    console.log(testMembers);
-}
-
-export const AccordionPanelCustomTitleExample = (props) => {
-    const panels = [
-        {
-            title: (
-                <Layout key="title" start={<Label icon={<AudienceIcon />} iconPosition="start" circular content="Prosjektdeltakere" />} />
-            ),
-            content: {
-                key: 'Prosjektdeltakere',
-                content: <TeamMembers items={props.items} />,
-            },
-        },
-    ];
-
-    return (
-            <Accordion defaultActiveIndex={[0]} panels={panels} />
-    )
-};
+export const DropdownSorting = () => (
+    <Dropdown
+      items={dropdownItems}
+      placeholder="Sort by"
+      checkable
+      getA11ySelectionMessage={{ onAdd: item => console.log(`${item} has been selected.`) }}
+    />
+  );
 
 
-const testMembers = [
+  const dropdownItems = [
+      "Mail",
+      "Fornavn",
+      "Etternavn"
+  ]
+
+
+  const testMembers = [
     {
         key: 10,
         header: "Gunnar Leif",
