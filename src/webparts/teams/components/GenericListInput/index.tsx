@@ -51,9 +51,18 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
             .then(ct => ct.map(ct => setContentTypeID(current => [...current, ct.Id])))
     }
 
-    // Handles the input from the child components and sets it to the state 
-    const handleInput = (value: React.KeyboardEvent, name: string | boolean) => {
-        setValue(curr => [...curr.filter((obj: any) => obj.fieldName !== name), { fieldName: name, fieldValue: value }]);
+    //Handles the input from the child components and sets it to the state 
+    const handleInput = (value: string | any, name: string | boolean) => {
+        if(typeof value === 'object') {
+            setValue(curr => [...curr.filter((obj: any) => obj.fieldName !== name), { fieldName: name, fieldValue: {
+                "TermGuid": value.key, 
+                "WssId": '-1'
+            }}]);
+            console.log("Got here??!!!")
+
+        } else {
+            setValue(curr => [...curr.filter((obj: any) => obj.fieldName !== name), { fieldName: name, fieldValue: value }]);
+        }
     }
 
     // Adds the current items to the associated SP list
@@ -67,12 +76,20 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
         // Convert the map to a object according
         let obj = [...newValues.entries()].reduce((obj, [key, value]) => (obj[key] = value, obj), {});
         console.log(obj)
+
+        //const data = {};
+        //data["GtProjectPhase"] = {
+        //  'TermGuid': "99d7765a-c786-4792-a1a1-866ef0f982b9",
+        //  'WssId': '-1'
+        //};
+
         
         //add an item to the list
         const result: IItemAddResult = await sp.web.lists.getByTitle(lName).items.add(obj)
         console.log(result);
     }
     console.log(value);
+    console.log(listFields);
     return (
         <>
             <form>

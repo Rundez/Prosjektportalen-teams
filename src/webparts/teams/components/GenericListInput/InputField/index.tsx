@@ -103,7 +103,9 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context, l
         case FieldTypes.User: {
             const _getPeoplePickerItems = (items: any[]) => {
                 console.log('Items:', items);
-                onChange(items[0].id, field.EntityPropertyName + "Id")
+                const id: string = items[0].id;
+                const propertyName: string = field.EntityPropertyName + "Id";
+                onChange(id, propertyName)
             }
 
             return (
@@ -122,23 +124,23 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context, l
         // This should really be a taxonomy field
         case FieldTypes.Invalid: {
 
-            // Get the associated termset name
-            
 
             const onTaxPickerChange = (terms : IPickerTerms) => {
                 console.log("Terms", terms);
-                onChange(terms, field.EntityPropertyName)
+
+                // call the onchange function and pass the whole term element. 
+                // Should be refactored to also work with multiple terms
+                onChange(terms[0], field.EntityPropertyName)
               }
             return (
                 <>
                 <TaxonomyPicker
-                termsetNameOrID="Fase"
+                termsetNameOrID={field.TermSetId}
                 panelTitle="Velg fase"
                 label={field.Title}
                 context={context}
                 isTermSetSelectable={false} 
                 onChange={onTaxPickerChange}
-
                 />
                 </>
             )
