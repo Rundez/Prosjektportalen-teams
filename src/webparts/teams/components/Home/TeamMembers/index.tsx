@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Flex, List, Avatar, Dropdown, Button, Text} from '@fluentui/react-northstar';
+import React, { FunctionComponent } from 'react';
+import { Flex, List, Avatar, Dropdown } from '@fluentui/react-northstar';
 import { CloseIcon } from '@fluentui/react-icons-northstar'
 import { ITeamMembersProps } from './types';
 import { noWrap } from 'office-ui-fabric-react';

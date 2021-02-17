@@ -10,7 +10,6 @@ import { graph } from "@pnp/graph";
 import "@pnp/graph/teams";
 import "@pnp/graph/users";
 import { ISiteUserInfo } from '@pnp/sp/site-users/types';
-import { TeamMembers } from './TeamMembers/index';
 import { Accordion, Label, Layout } from '@fluentui/react-northstar';
 import { ErrorIcon, AudienceIcon } from '@fluentui/react-icons-northstar';
 import { AccordionPanelCustomTitleExample } from './TeamMembers/index';
@@ -39,12 +38,10 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
 
     return (
         <div>
-            <Flex gap="gap.medium">
-                <Flex hAlign ="end">
-                    <DropdownSorting/>
-                    <Flex hAlign="end">
-                        <TeamMembers items={teamUsers} />
-                    </Flex>
+            <Flex column gap="gap.medium" >
+                <Flex hAlign="end">
+                <DropdownSorting />
+                    <AccordionPanelCustomTitleExample items={teamUsers} />
                 </Flex>
             </Flex>
         </div>
