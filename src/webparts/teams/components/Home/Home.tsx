@@ -10,7 +10,7 @@ import { graph } from "@pnp/graph";
 import "@pnp/graph/teams";
 import "@pnp/graph/users";
 import { ISiteUserInfo } from '@pnp/sp/site-users/types';
-import { TeamMembers } from './TeamMembers/index';
+import { TeamMembers, DropdownSorting } from './TeamMembers/index';
 
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
@@ -37,8 +37,11 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
     return (
         <div>
             <Flex gap="gap.medium">
-                <Flex hAlign="end">
-                    <TeamMembers items={teamUsers} />
+                <Flex hAlign ="end">
+                    <DropdownSorting/>
+                    <Flex hAlign="end">
+                        <TeamMembers items={teamUsers} />
+                    </Flex>
                 </Flex>
             </Flex>
         </div>

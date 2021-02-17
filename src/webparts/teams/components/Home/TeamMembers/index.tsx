@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import { Flex, List, Avatar } from '@fluentui/react-northstar';
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import { Flex, List, Avatar, Dropdown, Button, Text} from '@fluentui/react-northstar';
+import { CloseIcon } from '@fluentui/react-icons-northstar'
 import { ITeamMembersProps } from './types';
 import { noWrap } from 'office-ui-fabric-react';
 
  
-
 export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
 
     const newList = [...props.items, ...testMembers]
@@ -14,8 +14,9 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
                 <div style={{ backgroundColor: "White", 
                             boxShadow: " 2px 2px 2px #888888", 
                             overflow: "auto", 
-                            height: "400px", 
-                            marginTop: "10px"}}>
+                            height: "300px", 
+                            marginTop: "10px"
+                            }}>
                     <Flex.Item >
                         <List items={newList} />
                     </Flex.Item>
@@ -26,7 +27,26 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
         </div>
     )
 }
-const testMembers = [
+
+
+export const DropdownSorting = () => (
+    <Dropdown
+      items={dropdownItems}
+      placeholder="Sort by"
+      checkable
+      getA11ySelectionMessage={{ onAdd: item => console.log(`${item} has been selected.`) }}
+    />
+  );
+
+
+  const dropdownItems = [
+      "Mail",
+      "Fornavn",
+      "Etternavn"
+  ]
+
+
+  const testMembers = [
     {
         key: 10,
         header: "Gunnar Leif",
