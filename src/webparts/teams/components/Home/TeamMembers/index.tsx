@@ -1,9 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { Flex, List, Avatar } from '@fluentui/react-northstar';
+import { Flex, List, Avatar, Dropdown } from '@fluentui/react-northstar';
 import { ITeamMembersProps } from './types';
 import { noWrap } from 'office-ui-fabric-react';
+import { Accordion, Label, Layout } from '@fluentui/react-northstar';
+import { ErrorIcon, AudienceIcon } from '@fluentui/react-icons-northstar';
 
- 
+
 
 export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
 
@@ -11,12 +13,14 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
     return (
         <div>
             <Flex hAlign="end">
-                <div style={{ backgroundColor: "White", 
-                            boxShadow: " 2px 2px 2px #888888", 
-                            overflow: "auto", 
-                            height: "400px", 
-                            marginTop: "10px"}}>
-                    <Flex.Item >
+                <div style={{
+                    backgroundColor: "White",
+                    boxShadow: " 2px 2px 2px #888888",
+                    overflow: "auto",
+                    height: "250px",
+                    marginTop: "10px"
+                }}>
+                    <Flex.Item>
                         <List items={newList} />
                     </Flex.Item>
                 </div>
@@ -26,48 +30,78 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
         </div>
     )
 }
+
+const sortByName = () => {
+    testMembers.sort((a, b) => a.header.localeCompare(b.header));
+    console.log(testMembers);
+}
+
+const sortByMail = () => {
+    testMembers.sort((a, b) => a.content.localeCompare(b.content));
+    console.log(testMembers);
+}
+
+export const AccordionPanelCustomTitleExample = (props) => {
+    const panels = [
+        {
+            title: (
+                <Layout key="title" start={<Label icon={<AudienceIcon />} iconPosition="start" circular content="Prosjektdeltakere" />} />
+            ),
+            content: {
+                key: 'Prosjektdeltakere',
+                content: <TeamMembers items={props.items} />,
+            },
+        },
+    ];
+
+    return (
+            <Accordion defaultActiveIndex={[0]} panels={panels} />
+    )
+};
+
+
 const testMembers = [
     {
         key: 10,
         header: "Gunnar Leif",
         content: "Gunnar@leif.livet",
-        media: <Avatar name= "Gunnar Leif" />
+        media: <Avatar name="Gunnar Leif" />
     },
     {
         key: 11,
         header: "Liljan Sofie",
         content: "Liljan@test.livet",
-        media: <Avatar name= "Liljan Sofie" />
+        media: <Avatar name="Liljan Sofie" />
     },
     {
         key: 12,
         header: "Cecilie Tuva",
         content: "Cecilie@test.livet",
-        media: <Avatar name= "Cecilie Tuva" />
+        media: <Avatar name="Cecilie Tuva" />
     },
     {
         key: 13,
         header: "Geir Ove",
         content: "Geir@test.livet",
-        media: <Avatar name= "Geir Ove" />
+        media: <Avatar name="Geir Ove" />
     },
     {
-    key: 14,
+        key: 14,
         header: "Per Svein",
         content: "Per@test.livet",
-        media: <Avatar name= "Per Svein" />
+        media: <Avatar name="Per Svein" />
     },
     {
         key: 15,
         header: "Millie The Cat",
         content: "Millie@test.livet",
-        media: <Avatar name= "Millie the Cat" />
+        media: <Avatar name="Millie the Cat" />
     },
     {
         key: 16,
         header: "Ludvig The Dog",
         content: "Ludvig@test.livet",
-        media: <Avatar name= "Ludvig the Dog" />
+        media: <Avatar name="Ludvig the Dog" />
     },
 
 ]
