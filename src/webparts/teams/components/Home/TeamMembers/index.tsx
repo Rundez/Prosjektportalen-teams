@@ -46,7 +46,7 @@ export const Minimizer = (props) => {
                     <Flex>
                         <Boxes/>
                     </Flex>
-                <TeamMembers items={props.items} />,
+                <TeamMembers items={props.items} />
                 </div>
         },
         },
@@ -75,23 +75,18 @@ export const DropdownSorting = () => (
     />
   );
 
+  //Tanken er at bare en checkbox kan velges om gangen
   export const Boxes = () => (
     <>
     <Checkbox label="Fornavn" />
     <br />
     <Checkbox label="Etternavn" />
     <br />
-    <Checkbox
-      label={
-        <span>
-          Mail <br />
-        </span>
-      }
-      
-    />
+    <Checkbox label="Mail" />
+    <br />
   </>
-
   );
+
 
   const testMembers = [
     {

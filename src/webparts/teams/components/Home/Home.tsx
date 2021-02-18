@@ -44,7 +44,6 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
             <Flex column gap="gap.medium" >
                 <Flex hAlign="end">
                     <Minimizer  items={teamUsers} />
-                    
                 </Flex>
             </Flex>
         </div>
