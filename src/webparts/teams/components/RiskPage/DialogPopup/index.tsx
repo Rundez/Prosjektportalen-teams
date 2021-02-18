@@ -5,11 +5,12 @@ import { Panel } from 'office-ui-fabric-react/lib/Panel';
 import { sp } from "@pnp/sp/presets/all";
 import { useForm } from 'react-hook-form';
 import { GenericListInput } from '../../GenericListInput/index';
+import { ISideBarProps } from './types'
 
 /**
  * Renders a sidebar with input fields according to the list.
  */
-export const AddElementDialog: FunctionComponent<any> = ({context}) => {
+export const AddElementDialog: FunctionComponent<ISideBarProps> = ({context, listName}) => {
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
   const { register, handleSubmit } = useForm();
 
@@ -26,14 +27,14 @@ export const AddElementDialog: FunctionComponent<any> = ({context}) => {
     <>
       <Button primary content="Add item" onClick={openPanel} style={{ marginBottom: 10 }} />
       <Panel
-        headerText="Add risk/opportunity"
+        headerText="Add item"
         isOpen={isOpen}
         onDismiss={dismissPanel}
         closeButtonAriaLabel="Close"
       >
         <div>
           <Form onSubmit={handleSubmit(printData)}>
-          <GenericListInput listName="usikkerhet" context={context} closeHandler={onClickHandler}/>
+          <GenericListInput listName={listName} context={context} closeHandler={onClickHandler}/>
           </Form>
         </div>
       </Panel>

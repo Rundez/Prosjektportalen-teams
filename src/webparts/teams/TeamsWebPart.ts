@@ -8,7 +8,7 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart, IMicrosoftTeams } from '@microsoft/sp-webpart-base';
-import Teams from './components/Teams';
+import {Teams} from './components/Teams';
 import { ITeamsProps } from './components/ITeamsProps';
 import { WebPartContext } from "@microsoft/sp-webpart-base";    
 import { sp } from "@pnp/sp";
@@ -20,13 +20,12 @@ export interface ITeamsWebPartProps {
   riskMatrixHeight: number;
   riskMatrixWidth: number;
   riskMatrixListName: string;
-  context: any;
+  context?: WebPartContext
 }
 
 export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartProps> {
 
   public onInit(): Promise<void> {
-    this.properties.context = this.context;
 
     return super.onInit().then(_ => {
 
@@ -48,7 +47,18 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
 
   public render(): void {
 
-    ReactDom.render(React.createElement(Teams, this.properties), this.domElement);
+    const element: React.ReactElement<ITeamsWebPartProps> = React.createElement(
+      Teams, 
+      {
+        projectUrl: this.properties.projectUrl,
+        riskMatrixHeight: this.properties.riskMatrixHeight,
+        riskMatrixWidth: this.properties.riskMatrixWidth,
+        riskMatrixListName: this.properties.riskMatrixListName,
+        context: this.context
+      }
+    );
+    ReactDom.render(element, this.domElement);
+
   }
 
   protected onDispose(): void {
