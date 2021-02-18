@@ -12,8 +12,10 @@ import "@pnp/graph/users";
 import { ISiteUserInfo } from '@pnp/sp/site-users/types';
 import { Accordion, Label, Layout } from '@fluentui/react-northstar';
 import { ErrorIcon, AudienceIcon } from '@fluentui/react-icons-northstar';
-import { AccordionPanelCustomTitleExample } from './TeamMembers/index';
+import { Minimizer, Boxes } from './TeamMembers/index';
 import { TeamMembers, DropdownSorting } from './TeamMembers/index';
+import { Checkbox } from 'semantic-ui-react';
+
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
@@ -40,8 +42,8 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
         <div>
             <Flex column gap="gap.medium" >
                 <Flex hAlign="end">
-                <DropdownSorting />
-                    <AccordionPanelCustomTitleExample items={teamUsers} />
+                    <Minimizer  items={teamUsers} />
+                    
                 </Flex>
             </Flex>
         </div>

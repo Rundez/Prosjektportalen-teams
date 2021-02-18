@@ -5,6 +5,8 @@ import { ITeamMembersProps } from './types';
 import { noWrap } from 'office-ui-fabric-react';
 import { Accordion, Label, Layout } from '@fluentui/react-northstar';
 import { ErrorIcon, AudienceIcon } from '@fluentui/react-icons-northstar';
+import { Checkbox } from '@fluentui/react-northstar'
+import { Input } from 'semantic-ui-react';
 
  
 export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
@@ -29,7 +31,39 @@ export const TeamMembers: FunctionComponent<ITeamMembersProps> = (props) => {
         </div>
     )
 }
+export const Minimizer = (props) => {
+    const panels = [
+        {
+            title: (  
+                <Layout key="title" start={<Label icon={<AudienceIcon />} iconPosition="start" circular content="Prosjektdeltakere" />} />
+            ),
+            
+            content: {
+                key: 'Prosjektdeltakere',
+                content: 
+                <div>
+                    <Flex>
+                        <Boxes/>
+                    </Flex>
+                <TeamMembers items={props.items} />,
+                </div>
+        },
+        },
+    ];
 
+    return (
+        <div>
+            
+            <Accordion defaultActiveIndex={[0]} panels={panels} />
+            </div>
+    )
+};
+
+const dropdownItems = [
+    "Mail",
+    "Fornavn",
+    "Etternavn"
+]
 
 export const DropdownSorting = () => (
     <Dropdown
@@ -40,13 +74,23 @@ export const DropdownSorting = () => (
     />
   );
 
+  export const Boxes = () => (
+    <>
+    <Checkbox label="Fornavn" />
+    <br />
+    <Checkbox label="Etternavn" />
+    <br />
+    <Checkbox
+      label={
+        <span>
+          Mail <br />
+        </span>
+      }
+      
+    />
+  </>
 
-  const dropdownItems = [
-      "Mail",
-      "Fornavn",
-      "Etternavn"
-  ]
-
+  );
 
   const testMembers = [
     {
