@@ -1,27 +1,22 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { IGenericListInputProps } from './types';
-import { Button, createClassResolver } from '@fluentui/react-northstar';
+import { Button, createClassResolver, Flex } from '@fluentui/react-northstar';
 import { InputField } from './InputField/index';
 //import { IFieldType } from './types';
 
 import { sp, IFieldInfo } from "@pnp/sp/presets/all";
 import { IItemAddResult } from "@pnp/sp/items";
 
-import { InputTypes } from './InputField/types';
-import { useForm } from "react-hook-form";
-import { getGUID } from '@pnp/common';
+export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ listName, context, closeHandler }) => {
 
-export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ listName, context }) => {
-
-    const [fields, setFields] = useState([]);
-    const [contentTypeID, setContentTypeID] = useState([]);
+    const [fields, setFields] = useState([]); // Not in use
+    const [contentTypeID, setContentTypeID] = useState([]); // Not in use. Could be needed?
     const [listFields, setListFields] = useState<IFieldInfo[]>([]);
-
     const [value, setValue] = useState([{}]);
 
     useEffect(() => {
-        fetchViewListData(listName);
-        fetchFieldData(listName);
+        //fetchViewListData(listName);
+        //fetchFieldData(listName);
         fetchListFields(listName);
     }, [])
 
@@ -51,22 +46,24 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
             .then(ct => ct.map(ct => setContentTypeID(current => [...current, ct.Id])))
     }
 
-    //Handles the input from the child components and sets it to the state 
+    /**
+     * Handles the input from the child components and sets it to the state
+     */
     const handleInput = (value: string | any, name: string | boolean) => {
         if(typeof value === 'object') {
             setValue(curr => [...curr.filter((obj: any) => obj.fieldName !== name), { fieldName: name, fieldValue: {
                 "TermGuid": value.key, 
                 "WssId": '-1'
             }}]);
-            console.log("Got here??!!!")
-
         } else {
             setValue(curr => [...curr.filter((obj: any) => obj.fieldName !== name), { fieldName: name, fieldValue: value }]);
         }
     }
 
-    // Adds the current items to the associated SP list
-    const addItemsToList = async (lName: string, inputValues: any) => {
+    /**
+     * Adds the current items to the associated SP list
+     */
+    const addItemsToSpList = async (lName: string, inputValues: any) => {
        
         inputValues.splice(0, 1);  // Delete the first element (this should be fixed)
 
@@ -76,16 +73,10 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
         // Convert the map to a object according
         let obj = [...newValues.entries()].reduce((obj, [key, value]) => (obj[key] = value, obj), {});
         console.log(obj)
-
-        //const data = {};
-        //data["GtProjectPhase"] = {
-        //  'TermGuid': "99d7765a-c786-4792-a1a1-866ef0f982b9",
-        //  'WssId': '-1'
-        //};
-
-        
         //add an item to the list
         const result: IItemAddResult = await sp.web.lists.getByTitle(lName).items.add(obj)
+        closeHandler(); 
+
         console.log(result);
     }
     console.log(value);
@@ -97,7 +88,10 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({ li
                     <InputField field={field} key={index} onChange={handleInput} context={context} listName={listName}/>
                 )
                 )}
-                <Button primary content="Add Item" onClick={() => addItemsToList(listName, value)} />
+                <Flex gap="gap.medium" style={{ marginTop: 10 }}>
+                <Button primary content="Add Item" onClick={() => addItemsToSpList(listName, value)} />
+                <Button secondary content="Cancel" onClick={closeHandler} />
+                </Flex>
             </form>
         </>
     )

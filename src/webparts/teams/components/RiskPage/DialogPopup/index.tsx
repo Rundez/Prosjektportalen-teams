@@ -6,13 +6,21 @@ import { sp } from "@pnp/sp/presets/all";
 import { useForm } from 'react-hook-form';
 import { GenericListInput } from '../../GenericListInput/index';
 
-
+/**
+ * Renders a sidebar with input fields according to the list.
+ */
 export const AddElementDialog: FunctionComponent<any> = ({context}) => {
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
   const { register, handleSubmit } = useForm();
 
   const printData = data => console.log(data);
 
+  /**
+   * Closes the window when either "Add item" og "Dismiss is pressed"
+   */
+  const onClickHandler = () => {
+    dismissPanel();
+  }
 
   return (
     <>
@@ -25,29 +33,10 @@ export const AddElementDialog: FunctionComponent<any> = ({context}) => {
       >
         <div>
           <Form onSubmit={handleSubmit(printData)}>
-          <GenericListInput listName="usikkerhet" context={context}/>
-            <Flex gap="gap.medium" style={{ marginTop: 10 }}>
-              <FlexItem>
-                <Button primary content="Add item" type="submit" />
-              </FlexItem>
-              <FlexItem>
-                <Button secondary content="Cancel" onClick={dismissPanel} />
-              </FlexItem>
-            </Flex>
+          <GenericListInput listName="usikkerhet" context={context} closeHandler={onClickHandler}/>
           </Form>
         </div>
       </Panel>
     </>
   )
 }
-
-
-const phase = [
-  'Ingen fase',
-  'Flere faser',
-  'Konsept',
-  'Planlegge',
-  'Gjennomføre',
-  'Avslutte',
-  'Realisere'
-];

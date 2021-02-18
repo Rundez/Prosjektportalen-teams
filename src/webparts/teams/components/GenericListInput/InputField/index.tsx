@@ -5,11 +5,12 @@ import { Toggle } from 'office-ui-fabric-react';
 import { TaxonomyPicker, IPickerTerms } from "@pnp/spfx-controls-react/lib/TaxonomyPicker";
 import { PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
 
-
+/**
+ * Returns a corresponding component based on the fieldtype.
+ * TODO: Add a field interface
+ */
 export const InputField: FunctionComponent<any> = ({ field, onChange, context, listName }) => {
 
-
-    // Check the fieldtype and return a corresponding input element..
     switch (field.FieldTypeKind) {
         case FieldTypes.Text: {
             return (
@@ -179,5 +180,4 @@ export const InputField: FunctionComponent<any> = ({ field, onChange, context, l
             )
         }
     }
-
 }
