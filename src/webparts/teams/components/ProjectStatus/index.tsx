@@ -1,12 +1,14 @@
 import React from 'react';
 import { Header } from '@fluentui/react-northstar';
-import { Sub } from './Subcomponent';
+import { ProgressDialog } from 'pp365-projectwebparts/lib/components/ProgressDialog'
+import {  IProgressDialogProps } from 'pp365-projectwebparts/lib/components/ProgressDialog/types'
 
-export const ProjectStatus = () => {
+export const Status = () => {
+
 
     return (
-        <Sub name1="Hello"/>
-        
+        <>
+        </>
     )
 }
 

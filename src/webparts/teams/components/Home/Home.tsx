@@ -11,6 +11,7 @@ import "@pnp/graph/teams";
 import "@pnp/graph/users";
 import { ISiteUserInfo } from '@pnp/sp/site-users/types';
 import { TeamMembers } from './TeamMembers/index';
+import { DisplayTable } from '../RiskPage/DisplayTable'
 
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
@@ -44,6 +45,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
                     </Flex.Item>
                 </Flex>
             </Flex>
+            <DisplayTable />
         </div>
     )
 }

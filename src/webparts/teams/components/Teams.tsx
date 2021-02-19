@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './Navigation/Navbar';
 import { RiskPage } from './RiskPage/index'
 import { Home } from './Home/Home';
-import { ProjectStatus } from './ProjectStatus/index'
+import { Status } from './ProjectStatus/index'
 
 
 import { sp } from "@pnp/sp";
@@ -26,7 +26,7 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
           <Navbar />
           <Switch>
             <Route path="/riskmatrix" render={() => <RiskPage height={props.riskMatrixHeight} width={props.riskMatrixWidth} listName={props.riskMatrixListName} context={props.context} />} />
-            <Route path="/projectstatus" component={ProjectStatus} />
+            <Route path="/projectstatus" component={Status} />
             <Route path="*" render={() => <Home />} exact />
 
           </Switch>

@@ -1,30 +1,74 @@
-import React, { useState, FunctionComponent } from 'react';
-import { Table } from '@fluentui/react-northstar';
-import { IDisplayTableProps } from './types';
+import React, { useState, FunctionComponent } from "react";
+import { IDisplayTableProps } from "./types";
+import {
+  ListView,
+  IViewField,
+  SelectionMode,
+  GroupOrder,
+  IGrouping,
+} from "@pnp/spfx-controls-react/lib/ListView";
 
 export const DisplayTable: FunctionComponent = ({}) => {
+  return (
+    <div style={{ width: "75%" }}>
+      <ListView items={items} viewFields={viewFields} showFilter />
+    </div>
+  );
+};
 
-    return (
-        <div>
-            <Table header={header} rows={rows}/>
-        </div>
-    )
-}
+const viewFields: IViewField[] = [
+  {
+    name: "Id",
+    displayName: "Id",
+    sorting: true,
+    isResizable: true,
+  },
+  {
+    name: "Name",
+    displayName: "Name",
+    sorting: true,
+    isResizable: true,
+  },
+  {
+    name: "Picture",
+    displayName: "Picture",
+    sorting: true,
+    isResizable: true,
+  },
+  {
+    name: "Age",
+    displayName: "Age",
+    sorting: true,
+    isResizable: true,
+  },
+];
 
 const header = {
-    items: ['id', 'Name', 'Picture', 'Age'],
-  }
-  const rows = [
-    {
-      key: 1,
-      items: ['1', 'Roman van von der Longername', 'None', '30 years'],
-    },
-    {
-      key: 2,
-      items: ['2', 'Alex', 'None', '1 year'],
-    },
-    {
-      key: 3,
-      items: ['3', 'Ali', 'None', '30000000000000 years'],
-    },
-  ]
+  items: ["id", "Name", "Picture", "Age"],
+};
+const items = [
+  {
+    Id: "1",
+    Name: "Roman van von der Longername",
+    Picture: "None",
+    Age: "30 years",
+  },
+  {
+    Id: "2",
+    Name: "Martin Ruud",
+    Picture: "None",
+    Age: "27 years",
+  },
+  {
+    Id: "3",
+    Name: "Millie me",
+    Picture: "None",
+    Age: "1 year",
+  },
+  {
+    Id: "4",
+    Name: "Maryloo",
+    Picture: "None",
+    Age: "22 years",
+  },
+];
