@@ -1,9 +1,8 @@
 export interface IDisplayTableProps {
-    header: {
-        items: string[];
-    };
-    rows: [{
-        key: number;
-        items: string[];
-    }]
+  /**
+   * The list to fetch data
+   */
+  listName?: string;
 }
+
+export interface ITableColumns {}
