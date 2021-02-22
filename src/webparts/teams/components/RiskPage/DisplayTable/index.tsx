@@ -8,7 +8,6 @@ import {
   IGrouping,
 } from "@pnp/spfx-controls-react/lib/ListView";
 import { sp, IFieldInfo, Item, IView } from "@pnp/sp/presets/all";
-import { isBeforeMinDate } from "@fluentui/react-northstar";
 
 export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
@@ -21,17 +20,21 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
       const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
       setListColumns(columnFormatted); // set the list columns to state
 
-      console.log(columnNames);
+      console.log(columnFormatted);
       const rows = await fetchListItems(listName, columnNames);
       setListElements(rows);
-      console.log(rows);
     };
     fetchItems();
   }, []);
 
   return (
     <div>
-      <ListView items={listElements} viewFields={listColumns} showFilter />
+      <ListView
+        items={listElements}
+        viewFields={listColumns}
+        showFilter
+        compact
+      />
     </div>
   );
 };
@@ -65,7 +68,7 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
 };
 
 /**
- * Fetch ALL the view fields (hidden not included)
+ * Convert the columns to the accepted format
  * @param listName
  */
 const convertListColumns = async (
@@ -77,10 +80,13 @@ const convertListColumns = async (
       displayName: field.Title,
       sorting: true,
       isResizable: true,
+      minWidth: 50,
+      maxWidth: 100,
     };
   });
 
-  return list;
+  const sortedList = list.reverse();
+  return sortedList;
 };
 
 /**
