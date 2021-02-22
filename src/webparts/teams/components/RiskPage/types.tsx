@@ -1,9 +1,12 @@
+import { WebPartContext } from "@microsoft/sp-webpart-base"
+
 export interface IRiskMatrixProps {
   items?: RiskElementModel[];
   width?: number | string;
   height?: number | string;
   calloutTemplate?: string;
   listName?: string;
+  context?: WebPartContext;
 }
 
 export interface IRiskElementItem {
