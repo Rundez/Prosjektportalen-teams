@@ -1,57 +1,66 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import { useBoolean } from '@uifabric/react-hooks';
-import { Button, Flex, FlexItem, Input, Dropdown, Text, TextArea, Form } from '@fluentui/react-northstar';
-import { Panel } from 'office-ui-fabric-react/lib/Panel';
+import React, { FunctionComponent, useEffect, useState } from "react";
+import { useBoolean } from "@uifabric/react-hooks";
+import {
+  Button,
+  Flex,
+  FlexItem,
+  Input,
+  Dropdown,
+  Text,
+  TextArea,
+  Form,
+} from "@fluentui/react-northstar";
+import { Panel } from "office-ui-fabric-react/lib/Panel";
 import { sp } from "@pnp/sp/presets/all";
-import { useForm } from 'react-hook-form';
+import { useForm } from "react-hook-form";
+import { GenericListInput } from "../../GenericListInput/index";
+import { ISideBarProps } from "./types";
 
-
-export const AddElementDialog: FunctionComponent = () => {
-  const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
+/**
+ * Renders a sidebar with input fields according to the list.
+ */
+export const AddElementDialog: FunctionComponent<ISideBarProps> = ({
+  context,
+  listName,
+}) => {
+  const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(
+    false
+  );
   const { register, handleSubmit } = useForm();
 
-  const printData = data => console.log(data);
+  const printData = (data) => console.log(data);
 
+  /**
+   * Closes the window when either "Add item" og "Dismiss is pressed"
+   */
+  const onClickHandler = () => {
+    dismissPanel();
+  };
 
   return (
     <>
-      <Button primary content="Add item" onClick={openPanel} style={{ marginBottom: 10 }} />
+      <Button
+        primary
+        content="Add item"
+        onClick={openPanel}
+        style={{ marginBottom: 10 }}
+      />
       <Panel
-        headerText="Add risk/opportunity"
+        headerText="Add item"
         isOpen={isOpen}
         onDismiss={dismissPanel}
         closeButtonAriaLabel="Close"
       >
         <div>
           <Form onSubmit={handleSubmit(printData)}>
-            <Input ref={register} name="title" label="Tittel" fluid/>
-            <Dropdown items={phase} fluid/>
-            <Input ref={register} name="probability" label="Sannsynlighet (S)" fluid/>
-            <Input ref={register} name="conseqence" label="Konsekvens (K)" fluid/>
-            <Input ref={register} name="propbAfter" label="S etter tiltak" fluid/>
-            <Input ref={register} name="consAfter" label="K etter tiltak" fluid/>
-            <Flex gap="gap.medium" style={{ marginTop: 10 }}>
-              <FlexItem>
-                <Button primary content="Add item" type="submit" />
-              </FlexItem>
-              <FlexItem>
-                <Button secondary content="Cancel" onClick={dismissPanel} />
-              </FlexItem>
-            </Flex>
+            <GenericListInput
+              listName={listName}
+              context={context}
+              closeHandler={onClickHandler}
+            />
           </Form>
         </div>
       </Panel>
     </>
-  )
-}
-
-
-const phase = [
-  'Ingen fase',
-  'Flere faser',
-  'Konsept',
-  'Planlegge',
-  'Gjennomføre',
-  'Avslutte',
-  'Realisere'
-];
+  );
+};

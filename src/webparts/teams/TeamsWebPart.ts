@@ -8,30 +8,28 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart, IMicrosoftTeams } from '@microsoft/sp-webpart-base';
-import Teams from './components/Teams';
+import {Teams} from './components/Teams';
 import { ITeamsProps } from './components/ITeamsProps';
 import { WebPartContext } from "@microsoft/sp-webpart-base";    
 import { sp } from "@pnp/sp";
 import { graph } from "@pnp/graph";
 import "@pnp/graph/groups";
 
-
-
 export interface ITeamsWebPartProps {
   projectUrl: string;
-  context: WebPartContext;
   riskMatrixHeight: number;
   riskMatrixWidth: number;
   riskMatrixListName: string;
-  teamsContext: IMicrosoftTeams;
+  context?: WebPartContext
 }
 
 export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartProps> {
 
   public onInit(): Promise<void> {
+
     return super.onInit().then(_ => {
 
-      this.properties.teamsContext= this.context.sdks.microsoftTeams;
+      // Put the teams context and SP context in to the properties. 
       
       // Init of the graph
       graph.setup({
@@ -42,12 +40,25 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
       sp.setup({
         spfxContext: this.context
       });
+
     });
+
   }
 
   public render(): void {
 
-    ReactDom.render(React.createElement(Teams, this.properties), this.domElement);
+    const element: React.ReactElement<ITeamsWebPartProps> = React.createElement(
+      Teams, 
+      {
+        projectUrl: this.properties.projectUrl,
+        riskMatrixHeight: this.properties.riskMatrixHeight,
+        riskMatrixWidth: this.properties.riskMatrixWidth,
+        riskMatrixListName: this.properties.riskMatrixListName,
+        context: this.context
+      }
+    );
+    ReactDom.render(element, this.domElement);
+
   }
 
   protected onDispose(): void {
