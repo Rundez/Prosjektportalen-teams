@@ -19,10 +19,9 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
       const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
       const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
       setListColumns(columnFormatted); // set the list columns to state
-
-      console.log(columnFormatted);
-      const rows = await fetchListItems(listName, columnNames);
+      const rows = await fetchListItems(listName, columnNames); // Fetch the items based on the view query
       setListElements(rows);
+      console.log(rows);
     };
     fetchItems();
   }, []);
@@ -55,6 +54,7 @@ const fetchViewFields = async (listName: string) => {
 /**
  * Fetch data from the selected list
  * @param listName
+ * @param viewFields
  */
 const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
   const internalNames = viewFields.map((field) => field.InternalName);
@@ -64,6 +64,7 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
     .expand("")
     .get();
 
+  const lookup = console.log(items);
   return items;
 };
 
