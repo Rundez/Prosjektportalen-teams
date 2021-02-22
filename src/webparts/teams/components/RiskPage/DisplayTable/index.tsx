@@ -17,15 +17,6 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   const [listElements, setListElements] = useState<any[]>([]);
   useEffect(() => {
     const fetchItems = async () => {
-      //const columns = await fetchListColumns(listName);
-      //fetchListItems(listName, columns);
-      //setListColumns(columns);
-
-      //const viewFields: any = await fetchViewFields(listName);
-      //const viewFieldNames: string[] = viewFields.Items; // Array of the viewFields
-      //console.log(viewFields);
-      //const items = await fetchListItems(listName, viewFieldNames);
-
       const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
       const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
       setListColumns(columnFormatted); // set the list columns to state
@@ -44,61 +35,6 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
     </div>
   );
 };
-
-const viewFields: IViewField[] = [
-  {
-    name: "Id",
-    displayName: "Id",
-    sorting: true,
-    isResizable: true,
-    maxWidth: 150,
-  },
-  {
-    name: "Name",
-    displayName: "Name",
-    sorting: true,
-    isResizable: true,
-  },
-  {
-    name: "Picture",
-    displayName: "Picture",
-    sorting: true,
-    isResizable: true,
-  },
-  {
-    name: "Age",
-    displayName: "Age",
-    sorting: true,
-    isResizable: true,
-  },
-];
-
-const items = [
-  {
-    Id: "1",
-    Name: "Roman van von der Longername",
-    Picture: "None",
-    Age: "30 years",
-  },
-  {
-    Id: "2",
-    Name: "Martin Ruud",
-    Picture: "None",
-    Age: "27 years",
-  },
-  {
-    Id: "3",
-    Name: "Millie me",
-    Picture: "None",
-    Age: "1 year",
-  },
-  {
-    Id: "4",
-    Name: "Maryloo",
-    Picture: "None",
-    Age: "22 years",
-  },
-];
 
 /**
  * Fetch the fields for the selected view
