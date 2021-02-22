@@ -1,20 +1,13 @@
 import React from "react";
 
-import { ITeamsWebPartProps } from "../TeamsWebPart";
-import { escape } from "@microsoft/sp-lodash-subset";
-import {
-  Provider,
-  teamsTheme,
-  Button,
-  Text,
-  Header,
-  Flex,
-} from "@fluentui/react-northstar";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { RiskPage } from "./RiskPage/index";
-import { Home } from "./Home/Home";
-import { Status } from "./ProjectStatus/index";
-import NavbarV1 from "./Navigation/NavBarv1";
+import { ITeamsWebPartProps } from '../TeamsWebPart';
+import { escape } from '@microsoft/sp-lodash-subset';
+import { Provider, teamsTheme, Button, Text, Header, Flex } from "@fluentui/react-northstar";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { RiskPage } from './RiskPage/index'
+import { Home } from './Home/Home';
+import { ProjectStatus } from './ProjectStatus/index'
+import  Navbar from './Navigation/NavBar'
 
 import { sp } from "@pnp/sp";
 import "@pnp/sp/webs";
@@ -28,7 +21,7 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
     <Router>
       <Provider theme={teamsTheme}>
         <div style={{ backgroundColor: style.backgroundColor }}>
-          <NavbarV1 />
+          <Navbar />
           <Switch>
             <Route
               path="/riskmatrix"
