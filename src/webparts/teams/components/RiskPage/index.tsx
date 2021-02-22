@@ -1,6 +1,5 @@
 import * as React from "react";
 import { IRiskMatrixProps, RiskElementModel } from "./types";
-import styles from "./RiskMatrix.module.scss";
 import * as getValue from "get-value";
 import { Loader, Divider } from "@fluentui/react-northstar";
 import { AddElementDialog } from "./DialogPopup/index";

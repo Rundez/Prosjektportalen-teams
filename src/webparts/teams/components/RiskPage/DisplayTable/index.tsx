@@ -28,12 +28,7 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
 
   return (
     <div>
-      <ListView
-        items={listElements}
-        viewFields={listColumns}
-        showFilter
-        compact
-      />
+      <ListView items={listElements} viewFields={listColumns} showFilter />
     </div>
   );
 };

@@ -1,12 +1,9 @@
 import React, { Component, FunctionComponent } from "react";
 import { Link } from "react-router-dom";
-import {
-  Button,
-  Image
-} from "@fluentui/react-northstar";
+import { Button, Image } from "@fluentui/react-northstar";
 import { IMenuProps } from "./types";
 
-const mainColor = "#6264A7"
+const mainColor = "#6264A7";
 
 const style = {
   marginTop: 0,
@@ -21,7 +18,7 @@ const styleImg = {
 const styleActive = {
   marginTop: 0,
   textDecoration: "none",
-  borderBottom: "4px solid " + mainColor
+  borderBottom: "4px solid " + mainColor,
 };
 
 export const Menu: FunctionComponent<IMenuProps> = ({
@@ -35,7 +32,7 @@ export const Menu: FunctionComponent<IMenuProps> = ({
     if (typeof image == "undefined") {
       return (
         <Link to={path} style={styleActive} onClick={active}>
-          <Button content={name} text style={{color:mainColor}}></Button>
+          <Button content={name} text style={{ color: mainColor }}></Button>
         </Link>
       );
     } else {
