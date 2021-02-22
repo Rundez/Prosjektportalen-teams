@@ -1,4 +1,5 @@
-import { IMicrosoftTeams } from '@microsoft/sp-webpart-base';
+import { WebPartContext } from "@microsoft/sp-webpart-base";
 
 export interface IHomeProps {
+  teamsContext: WebPartContext;
 }
