@@ -41,16 +41,14 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
   }, []);
   console.log(teamUsers);
 
-  return (
-    <div>
-      <Flex gap="gap.medium">
-        <Flex hAlign="end">
-          <Flex.Item>
-            <List items={teamUsers} />
-          </Flex.Item>
-        </Flex>
-      </Flex>
-      <DisplayTable />
-    </div>
-  );
-};
+    return (
+        <div>
+            <Flex gap="gap.medium">
+                <Flex hAlign="end">
+                    <TeamMembers items={teamUsers} />
+                </Flex>
+            </Flex>
+        </div>
+    )
+}
+

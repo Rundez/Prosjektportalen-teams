@@ -8,7 +8,6 @@ import {
   IGrouping,
 } from "@pnp/spfx-controls-react/lib/ListView";
 import { sp, IFieldInfo, Item, IView } from "@pnp/sp/presets/all";
-import { isBeforeMinDate } from "@fluentui/react-northstar";
 
 export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
@@ -20,9 +19,7 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
       const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
       const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
       setListColumns(columnFormatted); // set the list columns to state
-
-      console.log(columnNames);
-      const rows = await fetchListItems(listName, columnNames);
+      const rows = await fetchListItems(listName, columnNames); // Fetch the items based on the view query
       setListElements(rows);
       console.log(rows);
     };
@@ -31,7 +28,12 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
 
   return (
     <div>
-      <ListView items={listElements} viewFields={listColumns} showFilter />
+      <ListView
+        items={listElements}
+        viewFields={listColumns}
+        showFilter
+        compact
+      />
     </div>
   );
 };
@@ -52,6 +54,7 @@ const fetchViewFields = async (listName: string) => {
 /**
  * Fetch data from the selected list
  * @param listName
+ * @param viewFields
  */
 const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
   const internalNames = viewFields.map((field) => field.InternalName);
@@ -61,11 +64,12 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
     .expand("")
     .get();
 
+  const lookup = console.log(items);
   return items;
 };
 
 /**
- * Fetch ALL the view fields (hidden not included)
+ * Convert the columns to the accepted format
  * @param listName
  */
 const convertListColumns = async (
@@ -77,10 +81,13 @@ const convertListColumns = async (
       displayName: field.Title,
       sorting: true,
       isResizable: true,
+      minWidth: 50,
+      maxWidth: 100,
     };
   });
 
-  return list;
+  const sortedList = list.reverse();
+  return sortedList;
 };
 
 /**
