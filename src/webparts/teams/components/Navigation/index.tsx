@@ -26,16 +26,16 @@ export default function Navigation() {
             name="Home"
           />
           <Menu
-            active={() => handleClick("Usikkerhet")}
+            active={() => handleClick("Risikomatrise")}
             activeState={active}
             path="/riskmatrix"
-            name="Risikomatrise"
+            name="Usikkerhet"
           />
           <Menu
-            active={() => handleClick("Prosjektstatus")}
+            active={() => handleClick("Prosjekt status")}
             activeState={active}
             path="/projectstatus"
-            name="Prosjekt status"
+            name="Prosjektstatus"
           />
           <Menu
             active={() => handleClick("Page 3")}

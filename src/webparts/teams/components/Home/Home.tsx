@@ -44,7 +44,6 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
         })
     );
   }, []);
-  console.log(teamUsers);
 
   return (
     <div>

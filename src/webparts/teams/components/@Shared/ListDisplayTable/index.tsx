@@ -7,10 +7,20 @@ import {
   GroupOrder,
   IGrouping,
 } from "@pnp/spfx-controls-react/lib/ListView";
-import { sp, IFieldInfo, Item, IView } from "@pnp/sp/presets/all";
+import {
+  sp,
+  IFieldInfo,
+  Item,
+  IView,
+  IRenderListData,
+} from "@pnp/sp/presets/all";
+import { FieldTextRenderer } from "@pnp/spfx-controls-react/lib/FieldTextRenderer";
+import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRenderer";
+import { WebPartContext } from "@microsoft/sp-webpart-base";
 
 export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
+  context,
 }) => {
   const [listColumns, setListColumns] = useState<IViewField[]>([]);
   const [listElements, setListElements] = useState<any[]>([]);
@@ -19,12 +29,49 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
       const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
       const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
       setListColumns(columnFormatted); // set the list columns to state
-      const rows = await fetchListItems(listName, columnNames); // Fetch the items based on the view query
+      //const rows = await fetchListItems(listName, columnNames); // Fetch the items based on the view query
+      //setListElements(rows);
+      //fetchListItems(listName, columnNames);
+      const rows = await fetchItemsCaml(listName);
       setListElements(rows);
-      console.log(rows);
     };
     fetchItems();
   }, []);
+
+  /**
+   * Convert the columns to the accepted format
+   * @param listName
+   */
+  const convertListColumns = async (
+    columns: IFieldInfo[]
+  ): Promise<IViewField[]> => {
+    const list = columns.map((field: any) => {
+      if (field["odata.type"] === "SP.FieldUser") {
+        console.log("Dette er et brukerfelt:");
+        console.log(field);
+      }
+      return {
+        name: field.InternalName,
+        displayName: field.Title,
+        sorting: true,
+        isResizable: true,
+        minWidth: 50,
+        maxWidth: 100,
+        //render: _renderColumn,
+      };
+    });
+
+    const sortedList = list.reverse();
+    return sortedList;
+  };
+
+  const _renderColumn = (text) => {
+    return <FieldTextRenderer text={text["GtRiskStrategy"]} />;
+  };
+
+  const _renderUserColumn = () => {
+    return <FieldUserRenderer context={context} />;
+  };
 
   return (
     <div>
@@ -37,13 +84,27 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
  * Fetch the fields for the selected view
  * @param listName
  */
-const fetchViewFields = async (listName: string) => {
+const fetchItemsCaml = async (listName: string) => {
   const list = await sp.web.lists
     .getByTitle(listName)
     .views.getByTitle("Alle elementer")
     .fields.get();
 
-  return list;
+  const test = await sp.web.lists
+    .getByTitle(listName)
+    .renderListData(`<View><ViewFields>${list.SchemaXml}</ViewFields></View>`);
+
+  const newestTest = test.Row.map((row) => {
+    if (row["GtResourceUser"]) {
+      row["GtResourceUser"] = row.GtResourceUser[0].title;
+    }
+
+    if (row["Editor"]) {
+      row["Editor"] = row.Editor[0].title;
+    }
+  });
+  console.log(newestTest);
+  return test.Row;
 };
 
 /**
@@ -59,30 +120,8 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
     .expand("")
     .get();
 
-  const lookup = console.log(items);
+  console.log(items);
   return items;
-};
-
-/**
- * Convert the columns to the accepted format
- * @param listName
- */
-const convertListColumns = async (
-  columns: IFieldInfo[]
-): Promise<IViewField[]> => {
-  const list = columns.map((field) => {
-    return {
-      name: field.InternalName,
-      displayName: field.Title,
-      sorting: true,
-      isResizable: true,
-      minWidth: 50,
-      maxWidth: 100,
-    };
-  });
-
-  const sortedList = list.reverse();
-  return sortedList;
 };
 
 /**

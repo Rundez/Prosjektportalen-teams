@@ -61,7 +61,7 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
           />
           <Divider />
           <AddElementDialog context={context} listName={listName} />
-          <DisplayTable listName={listName} />
+          <DisplayTable listName={listName} context={context} />
         </div>
       )}
     </>
