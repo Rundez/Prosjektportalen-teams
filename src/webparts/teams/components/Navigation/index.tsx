@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Flex, Divider } from "@fluentui/react-northstar";
-import { Menu } from "./Menu";
+import { Menu } from "./Menu/Menu";
 
 export default function Navigation() {
   const [active, setActive] = React.useState("Home");
@@ -17,7 +17,7 @@ export default function Navigation() {
             active={() => handleClick("Home")}
             activeState={active}
             path="/"
-            image="https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png"
+            image="src\webparts\teams\components\Navigation\Logo.png"
           />
           <Menu
             active={() => handleClick("Home")}
@@ -26,13 +26,13 @@ export default function Navigation() {
             name="Home"
           />
           <Menu
-            active={() => handleClick("Usikkerhet")}
+            active={() => handleClick("Risikomatrise")}
             activeState={active}
             path="/riskmatrix"
             name="Risikomatrise"
           />
           <Menu
-            active={() => handleClick("Prosjektstatus")}
+            active={() => handleClick("Prosjekt status")}
             activeState={active}
             path="/projectstatus"
             name="Prosjekt status"
@@ -55,6 +55,7 @@ export default function Navigation() {
             path="/"
             name="Page 5"
           />
+        
         </Flex>
         <Divider />
       </div>
