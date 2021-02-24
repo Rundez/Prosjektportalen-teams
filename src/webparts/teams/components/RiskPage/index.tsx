@@ -3,7 +3,7 @@ import { IRiskMatrixProps, RiskElementModel } from "./types";
 import * as getValue from "get-value";
 import { Loader, Divider } from "@fluentui/react-northstar";
 import { AddElementDialog } from "../@Shared/DialogPopup";
-import { DisplayTable } from "../@Shared/DisplayTable/index";
+import { DisplayTable } from "../@Shared/ListDisplayTable/index";
 import { RiskMatrix } from "pp365-projectwebparts/lib/components/RiskMatrix";
 import { sp } from "@pnp/sp";
 
@@ -61,31 +61,11 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
           />
           <Divider />
           <AddElementDialog context={context} listName={listName} />
-
           <DisplayTable listName={listName} />
         </div>
       )}
     </>
   );
 };
-
-// Test data for the list.
-const header = {
-  items: ["id", "Name", "Picture", "Age"],
-};
-const rows = [
-  {
-    key: 1,
-    items: ["1", "Roman van von der Longername", "None", "30 years"],
-  },
-  {
-    key: 2,
-    items: ["2", "Alex", "None", "1 year"],
-  },
-  {
-    key: 3,
-    items: ["3", "Ali", "None", "30000000000000 years"],
-  },
-];
 
 export * from "./types";

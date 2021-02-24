@@ -26,13 +26,13 @@ export default function Navigation() {
             name="Home"
           />
           <Menu
-            active={() => handleClick("Risikomatrise")}
+            active={() => handleClick("Usikkerhet")}
             activeState={active}
             path="/riskmatrix"
             name="Risikomatrise"
           />
           <Menu
-            active={() => handleClick("Prosjekt status")}
+            active={() => handleClick("Prosjektstatus")}
             activeState={active}
             path="/projectstatus"
             name="Prosjekt status"
@@ -55,7 +55,6 @@ export default function Navigation() {
             path="/"
             name="Page 5"
           />
-        
         </Flex>
         <Divider />
       </div>
