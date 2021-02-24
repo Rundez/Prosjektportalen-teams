@@ -2,11 +2,10 @@ import * as React from "react";
 import { IRiskMatrixProps, RiskElementModel } from "./types";
 import * as getValue from "get-value";
 import { Loader, Divider } from "@fluentui/react-northstar";
-import { AddElementDialog } from "./DialogPopup/index";
-import { DisplayTable } from "./DisplayTable/index";
+import { AddElementDialog } from "../@Shared/DialogPopup";
+import { DisplayTable } from "../@Shared/DisplayTable/index";
 import { RiskMatrix } from "pp365-projectwebparts/lib/components/RiskMatrix";
 import { sp } from "@pnp/sp";
-import { GenericListInput } from "../GenericListInput/index";
 
 import "@pnp/sp/webs";
 import "@pnp/sp/lists";
