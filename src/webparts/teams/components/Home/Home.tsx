@@ -24,6 +24,8 @@ import { ErrorIcon, AudienceIcon } from "@fluentui/react-icons-northstar";
 import { Minimizer, Boxes } from "./TeamMembers/index";
 import { TeamMembers, DropdownSorting } from "./TeamMembers/index";
 import { Checkbox } from "semantic-ui-react";
+import "@pnp/sp/taxonomy";
+import { ITermStoreInfo } from "@pnp/sp/taxonomy";
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
