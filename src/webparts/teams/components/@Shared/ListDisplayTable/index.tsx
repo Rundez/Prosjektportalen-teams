@@ -7,13 +7,7 @@ import {
   GroupOrder,
   IGrouping,
 } from "@pnp/spfx-controls-react/lib/ListView";
-import {
-  sp,
-  IFieldInfo,
-  Item,
-  IView,
-  IRenderListData,
-} from "@pnp/sp/presets/all";
+import { sp, IFieldInfo } from "@pnp/sp/presets/all";
 import { FieldTextRenderer } from "@pnp/spfx-controls-react/lib/FieldTextRenderer";
 import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRenderer";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
@@ -90,21 +84,34 @@ const fetchItemsCaml = async (listName: string) => {
     .views.getByTitle("Alle elementer")
     .fields.get();
 
-  const test = await sp.web.lists
+  const rows = await sp.web.lists
     .getByTitle(listName)
-    .renderListData(`<View><ViewFields>${list.SchemaXml}</ViewFields></View>`);
+    .renderListData(`<View> <ViewFields>${list.SchemaXml}</ViewFields></View>`);
 
-  const newestTest = test.Row.map((row) => {
+  // Some ghetto way to render lookup fields... (Temporary)
+  rows.Row.map((row) => {
     if (row["GtResourceUser"]) {
       row["GtResourceUser"] = row.GtResourceUser[0].title;
     }
-
     if (row["Editor"]) {
       row["Editor"] = row.Editor[0].title;
     }
+    if (row["GtProjectPhase"]) {
+      row["GtProjectPhase"] = row.GtProjectPhase.Label;
+    }
+    if (row["GtActionResponsible"]) {
+      row["GtActionResponsible"] = row.GtActionResponsible[0].title;
+    }
   });
-  console.log(newestTest);
-  return test.Row;
+
+  //Linktitle is the default "Title", but needs to be with the "Title" key på be properly mapped to the column
+  rows.Row.map((r) => {
+    r.LinkTitle = r.Title;
+    return r;
+  });
+
+  console.log(rows.Row);
+  return rows.Row;
 };
 
 /**
