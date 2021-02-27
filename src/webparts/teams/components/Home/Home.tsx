@@ -26,6 +26,7 @@ import { TeamMembers, DropdownSorting } from "./TeamMembers/index";
 import { Checkbox } from "semantic-ui-react";
 import "@pnp/sp/taxonomy";
 import { ITermStoreInfo } from "@pnp/sp/taxonomy";
+import { TestTable } from "../@Shared/ListDisplayTable/TestTable";
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
@@ -50,10 +51,9 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
   return (
     <div>
       <Flex column gap="gap.medium">
-        <Flex hAlign="end">
-          <Minimizer items={teamUsers} />
-        </Flex>
+        <Flex hAlign="end"></Flex>
       </Flex>
+      <TestTable context={props.context} listName={props.listName} />
     </div>
   );
 };

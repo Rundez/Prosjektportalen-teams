@@ -36,7 +36,12 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
           <Switch>
             <Route
               path="/"
-              render={() => <Home teamsContext={props.context} />}
+              render={() => (
+                <Home
+                  context={props.context}
+                  listName={props.riskMatrixListName}
+                />
+              )}
               exact
             />
             <Route

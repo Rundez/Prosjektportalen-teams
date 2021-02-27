@@ -8,7 +8,7 @@ import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { IPrincipal } from "@pnp/spfx-controls-react/lib/common/SPEntities";
 import { IContext } from "@pnp/spfx-controls-react/lib/common/Interfaces";
 
-export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
+export const TestTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
   context,
 }) => {
@@ -28,6 +28,7 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
     fetchItems();
   }, []);
 
+  console.log(listElements);
   /**
    * Convert the columns to the accepted format
    * @param listName
@@ -46,7 +47,7 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
           isResizable: true,
           minWidth: 50,
           maxWidth: 100,
-          //render: _renderUserColumn,
+          render: _renderUserColumn,
         };
       }
       return {
@@ -68,26 +69,16 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
     return <FieldTextRenderer text={text["GtRiskStrategy"]} />;
   };
 
-  const _renderUserColumn = (user: any) => {
+  const _renderUserColumn = (user: any, index: number) => {
     let spContext: IContext = {
       pageContext: context.pageContext,
       spHttpClient: context.spHttpClient,
     };
+    console.log(listElements);
     return (
       <FieldUserRenderer
         context={spContext}
-        users={[
-          {
-            id: user["GtResourceUser.0.id"],
-            email: user["GtResourceUser.0.email"],
-            department: user["GtResourceUser.0.department"],
-            jobTitle: user["GtResourceUser.0.jobtitle"],
-            picture: "GtResourceUser.0.picture",
-            sip: "GtResourceUser.0.sip",
-            title: user["GtResourceUser.0.title"],
-            value: user["GtResourceUser.0.key"],
-          },
-        ]}
+        users={listElements[0]["Editor"][0]}
         key={user["Editor.0.key"]}
       />
     );
@@ -117,18 +108,18 @@ const fetchItemsCaml = async (listName: string) => {
 
   // Some ghetto way to render lookup fields... (Temporary)
   rows.Row.map((row) => {
-    if (row["GtResourceUser"]) {
-      row["GtResourceUser"] = row.GtResourceUser[0].title;
-    }
-    if (row["Editor"]) {
-      row["Editor"] = row.Editor[0].title;
-    }
+    //if (row["GtResourceUser"]) {
+    //  row["GtResourceUser"] = row.GtResourceUser[0].title;
+    //}
+    //if (row["Editor"]) {
+    //  row["Editor"] = row.Editor[0].title;
+    //}
     if (row["GtProjectPhase"]) {
       row["GtProjectPhase"] = row.GtProjectPhase.Label;
     }
-    if (row["GtActionResponsible"]) {
-      row["GtActionResponsible"] = row.GtActionResponsible[0].title;
-    }
+    //if (row["GtActionResponsible"]) {
+    //  row["GtActionResponsible"] = row.GtActionResponsible[0].title;
+    //}
   });
 
   //Linktitle is the default "Title", but needs to be with the "Title" key på be properly mapped to the column
