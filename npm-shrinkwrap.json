@@ -3243,9 +3243,9 @@
             }
         },
         "@pnp/common": {
-            "version": "2.1.0",
-            "resolved": "https://registry.npmjs.org/@pnp/common/-/common-2.1.0.tgz",
-            "integrity": "sha512-2/4E5eAIkveh76JU8L2KYgxp7ZzF6TxH39odm4IK8rxA3aKLhWVujQ+1ZICB+L7aMZi8bgisIOea54p2D8f5Lg==",
+            "version": "2.2.0",
+            "resolved": "https://registry.npmjs.org/@pnp/common/-/common-2.2.0.tgz",
+            "integrity": "sha512-pu/LQ/QNa8b94OcAgLb+VHRBu6I4knLS2zoFOw/OJuGOi3DimdvVegYTWIOcJV0Een0SVG01K0h/o7W99BOGPw==",
             "requires": {
                 "tslib": "2.1.0"
             },
@@ -3258,17 +3258,43 @@
             }
         },
         "@pnp/graph": {
-            "version": "2.1.0",
-            "resolved": "https://registry.npmjs.org/@pnp/graph/-/graph-2.1.0.tgz",
-            "integrity": "sha512-ekZNsA6WDeqqsRv3EYOQO3ZIPao6HbIvY9mYOdmgiGR1iw+r7JcuMZAMPIqRVMySSfx3ldl5qsGh86uwo40w2Q==",
+            "version": "2.2.0",
+            "resolved": "https://registry.npmjs.org/@pnp/graph/-/graph-2.2.0.tgz",
+            "integrity": "sha512-mTdfVzs3HgU6GQe2c6kMJxsZFUqIwMtDkUaV2oi5n1DmcvPwSiCSkXK73MOo6kntGpbZLYPya4vyjRkdS3Y39g==",
             "requires": {
                 "@microsoft/microsoft-graph-types": "1.13.0",
-                "@pnp/common": "2.1.0",
-                "@pnp/logging": "2.1.0",
-                "@pnp/odata": "2.1.0",
+                "@pnp/common": "2.2.0",
+                "@pnp/logging": "2.2.0",
+                "@pnp/odata": "2.2.0",
                 "tslib": "2.1.0"
             },
             "dependencies": {
+                "@pnp/common": {
+                    "version": "2.2.0",
+                    "resolved": "https://registry.npmjs.org/@pnp/common/-/common-2.2.0.tgz",
+                    "integrity": "sha512-pu/LQ/QNa8b94OcAgLb+VHRBu6I4knLS2zoFOw/OJuGOi3DimdvVegYTWIOcJV0Een0SVG01K0h/o7W99BOGPw==",
+                    "requires": {
+                        "tslib": "2.1.0"
+                    }
+                },
+                "@pnp/logging": {
+                    "version": "2.2.0",
+                    "resolved": "https://registry.npmjs.org/@pnp/logging/-/logging-2.2.0.tgz",
+                    "integrity": "sha512-OCwlJR/wYrjbyGO/GGLDFOlM/az+RvpyqmcF9rS0Umo2YyiYr5sb5KwnOTGqK8HDb5odq1pkc+bGbyf9yM2Hvw==",
+                    "requires": {
+                        "tslib": "2.1.0"
+                    }
+                },
+                "@pnp/odata": {
+                    "version": "2.2.0",
+                    "resolved": "https://registry.npmjs.org/@pnp/odata/-/odata-2.2.0.tgz",
+                    "integrity": "sha512-AMrmpYehfv0AGu7p7Li/3p2KJ7UsZBUKbB5baYNg9vzjLFo+kU8ywknmwXmn9scol5zUJzI0aiiLk1dWmNP2WQ==",
+                    "requires": {
+                        "@pnp/common": "2.2.0",
+                        "@pnp/logging": "2.2.0",
+                        "tslib": "2.1.0"
+                    }
+                },
                 "tslib": {
                     "version": "2.1.0",
                     "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.1.0.tgz",
@@ -3277,9 +3303,9 @@
             }
         },
         "@pnp/logging": {
-            "version": "2.1.0",
-            "resolved": "https://registry.npmjs.org/@pnp/logging/-/logging-2.1.0.tgz",
-            "integrity": "sha512-974ANmHsZhItZwh5Xq7FjY4dAhCirKQMuYgIYNvn0ystx8B3mHRVjE6m272mc3YSOa4jr05TWJs/iQH5RrGUlA==",
+            "version": "2.2.0",
+            "resolved": "https://registry.npmjs.org/@pnp/logging/-/logging-2.2.0.tgz",
+            "integrity": "sha512-OCwlJR/wYrjbyGO/GGLDFOlM/az+RvpyqmcF9rS0Umo2YyiYr5sb5KwnOTGqK8HDb5odq1pkc+bGbyf9yM2Hvw==",
             "requires": {
                 "tslib": "2.1.0"
             },
@@ -3292,12 +3318,12 @@
             }
         },
         "@pnp/odata": {
-            "version": "2.1.0",
-            "resolved": "https://registry.npmjs.org/@pnp/odata/-/odata-2.1.0.tgz",
-            "integrity": "sha512-sfeMzERK8OMDXT9dcjgvU8WXpz12JbfeDqdV0Cy1+1yh1qJsgEhatPtnFtpHPbUXe6EcSFCs7ArjsXZJzyhIAA==",
+            "version": "2.2.0",
+            "resolved": "https://registry.npmjs.org/@pnp/odata/-/odata-2.2.0.tgz",
+            "integrity": "sha512-AMrmpYehfv0AGu7p7Li/3p2KJ7UsZBUKbB5baYNg9vzjLFo+kU8ywknmwXmn9scol5zUJzI0aiiLk1dWmNP2WQ==",
             "requires": {
-                "@pnp/common": "2.1.0",
-                "@pnp/logging": "2.1.0",
+                "@pnp/common": "2.2.0",
+                "@pnp/logging": "2.2.0",
                 "tslib": "2.1.0"
             },
             "dependencies": {
@@ -3332,13 +3358,13 @@
             }
         },
         "@pnp/sp": {
-            "version": "2.1.0",
-            "resolved": "https://registry.npmjs.org/@pnp/sp/-/sp-2.1.0.tgz",
-            "integrity": "sha512-BWaXRspr2+dSEa95TpSz794Rl8KkiFlWGK66nHmYWEI47NZOYYFMfhRj5V4Y2K6Rse7O03zS58dntj2xaJTH3Q==",
+            "version": "2.2.0",
+            "resolved": "https://registry.npmjs.org/@pnp/sp/-/sp-2.2.0.tgz",
+            "integrity": "sha512-XVyJUWN/d4XgwCGWpw18CYNVVUl3gm5jEh5V1lsqzwXz9yMN8sJsnGcetIoQ8uy8vAz5gHtyZNGYxEaABCu1Gw==",
             "requires": {
-                "@pnp/common": "2.1.0",
-                "@pnp/logging": "2.1.0",
-                "@pnp/odata": "2.1.0",
+                "@pnp/common": "2.2.0",
+                "@pnp/logging": "2.2.0",
+                "@pnp/odata": "2.2.0",
                 "tslib": "2.1.0"
             },
             "dependencies": {
@@ -15717,13 +15743,13 @@
                 "@microsoft/sp-page-context": "1.11.0",
                 "@microsoft/sp-property-pane": "1.11.0",
                 "@microsoft/sp-webpart-base": "1.11.0",
-                "@pnp/common": "1.3.8",
-                "@pnp/logging": "1.3.8",
-                "@pnp/odata": "1.3.8",
+                "@pnp/common": "2.1.0",
+                "@pnp/logging": "2.1.0",
+                "@pnp/odata": "2.1.0",
                 "@pnp/polyfill-ie11": "1.0.1",
-                "@pnp/sp": "1.3.8",
-                "@pnp/sp-clientsvc": "1.3.8",
-                "@pnp/sp-taxonomy": "1.3.8",
+                "@pnp/sp": "2.1.0",
+                "@pnp/sp-clientsvc": "1.3.6",
+                "@pnp/sp-taxonomy": "1.3.6",
                 "@pnp/spfx-controls-react": "1.11.0",
                 "@uifabric/utilities": "6.45.1",
                 "dom-to-image": "2.6.0",

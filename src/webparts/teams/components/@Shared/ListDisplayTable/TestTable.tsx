@@ -1,12 +1,14 @@
 import React, { useState, FunctionComponent, useEffect } from "react";
 import { IDisplayTableProps } from "./types";
 import { ListView, IViewField } from "@pnp/spfx-controls-react/lib/ListView";
-import { sp, IFieldInfo } from "@pnp/sp/presets/all";
+import { sp, IFieldInfo, ITerm } from "@pnp/sp/presets/all";
 import { FieldTextRenderer } from "@pnp/spfx-controls-react/lib/FieldTextRenderer";
 import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRenderer";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { IPrincipal } from "@pnp/spfx-controls-react/lib/common/SPEntities";
 import { IContext } from "@pnp/spfx-controls-react/lib/common/Interfaces";
+import { FieldTaxonomyRenderer } from "@pnp/spfx-controls-react/lib/FieldTaxonomyRenderer";
+import { Spinner } from "office-ui-fabric-react";
 
 export const TestTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
@@ -14,21 +16,24 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
 }) => {
   const [listColumns, setListColumns] = useState<IViewField[]>([]);
   const [listElements, setListElements] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
+
   useEffect(() => {
     const fetchItems = async () => {
-      const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
-      const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
-      setListColumns(columnFormatted); // set the list columns to state
-      //const rows = await fetchListItems(listName, columnNames); // Fetch the items based on the view query
-      //setListElements(rows);
-      //fetchListItems(listName, columnNames);
       const rows = await fetchItemsCaml(listName);
       setListElements(rows);
+      setIsLoading(false);
+
+      const names = await fetchInternalAndExternalColumns(listName);
+      const updatedNames = await convertListColumns(names);
+
+      setListColumns(updatedNames);
+      console.log(names);
+      console.log(updatedNames);
     };
     fetchItems();
-  }, []);
+  }, [isLoading]);
 
-  console.log(listElements);
   /**
    * Convert the columns to the accepted format
    * @param listName
@@ -38,8 +43,6 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
   ): Promise<IViewField[]> => {
     const list = columns.map((field: any) => {
       if (field["odata.type"] === "SP.FieldUser") {
-        console.log("Dette er et brukerfelt:");
-        console.log(field);
         return {
           name: field.InternalName,
           displayName: field.Title,
@@ -50,6 +53,18 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
           render: _renderUserColumn,
         };
       }
+      if (field["odata.type"] === "SP.Taxonomy.TaxonomyField") {
+        console.log(field);
+        return {
+          name: field.InternalName,
+          displayName: field.Title,
+          sorting: true,
+          isResizable: true,
+          minWidth: 50,
+          maxWidth: 100,
+          render: _renderTaxonomyColumn,
+        };
+      }
       return {
         name: field.InternalName,
         displayName: field.Title,
@@ -57,37 +72,49 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
         isResizable: true,
         minWidth: 50,
         maxWidth: 100,
-        //render: _renderColumn,
       };
     });
 
-    const sortedList = list.reverse();
-    return sortedList;
+    return list;
   };
 
-  const _renderColumn = (text) => {
-    return <FieldTextRenderer text={text["GtRiskStrategy"]} />;
+  const _renderTaxonomyColumn = (row: any, index: number) => {
+    if (listElements[index] != undefined) {
+      console.log(row);
+      if (listElements[index].hasOwnProperty("GtResourceRole")) {
+        return listElements[index].GtResourceRole.Label;
+      }
+    }
   };
 
-  const _renderUserColumn = (user: any, index: number) => {
-    let spContext: IContext = {
-      pageContext: context.pageContext,
-      spHttpClient: context.spHttpClient,
-    };
-    console.log(listElements);
+  const _renderUserColumn = (user: any) => {
     return (
       <FieldUserRenderer
-        context={spContext}
-        users={listElements[0]["Editor"][0]}
+        context={context as IContext}
+        users={[
+          {
+            id: user["GtResourceUser.0.id"],
+            email: user["GtResourceUser.0.email"],
+            department: user["GtResourceUser.0.department"],
+            jobTitle: user["GtResourceUser.0.jobtitle"],
+            picture: "GtResourceUser.0.picture",
+            sip: "GtResourceUser.0.sip",
+            title: user["GtResourceUser.0.title"],
+            value: user["GtResourceUser.0.key"],
+          },
+        ]}
         key={user["Editor.0.key"]}
       />
     );
   };
 
-  console.log(listElements);
   return (
     <div>
-      <ListView items={listElements} viewFields={listColumns} showFilter />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <ListView items={listElements} viewFields={listColumns} showFilter />
+      )}
     </div>
   );
 };
@@ -97,38 +124,23 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
  * @param listName
  */
 const fetchItemsCaml = async (listName: string) => {
-  const list = await sp.web.lists
+  const viewData = await sp.web.lists
     .getByTitle(listName)
     .views.getByTitle("Alle elementer")
     .fields.get();
 
+  console.log(viewData);
   const rows = await sp.web.lists
     .getByTitle(listName)
-    .renderListData(`<View> <ViewFields>${list.SchemaXml}</ViewFields></View>`);
-
-  // Some ghetto way to render lookup fields... (Temporary)
-  rows.Row.map((row) => {
-    //if (row["GtResourceUser"]) {
-    //  row["GtResourceUser"] = row.GtResourceUser[0].title;
-    //}
-    //if (row["Editor"]) {
-    //  row["Editor"] = row.Editor[0].title;
-    //}
-    if (row["GtProjectPhase"]) {
-      row["GtProjectPhase"] = row.GtProjectPhase.Label;
-    }
-    //if (row["GtActionResponsible"]) {
-    //  row["GtActionResponsible"] = row.GtActionResponsible[0].title;
-    //}
-  });
-
+    .renderListData(
+      `<View> <ViewFields>${viewData.SchemaXml}</ViewFields></View>`
+    );
   //Linktitle is the default "Title", but needs to be with the "Title" key på be properly mapped to the column
   rows.Row.map((r) => {
     r.LinkTitle = r.Title;
     return r;
   });
 
-  console.log(rows.Row);
   return rows.Row;
 };
 
@@ -145,7 +157,6 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
     .expand("")
     .get();
 
-  console.log(items);
   return items;
 };
 

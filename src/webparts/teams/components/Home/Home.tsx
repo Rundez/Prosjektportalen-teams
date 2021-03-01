@@ -27,6 +27,7 @@ import { Checkbox } from "semantic-ui-react";
 import "@pnp/sp/taxonomy";
 import { ITermStoreInfo } from "@pnp/sp/taxonomy";
 import { TestTable } from "../@Shared/ListDisplayTable/TestTable";
+import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
@@ -53,6 +54,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
       <Flex column gap="gap.medium">
         <Flex hAlign="end"></Flex>
       </Flex>
+      <ProjectStatus riskMatrixCalloutTemplate="" />
       <TestTable context={props.context} listName={props.listName} />
     </div>
   );

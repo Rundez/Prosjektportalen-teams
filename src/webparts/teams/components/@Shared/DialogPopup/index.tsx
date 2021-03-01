@@ -11,7 +11,6 @@ import {
   Form,
 } from "@fluentui/react-northstar";
 import { Panel } from "office-ui-fabric-react/lib/Panel";
-import { sp } from "@pnp/sp/presets/all";
 import { useForm } from "react-hook-form";
 import { GenericListInput } from "../GenericListInput/";
 import { ISideBarProps } from "./types";
