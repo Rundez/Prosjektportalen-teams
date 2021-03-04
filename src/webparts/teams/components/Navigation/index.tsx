@@ -10,7 +10,7 @@ export default function Navigation() {
   const [menu, setMenu] = React.useState([
     {
       path: "/",
-      name: "Home",
+      name: "Homes",
       image:
         "https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png",
     },
@@ -22,58 +22,47 @@ export default function Navigation() {
     { path: "/", name: "Page 5" },
   ]);
 
-  const fetchTerms = async () => {
-    const infos: any[] = await sp.termStore.groups
-      .getById("c56bb677-f782-4cf6-a6d6-17685ee9f19d")
-      .sets.getById("1a58ab36-36bb-4234-abad-ad2410b0b74f")
-      .terms();
-    let info = [];
-    for (let index = 0; index < infos.length; index++) {
-      if (infos[index].labels[2].name == "notImage") {
-        info.push({
-          path: infos[index].labels[1].name,
-          name: infos[index].labels[0].name,
-        });
-      } else {
-        info.push({
-          path: infos[index].labels[1].name,
-          name: infos[index].labels[0].name,
-          image: infos[index].labels[2].name,
-        });
-        info.push({
-          path: infos[index].labels[1].name,
-          name: infos[index].labels[0].name,
-        });
+  useEffect(() => {
+    const fetchTerms = async () => {
+      const infos: any[] = await sp.termStore.groups
+        .getById("c56bb677-f782-4cf6-a6d6-17685ee9f19d")
+        .sets.getById("1a58ab36-36bb-4234-abad-ad2410b0b74f")
+        .terms();
+      let info = [];
+      for (let index = 0; index < infos.length; index++) {
+        //Check if the 3 label from sharepoint contains the string notImage then creates add a menuItem object that contains only the name and path
+        if (infos[index].labels[2].name == "notImage") {
+          info.push({
+            path: infos[index].labels[1].name,
+            name: infos[index].labels[0].name,
+          });
+        } else {
+          // Add both the picture and add another iteam in to the menu array with a name to the path, meant for home
+          //Image
+          info.push({
+            path: infos[index].labels[1].name,
+            name: infos[index].labels[0].name,
+            image: infos[index].labels[2].name,
+          });
+          //Name
+          info.push({
+            path: infos[index].labels[1].name,
+            name: infos[index].labels[0].name,
+          });
+        }
       }
-    }
 
-    setMenu(info);
-    console.log("Now using menuState");
-    console.log(info);
-  };
+      setMenu(info);
+      console.log("Now using menuState");
+    };
+    fetchTerms();
+  }, []);
 
   const handleClick = (name) => {
-    fetchTerms();
     setActive(name);
   };
 
-  const smenu = [
-    {
-      path: "/",
-      name: "Home",
-      image:
-        "https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png",
-    },
-    { path: "/", name: "Home" },
-    { path: "/riskmatrix", name: "Usikkerhet" },
-    { path: "/projectstatus", name: "Prosjektstatus" },
-    { path: "/", name: "Page 3" },
-    { path: "/", name: "Page 4" },
-    { path: "/", name: "Page 5" },
-  ];
-
   function getMenu(menu) {
-    fetchTerms();
     return menu.map((menu) => (
       <Menu
         active={() => handleClick(menu.name)}

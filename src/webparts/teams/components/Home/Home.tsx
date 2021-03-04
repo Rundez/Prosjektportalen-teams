@@ -27,15 +27,6 @@ import { Checkbox } from "semantic-ui-react";
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
-  /* const fetchTerms = async () => {
-    const childTree = await sp.termStore.groups
-      .getById("c56bb677-f782-4cf6-a6d6-17685ee9f19d")
-      .sets.getById("1a58ab36-36bb-4234-abad-ad2410b0b74f")
-      .getAllChildrenAsOrderedTree();
-    console.log(childTree);
-  };
-  fetchTerms();*/
-  //Fetches the users of the project on site load.
   useEffect(() => {
     sp.web.siteUsers().then((users) =>
       users
