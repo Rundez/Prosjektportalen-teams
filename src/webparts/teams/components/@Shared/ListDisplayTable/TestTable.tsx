@@ -1,7 +1,9 @@
 import React, { useState, FunctionComponent, useEffect } from "react";
 import { IDisplayTableProps } from "./types";
 import { ListView, IViewField } from "@pnp/spfx-controls-react/lib/ListView";
-import { sp, IFieldInfo, ITerm } from "@pnp/sp/presets/all";
+//import { sp, IFieldInfo } from "@pnp/sp/presets/all";
+import { sp } from "@pnp/sp";
+import { IFieldInfo } from "./types";
 import { FieldTextRenderer } from "@pnp/spfx-controls-react/lib/FieldTextRenderer";
 import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRenderer";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
@@ -124,7 +126,7 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
  * @param listName
  */
 const fetchItemsCaml = async (listName: string) => {
-  const viewData = await sp.web.lists
+  const viewData: any = await sp.web.lists
     .getByTitle(listName)
     .views.getByTitle("Alle elementer")
     .fields.get();
@@ -165,14 +167,10 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
  * @param listName
  */
 const fetchInternalAndExternalColumns = async (listName: string) => {
-  const View = await sp.web.lists
-    .getByTitle(listName)
-    .views.getByTitle("Alle elementer")();
-
   const fields = await sp.web.lists
     .getByTitle(listName)
     .views.getByTitle("Alle elementer")
-    .fields();
+    .fields.get();
 
   let internames: string[] = (fields as any).Items;
   let filterstring: string = internames

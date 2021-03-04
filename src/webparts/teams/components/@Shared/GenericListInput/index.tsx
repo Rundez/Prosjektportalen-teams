@@ -2,10 +2,11 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import { IGenericListInputProps } from "./types";
 import { Button, createClassResolver, Flex } from "@fluentui/react-northstar";
 import { InputField } from "./InputField/index";
-//import { IFieldType } from './types';
 
-import { sp, IFieldInfo } from "@pnp/sp/presets/all";
-import { IItemAddResult } from "@pnp/sp/items";
+//import { sp, IFieldInfo } from "@pnp/sp/presets/all";
+//import { IItemAddResult } from "@pnp/sp/items";
+
+import { sp } from "@pnp/sp";
 
 export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   listName,
@@ -14,7 +15,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
 }) => {
   const [fields, setFields] = useState([]); // Not in use
   const [contentTypeID, setContentTypeID] = useState([]); // Not in use. Could be needed?
-  const [listFields, setListFields] = useState<IFieldInfo[]>([]);
+  const [listFields, setListFields] = useState<any[]>([]);
   const [value, setValue] = useState([{}]);
 
   useEffect(() => {
@@ -96,9 +97,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     );
     console.log(obj);
     //add an item to the list
-    const result: IItemAddResult = await sp.web.lists
-      .getByTitle(lName)
-      .items.add(obj);
+    const result = await sp.web.lists.getByTitle(lName).items.add(obj);
     closeHandler();
 
     console.log(result);

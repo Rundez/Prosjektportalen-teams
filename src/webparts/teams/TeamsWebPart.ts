@@ -13,7 +13,6 @@ import { ITeamsProps } from './components/ITeamsProps';
 import { WebPartContext } from "@microsoft/sp-webpart-base";    
 import { sp } from "@pnp/sp";
 import { graph } from "@pnp/graph";
-import "@pnp/graph/groups";
 
 export interface ITeamsWebPartProps {
   projectUrl: string;

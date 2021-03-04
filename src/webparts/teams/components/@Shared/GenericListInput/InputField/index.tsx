@@ -1,4 +1,4 @@
-import { IFieldInfo, FieldTypes } from "@pnp/sp/fields";
+import { FieldTypes } from "./types";
 import React, { useState, FunctionComponent } from "react";
 import { Input, Flex, TextArea, Dropdown } from "@fluentui/react-northstar";
 import { Toggle } from "office-ui-fabric-react";
