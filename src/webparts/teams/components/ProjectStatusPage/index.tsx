@@ -11,20 +11,18 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
   const [hubSite, setHubSite] = useState<any>();
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
-  /**
-   * Gets hubsite information
-   */
-  useEffect(() => {
-    const getHubSite = async () => {
-      const pc = context.pageContext;
-      HubSiteService.GetHubSite(sp, pc).then((hubsite) => {
-        setHubSite(hubsite);
-        console.log(hubsite);
-        setIsLoading(false);
-      });
-    };
-    getHubSite();
-  }, []);
+  let pc = context.pageContext;
+  if (!hubSite) {
+    HubSiteService.GetHubSite(sp, pc).then((hubsite) => {
+      setHubSite(hubsite);
+      setIsLoading(false);
+    });
+  }
+
+  if (hubSite) {
+    let newHub = hubSite;
+    console.log(newHub);
+  }
 
   const callout = `<h3>{Title}</h3>
   <p><strong>Usikkerhetstrategi: </strong>{GtRiskStrategy}</p>
@@ -38,17 +36,15 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
       ) : (
         <div>
           <ProjectPhases
-            confirmPhaseChange={false}
-            currentPhaseViewName={false}
+            confirmPhaseChange
+            currentPhaseViewName
             phaseField="GtProjectPhase"
             hubSite={hubSite}
-            siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
           />
           <ProjectStatus
             riskMatrixCalloutTemplate={callout}
             hubSite={hubSite}
             siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
-            isSiteAdmin
           />
         </div>
       )}
