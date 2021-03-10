@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Flex, Divider } from "@fluentui/react-northstar";
 import { IMenuProps } from "./Menu/types";
 import { Menu } from "./Menu/Menu";
-import { sp } from "@pnp/sp/presets/all";
+import { sp } from "@pnp/sp";
 
 export default function Navigation() {
   const [active, setActive] = React.useState("Home");
@@ -22,7 +22,8 @@ export default function Navigation() {
     { path: "/", name: "Page 5" },
   ]);
 
-  useEffect(() => {
+  /**
+    useEffect(() => {
     const fetchTerms = async () => {
       const infos: any[] = await sp.termStore.groups
         .getById("c56bb677-f782-4cf6-a6d6-17685ee9f19d")
@@ -57,6 +58,7 @@ export default function Navigation() {
     };
     fetchTerms();
   }, []);
+  */
 
   const handleClick = (name) => {
     setActive(name);
