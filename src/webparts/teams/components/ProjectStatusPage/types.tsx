@@ -1,6 +1,5 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 
-export interface IHomeProps {
+export interface IProjectStatusPageProps {
   context: WebPartContext;
-  listName?: string;
 }

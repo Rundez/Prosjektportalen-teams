@@ -13,14 +13,13 @@ import { ITeamsProps } from './components/ITeamsProps';
 import { WebPartContext } from "@microsoft/sp-webpart-base";    
 import { sp } from "@pnp/sp";
 import { graph } from "@pnp/graph";
-import "@pnp/graph/groups";
 
 export interface ITeamsWebPartProps {
   projectUrl: string;
   riskMatrixHeight: number;
   riskMatrixWidth: number;
   riskMatrixListName: string;
-  context?: WebPartContext
+  context?: WebPartContext;
 }
 
 export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartProps> {
@@ -54,7 +53,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
         riskMatrixHeight: this.properties.riskMatrixHeight,
         riskMatrixWidth: this.properties.riskMatrixWidth,
         riskMatrixListName: this.properties.riskMatrixListName,
-        context: this.context
+        context: this.context,
       }
     );
     ReactDom.render(element, this.domElement);
@@ -98,7 +97,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
                 }),
               ]
             }
-          ]
+          ],
         }
       ]
     };

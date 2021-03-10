@@ -1,4 +1,4 @@
-import { IFieldInfo, FieldTypes } from "@pnp/sp/fields";
+import { FieldTypes } from "./types";
 import React, { useState, FunctionComponent } from "react";
 import { Input, Flex, TextArea, Dropdown } from "@fluentui/react-northstar";
 import { Toggle } from "office-ui-fabric-react";
@@ -10,6 +10,11 @@ import {
   PeoplePicker,
   PrincipalType,
 } from "@pnp/spfx-controls-react/lib/PeoplePicker";
+import {
+  DateTimePicker,
+  DateConvention,
+  TimeConvention,
+} from "@pnp/spfx-controls-react/lib/DateTimePicker";
 
 /**
  * Returns a corresponding component based on the fieldtype.
@@ -77,9 +82,19 @@ export const InputField: FunctionComponent<any> = ({
       return <p>Integer field</p>;
     }
     case FieldTypes.DateTime: {
-      console.log(field.Title);
+      const handleChange = (date: Date) => {
+        console.log(date);
+        onChange(date.toISOString(), field.EntityPropertyName);
+      };
 
-      return <p>Datetime field</p>;
+      return (
+        <DateTimePicker
+          label={field.Title}
+          dateConvention={DateConvention.Date}
+          showLabels={false}
+          onChange={(date) => handleChange(date)}
+        />
+      );
     }
     case FieldTypes.MultiChoice: {
       console.log(field.Title);

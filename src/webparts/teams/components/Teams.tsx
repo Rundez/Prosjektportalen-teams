@@ -19,15 +19,9 @@ import {
 import { RiskPage } from "./RiskPage/index";
 import { Home } from "./Home/Home";
 import Navbar from "./Navigation/index";
-
-import { sp } from "@pnp/sp";
-import "@pnp/sp/webs";
-import "@pnp/sp/lists";
-import "@pnp/sp/items";
+import { ProjectStatusPage } from "./ProjectStatusPage";
 
 export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
-  console.log(props.context);
-
   return (
     <Router>
       <Provider theme={teamsTheme}>
@@ -36,7 +30,12 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
           <Switch>
             <Route
               path="/"
-              render={() => <Home teamsContext={props.context} />}
+              render={() => (
+                <Home
+                  context={props.context}
+                  listName={props.riskMatrixListName}
+                />
+              )}
               exact
             />
             <Route
@@ -50,7 +49,10 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
                 />
               )}
             />
-            <Route path="/projectstatus" />
+            <Route
+              path="/projectstatus"
+              render={() => <ProjectStatusPage context={props.context} />}
+            />
             <Redirect to="/" />
           </Switch>
         </div>
