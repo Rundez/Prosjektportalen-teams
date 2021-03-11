@@ -5,7 +5,7 @@ import { IMenuProps } from "./Menu/types";
 import { Menu } from "./Menu/Menu";
 import { sp } from "@pnp/sp";
 
-export default function Navigation() {
+export default function Navigation(terms) {
   const [active, setActive] = React.useState("Home");
   const [menu, setMenu] = React.useState([
     {
@@ -21,44 +21,44 @@ export default function Navigation() {
     { path: "/", name: "Page 4" },
     { path: "/", name: "Page 5" },
   ]);
-
-  /**
-    useEffect(() => {
-    const fetchTerms = async () => {
-      const infos: any[] = await sp.termStore.groups
-        .getById("c56bb677-f782-4cf6-a6d6-17685ee9f19d")
-        .sets.getById("1a58ab36-36bb-4234-abad-ad2410b0b74f")
-        .terms();
+  console.log(terms);
+  useEffect(() => {
+    const fetchTerms = () => {
+      const infos: any[] = terms.terms;
+      console.log(infos);
       let info = [];
+
       for (let index = 0; index < infos.length; index++) {
         //Check if the 3 label from sharepoint contains the string notImage then creates add a menuItem object that contains only the name and path
-        if (infos[index].labels[2].name == "notImage") {
+        if (infos[index].labels[2] == "notImage") {
           info.push({
-            path: infos[index].labels[1].name,
-            name: infos[index].labels[0].name,
+            path: infos[index].labels[1],
+            name: infos[index].labels[0],
           });
+          console.log(info[index]);
         } else {
           // Add both the picture and add another iteam in to the menu array with a name to the path, meant for home
           //Image
           info.push({
-            path: infos[index].labels[1].name,
-            name: infos[index].labels[0].name,
-            image: infos[index].labels[2].name,
+            path: infos[index].labels[1],
+            name: infos[index].labels[0],
+            image: infos[index].labels[2],
           });
           //Name
+
           info.push({
-            path: infos[index].labels[1].name,
-            name: infos[index].labels[0].name,
+            path: infos[index].labels[1],
+            name: infos[index].labels[0],
           });
+          console.log(info[index]);
         }
       }
-
+      console.log(info);
       setMenu(info);
       console.log("Now using menuState");
     };
     fetchTerms();
   }, []);
-  */
 
   const handleClick = (name) => {
     setActive(name);
