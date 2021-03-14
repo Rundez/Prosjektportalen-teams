@@ -104,13 +104,18 @@ const fetchItems = async (listName: string) => {
       "GtDeliveryEndTime",
       "GtDeliveryStartTime",
       "GtDeliveryStatus",
-      "GtDeliveryQualityExpectations"
+      "GtDeliveryQualityExpectations",
+      "GtDeliveryAcceptanceCriteria",
+      "GtDeliveryAcceptanceDate",
+      "GtDeliveryAcceptanceMethod",
+      "GtDeliveryQualityExpectations",
+      "GtDeliveryStakeholdersId"
     )
     .expand("GtDeliveryQualityResponsible")
     .get();
 
   console.log(items);
-  const transformedItems = items.map((item, index) => {
+  const transformedItems: ITimelineItem[] = items.map((item, index) => {
     return {
       id: index,
       group: index,

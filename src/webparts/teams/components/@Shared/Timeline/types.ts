@@ -12,6 +12,11 @@ export interface ITimelineItem {
     title: string;
     start_time: moment.Moment;
     end_time: moment.Moment;
+    GtDeliveryQualityResponsible?: string;
+    GtDeliveryDescription?: string;
+    GtDeliveryQualityExpectations?: string;
+    GtDeliveryStakeholders?: string[];
+    GtDeliveryStatus?: string;
 }
 
 export interface ITimelineGroup {
