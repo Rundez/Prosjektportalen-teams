@@ -26,7 +26,7 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
     <Router>
       <Provider theme={teamsTheme}>
         <div style={{ backgroundColor: style.backgroundColor }}>
-          <Navbar />
+          <Navbar terms={props.terms} />
           <Switch>
             <Route
               path="/"

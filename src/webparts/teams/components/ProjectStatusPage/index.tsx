@@ -3,7 +3,6 @@ import { IProjectStatusPageProps } from "./types";
 import { sp } from "@pnp/sp";
 import HubSiteService from "sp-hubsite-service";
 import { Spinner } from "office-ui-fabric-react";
-import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
 import { ProjectPhases } from "pp365-projectwebparts/lib/components/ProjectPhases";
 export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
   context,
@@ -40,11 +39,6 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
             currentPhaseViewName
             phaseField="GtProjectPhase"
             hubSite={hubSite}
-          />
-          <ProjectStatus
-            riskMatrixCalloutTemplate={callout}
-            hubSite={hubSite}
-            siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
           />
         </div>
       )}

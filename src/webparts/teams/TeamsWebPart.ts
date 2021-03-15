@@ -7,6 +7,7 @@ import {
   PropertyPaneSlider,
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
+import {PropertyFieldEnterpriseTermPicker, IPickerTerms} from '@pnp/spfx-property-controls'
 import { BaseClientSideWebPart, IMicrosoftTeams } from '@microsoft/sp-webpart-base';
 import {Teams} from './components/Teams';
 import { ITeamsProps } from './components/ITeamsProps';
@@ -19,6 +20,7 @@ export interface ITeamsWebPartProps {
   riskMatrixHeight: number;
   riskMatrixWidth: number;
   riskMatrixListName: string;
+  terms: IPickerTerms ; 
   context?: WebPartContext;
 }
 
@@ -53,6 +55,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
         riskMatrixHeight: this.properties.riskMatrixHeight,
         riskMatrixWidth: this.properties.riskMatrixWidth,
         riskMatrixListName: this.properties.riskMatrixListName,
+        terms: this.properties.terms,
         context: this.context,
       }
     );
@@ -96,9 +99,30 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
                   value: "usikkerhet",
                 }),
               ]
+            },
+            {
+              groupName:"Navigasjon",
+              groupFields:[
+                PropertyFieldEnterpriseTermPicker('terms', {
+                  label: 'Select terms',
+                  panelTitle: 'Select terms',
+                  initialValues: this.properties.terms,
+                  allowMultipleSelections: true,
+                  excludeSystemGroup: true,
+                  limitByTermsetNameOrID: 'Navigasjon',
+                  onPropertyChange: this.onPropertyPaneFieldChanged,
+                  properties: this.properties,
+                  context: this.context,
+                  includeLabels: true,
+                  key: '1a58ab36-36bb-4234-abad-ad2410b0b74f'
+                })
+                
+                   
+              ]
             }
           ],
         }
+        
       ]
     };
   }
