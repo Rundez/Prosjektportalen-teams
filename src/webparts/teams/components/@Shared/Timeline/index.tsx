@@ -89,7 +89,7 @@ export const TimeLine: FunctionComponent<ITimelineProps> = ({ listName }) => {
           onDismiss={() => setShowDetails(false)}
         />
       ) : (
-        "Or this"
+        ""
       )}
     </div>
   );
