@@ -40,12 +40,12 @@ export const AddElementDialog: FunctionComponent<ISideBarProps> = ({
     <>
       <Button
         primary
-        content="Add item"
+        content="Legg til"
         onClick={openPanel}
         style={{ marginBottom: 10 }}
       />
       <Panel
-        headerText="Add item"
+        headerText="Legg til"
         isOpen={isOpen}
         onDismiss={dismissPanel}
         closeButtonAriaLabel="Close"

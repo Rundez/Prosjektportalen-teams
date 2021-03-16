@@ -20,6 +20,7 @@ import { RiskPage } from "./RiskPage/index";
 import { Home } from "./Home/Home";
 import Navbar from "./Navigation/index";
 import { ProjectStatusPage } from "./ProjectStatusPage";
+import { ProjectDeliveries } from "./Pages/Projectdeliveries";
 
 export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
   return (
@@ -52,6 +53,10 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
             <Route
               path="/projectstatus"
               render={() => <ProjectStatusPage context={props.context} />}
+            />
+            <Route
+              path="/prosjektleveranser"
+              render={() => <ProjectDeliveries context={props.context} />}
             />
             <Redirect to="/" />
           </Switch>

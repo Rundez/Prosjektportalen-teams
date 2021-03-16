@@ -95,6 +95,10 @@ export const TimeLine: FunctionComponent<ITimelineProps> = ({ listName }) => {
   );
 };
 
+/**
+ * Fetch items
+ * @param listName 
+ */
 const fetchItems = async (listName: string) => {
   const items = await sp.web.lists
     .getByTitle(listName)

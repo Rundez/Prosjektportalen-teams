@@ -4,23 +4,21 @@ import { sp } from "@pnp/sp";
 import HubSiteService from "sp-hubsite-service";
 import { Spinner } from "office-ui-fabric-react";
 import { ProjectPhases } from "pp365-projectwebparts/lib/components/ProjectPhases";
+import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
+
 export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
   context,
 }) => {
   const [hubSite, setHubSite] = useState<any>();
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
+  console.log(context);
   let pc = context.pageContext;
   if (!hubSite) {
-    HubSiteService.GetHubSite(sp, pc).then((hubsite) => {
-      setHubSite(hubsite);
+    HubSiteService.GetHubSite(sp, pc).then((hub) => {
+      setHubSite(hub);
       setIsLoading(false);
     });
-  }
-
-  if (hubSite) {
-    let newHub = hubSite;
-    console.log(newHub);
   }
 
   const callout = `<h3>{Title}</h3>
@@ -34,11 +32,12 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
         <Spinner />
       ) : (
         <div>
-          <ProjectPhases
-            confirmPhaseChange
-            currentPhaseViewName
-            phaseField="GtProjectPhase"
+          <ProjectStatus
+            riskMatrixCalloutTemplate={callout}
+            siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
             hubSite={hubSite}
+            isSiteAdmin
+            webUrl="https://martdev.sharepoint.com/sites/test"
           />
         </div>
       )}

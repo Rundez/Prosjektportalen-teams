@@ -47,7 +47,6 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
   return (
     <div>
       <div>{isLoading ? <Spinner /> : <TeamMembers items={teamUsers} />}</div>
-      <TimeLine context={props.context} listName={props.listName} />
     </div>
   );
 };
