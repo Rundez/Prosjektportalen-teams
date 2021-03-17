@@ -50,3 +50,4 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
     </div>
   );
 };
+
