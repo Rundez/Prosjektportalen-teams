@@ -3,13 +3,16 @@ import { Avatar } from "@fluentui/react-northstar";
 import { IHomeProps } from "./types";
 //import { IUser } from '../TeamMembers/types';
 import HubSiteService from "sp-hubsite-service";
-
+import { Flex} from "@fluentui/react-northstar";
 import { sp, SPRest } from "@pnp/sp";
 import { TeamMembers, DropdownSorting } from "./TeamMembers/index";
 import { Spinner } from "office-ui-fabric-react";
 import { ProjectPhases } from "pp365-projectwebparts/lib/components/ProjectPhases";
 import { Chart } from "react-google-charts";
 import { TimeLine } from "../@Shared/Timeline";
+import { StatusBox } from "./MiniStatus/index";
+
+
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
   const [hubSite, setHubSite] = useState<any>();
@@ -47,6 +50,11 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
   return (
     <div>
       <div>{isLoading ? <Spinner /> : <TeamMembers items={teamUsers} />}</div>
+      <div>
+      <Flex hAlign="end">
+      <StatusBox/>
+      </Flex>
+      </div>
     </div>
   );
 };
