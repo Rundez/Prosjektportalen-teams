@@ -10,7 +10,7 @@ import { Spinner } from "office-ui-fabric-react";
 import { ProjectPhases } from "pp365-projectwebparts/lib/components/ProjectPhases";
 import { Chart } from "react-google-charts";
 import { TimeLine } from "../@Shared/Timeline";
-import { StatusBox } from "./MiniStatus/index";
+import { StatusBox, Status, TestStatus } from "./MiniStatus/index";
 
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
@@ -49,13 +49,19 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
 
   return (
     <div>
-      <div>{isLoading ? <Spinner /> : <TeamMembers items={teamUsers} />}</div>
+      <Flex gap="gap.small" padding="padding.medium" space="between">
+      <Flex.Item size="size.half">
+      <Status items={TestStatus} /> 
+      </Flex.Item>
       <div>
-      <Flex hAlign="end">
-      <StatusBox/>
-      </Flex>
+        <Flex.Item size="size.half" align="end">
+          
+        { isLoading ? <Spinner /> : <TeamMembers items={teamUsers} />}
+        </Flex.Item>
       </div>
+      </Flex>
     </div>
+
   );
 };
 

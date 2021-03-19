@@ -16814,6 +16814,11 @@
             "resolved": "https://registry.npmjs.org/react-hook-form/-/react-hook-form-6.15.1.tgz",
             "integrity": "sha512-bL0LQuQ3OlM3JYfbacKtBPLOHhmgYz8Lj6ivMrvu2M6e1wnt4sbGRtPEPYCc/8z3WDbjrMwfAfLX92OsB65pFA=="
         },
+        "react-icons": {
+            "version": "4.2.0",
+            "resolved": "https://registry.npmjs.org/react-icons/-/react-icons-4.2.0.tgz",
+            "integrity": "sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ=="
+        },
         "react-image-fade-in": {
             "version": "1.0.2",
             "resolved": "https://registry.npmjs.org/react-image-fade-in/-/react-image-fade-in-1.0.2.tgz",
