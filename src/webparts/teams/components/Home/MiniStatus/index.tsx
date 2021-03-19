@@ -24,7 +24,7 @@ export const StatusBox = () => (
     );
     
     export const Status: FunctionComponent<IStatusProps> = (props) => {
-        const newList = [...props.items, ...TestStatus];
+        const newList = [...props.items];
         return (
             <div>
       <Flex hAlign="center">
