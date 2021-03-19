@@ -16,7 +16,7 @@ export const StatusBox = () => (
         marginTop: "10px",
         marginBottom: "300px",
         color: 'Black',
-        textAlign: 'center',
+        textAlign: 'justify',
         width: '600px',
         height: '300px',
         }}
@@ -37,12 +37,12 @@ export const StatusBox = () => (
             height: "300px",
             marginTop: "10px",
             color: 'Black',
-            textAlign: 'center',
+            textAlign: 'justify',
             width: '600px',
           }}
         >
-            <div>
-      <p> Prosjektinformasjon </p>
+        <div>
+        <p> Prosjektinformasjon</p>
           <Flex.Item>
             <List items={newList} />
           </Flex.Item>
@@ -57,27 +57,27 @@ export const StatusBox = () => (
     export const TestStatus = [
         {
             header: "Status",
-            media: <GrStatusGood/>,
+            media: <GrStatusGood size="30px"/>,
         },
         {
             header: "Økonomi",
-            media: <GiMoneyStack/>,
+            media: <GiMoneyStack size="30px"/>,
         },
         {
             header: "Risiko",
-            media: <GrStatusWarning/>,
+            media: <GrStatusWarning size="30px"/>,
         },
         {
             header: "Kvalitet",
-            media: <FaBox/>,
+            media: <FaBox size="30px"/>,
         },
         {
             header: "Fremdrift",
-            media: <GiProgression/>,
+            media: <GiProgression size="30px"/>,
         },
         {
             header: "Gevinst oppnåelse",
-            media: <GiPodiumWinner/>,
+            media: <GiPodiumWinner size="30px"/>,
         }
 
     ];

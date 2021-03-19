@@ -51,11 +51,10 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
     <div>
       <Flex gap="gap.small" padding="padding.medium" space="between">
       <Flex.Item size="size.half">
-      <Status items={TestStatus} /> 
+        <Status items={TestStatus} /> 
       </Flex.Item>
       <div>
         <Flex.Item size="size.half" align="end">
-          
         { isLoading ? <Spinner /> : <TeamMembers items={teamUsers} />}
         </Flex.Item>
       </div>
