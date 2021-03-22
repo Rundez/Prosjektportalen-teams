@@ -26,36 +26,39 @@ export default function Navigation(terms) {
     const fetchTerms = () => {
       const infos: any[] = terms.terms;
       console.log(infos);
-      let info = [];
 
-      for (let index = 0; index < infos.length; index++) {
-        //Check if the 3 label from sharepoint contains the string notImage then creates add a menuItem object that contains only the name and path
-        if (infos[index].labels[2] == "notImage") {
-          info.push({
-            path: infos[index].labels[1],
-            name: infos[index].labels[0],
-          });
-          console.log(info[index]);
-        } else {
-          // Add both the picture and add another iteam in to the menu array with a name to the path, meant for home
-          //Image
-          info.push({
-            path: infos[index].labels[1],
-            name: infos[index].labels[0],
-            image: infos[index].labels[2],
-          });
-          //Name
+      if (terms.terms != undefined) {
+        let info = [];
 
-          info.push({
-            path: infos[index].labels[1],
-            name: infos[index].labels[0],
-          });
-          console.log(info[index]);
+        for (let index = 0; index < infos.length; index++) {
+          //Check if the 3 label from sharepoint contains the string notImage then creates add a menuItem object that contains only the name and path
+          if (infos[index].labels[2] == "notImage") {
+            info.push({
+              path: infos[index].labels[1],
+              name: infos[index].labels[0],
+            });
+            console.log(info[index]);
+          } else {
+            // Add both the picture and add another iteam in to the menu array with a name to the path, meant for home
+            //Image
+            info.push({
+              path: infos[index].labels[1],
+              name: infos[index].labels[0],
+              image: infos[index].labels[2],
+            });
+            //Name
+
+            info.push({
+              path: infos[index].labels[1],
+              name: infos[index].labels[0],
+            });
+            console.log(info[index]);
+          }
         }
+        console.log(info);
+        setMenu(info);
+        console.log("Now using menuState");
       }
-      console.log(info);
-      setMenu(info);
-      console.log("Now using menuState");
     };
     fetchTerms();
   }, []);
