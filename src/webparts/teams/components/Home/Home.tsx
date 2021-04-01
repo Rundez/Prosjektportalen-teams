@@ -3,7 +3,7 @@ import { Avatar, FlexItem } from "@fluentui/react-northstar";
 import { IHomeProps } from "./types";
 //import { IUser } from '../TeamMembers/types';
 import HubSiteService from "sp-hubsite-service";
-import { Flex} from "@fluentui/react-northstar";
+import { Flex } from "@fluentui/react-northstar";
 import { sp, SPRest } from "@pnp/sp";
 import { TeamMembers, DropdownSorting, Minimizer } from "./TeamMembers/index";
 import { Spinner } from "office-ui-fabric-react";
@@ -11,8 +11,7 @@ import { ProjectPhases } from "pp365-projectwebparts/lib/components/ProjectPhase
 import { Chart } from "react-google-charts";
 import { TimeLine } from "../@Shared/Timeline";
 import { StatusBox, Status, TestStatus, TestStatus2 } from "./MiniStatus/index";
-import { Info, TestInfo } from "./ProjectInfo/index";
-
+import { Info } from "./ProjectInfo/index";
 
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
@@ -50,31 +49,12 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
 
   return (
     <div>
-
-      <Flex gap="gap.small" padding="padding.medium" space="between">
-        <Flex.Item size="size.half" >
-        <Info items={TestInfo} />
-        </Flex.Item>
-      <div>
-        <Flex.Item size="size.half" align="end">
-        { isLoading ? <Spinner /> : <TeamMembers items={teamUsers} />}
-        </Flex.Item>
-      </div>
+      <Flex gap="gap.small" padding="padding.medium" space="around">
+        <Info context={props.context} />
       </Flex>
-      <div>
-      <Flex gap="gap.small" padding="padding.medium" space="between">
-      <Flex.Item size="size.half" align="start">
-      <Status items={TestStatus} /> 
-      </Flex.Item>
-      <Flex>
-      
+      <Flex padding="padding.medium" space="around">
+        <Status items={TestStatus} />
       </Flex>
-      </Flex>
-
     </div>
-    </div>
-    
-
   );
 };
-

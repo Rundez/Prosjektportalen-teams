@@ -90,6 +90,7 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
   };
 
   const _renderUserColumn = (user: any) => {
+    console.error(user);
     return (
       <FieldUserRenderer
         context={context as IContext}
