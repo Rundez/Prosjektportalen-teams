@@ -50,7 +50,7 @@ export const Status: FunctionComponent<IStatusProps> = (props) => {
           fontSize: "20px",
         }}
       >
-        <p> Prosjektegenskaper</p>
+        <p> Status </p>
       </div>
       <Flex hAlign="center">
         <div

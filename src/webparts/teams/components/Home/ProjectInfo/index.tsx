@@ -4,65 +4,93 @@ import { IInfoProps } from "./types";
 import { ErrorIcon, ClosedCaptionsIcon } from "@fluentui/react-icons-northstar";
 import { FaBeer, FaBox } from "react-icons/fa";
 import { FieldUserRenderer } from "@pnp/spfx-controls-react";
+import { sp, SPRest } from "@pnp/sp";
 import {
   GiMoneyStack,
   GiPodiumWinner,
   GiProgression,
   GiStairsGoal,
 } from "react-icons/gi";
-import { GrStatusWarning, GrStatusGood } from "react-icons/gr";
 import { AiOutlineNumber } from "react-icons/ai";
 import { BiCalendar } from "react-icons/bi";
 import { BsPersonFill } from "react-icons/bs";
 import { ImStatsBars } from "react-icons/im";
+import { WebPartContext } from "@microsoft/sp-webpart-base";
+import { Spinner } from "office-ui-fabric-react";
 
 export const Info: FunctionComponent<IInfoProps> = (props) => {
-  const usersArr: any[] = ["Martin Ruud"];
-  const info = getProjectInfo(props.context, usersArr);
+  const [projectInformation, setProjectInformation] = useState([{}]);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
+
+  const info = getProjectInfo(props.context);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  /**
+   * Fetch project information
+   * Why is the context "any"? Getting error cause of private property.
+   */
+  const fetchData = () => {
+    sp.web.lists
+      .getByTitle("prosjektegenskaper")
+      .items.get()
+      .then((data) => {
+        setProjectInformation(data);
+        setIsLoading(false);
+      });
+  };
+
+  const teamName = props.context.sdks.microsoftTeams.context.teamName;
 
   return (
     <div>
-      <Flex hAlign="center">
-        <div
-          style={{
-            backgroundColor: "White",
-            boxShadow: " 2px 2px 2px #888888",
-            overflow: "auto",
-            height: "300px",
-            marginTop: "10px",
-            color: "Black",
-            textAlign: "justify",
-          }}
-        >
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Flex hAlign="center">
           <div
             style={{
-              marginLeft: "30px",
-              fontWeight: "bold",
-              fontSize: "20px",
+              backgroundColor: "White",
+              boxShadow: " 2px 2px 2px #888888",
+              overflow: "auto",
+              height: "300px",
+              marginTop: "10px",
+              color: "Black",
+              textAlign: "justify",
             }}
           >
-            <p> Prosjektinformasjon</p>
+            <div
+              style={{
+                marginLeft: "30px",
+                fontWeight: "bold",
+                fontSize: "20px",
+              }}
+            >
+              <p> {teamName}</p>
+            </div>
+            <div
+              style={{
+                marginLeft: "20px",
+              }}
+            >
+              <Flex gap="gap.small" space="between">
+                <Flex.Item size="size.half">
+                  <List items={info} />
+                </Flex.Item>
+                <Flex.Item size="size.half" align="start">
+                  <List items={getProjectInfo2} />
+                </Flex.Item>
+              </Flex>
+            </div>
           </div>
-          <div
-            style={{
-              marginLeft: "20px",
-            }}
-          >
-            <Flex gap="gap.small" space="between">
-              <Flex.Item size="size.half">
-                <List items={info} />
-              </Flex.Item>
-              <Flex.Item size="size.half" align="start">
-                <List items={TestInfo2} />
-              </Flex.Item>
-            </Flex>
-          </div>
-        </div>
-      </Flex>
+        </Flex>
+      )}
     </div>
   );
 };
-const getProjectInfo = (context, users) => {
+const getProjectInfo = (context) => {
   return [
     {
       header: "Prosjektnummer:",
@@ -103,7 +131,7 @@ const getProjectInfo = (context, users) => {
     },
   ];
 };
-export const TestInfo2 = [
+const getProjectInfo2 = [
   {
     header: "Målsetting",
     content:
