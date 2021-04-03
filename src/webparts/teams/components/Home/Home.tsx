@@ -49,7 +49,12 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
 
   return (
     <div>
-      <Flex gap="gap.small" padding="padding.medium" space="around">
+      <Flex
+        gap="gap.small"
+        padding="padding.medium"
+        space="around"
+        style={{ display: "block" }} // Should get rid of this
+      >
         <Info context={props.context} />
       </Flex>
       <Flex padding="padding.medium" space="around">
