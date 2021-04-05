@@ -27,7 +27,8 @@ export default function Navigation(terms) {
       const infos: any[] = terms.terms;
       console.log(infos);
       let info = [];
-
+      console.log(terms.terms);
+      if(terms.terms.length !== 0){
       for (let index = 0; index < infos.length; index++) {
         //Check if the 3 label from sharepoint contains the string notImage then creates add a menuItem object that contains only the name and path
         if (infos[index].labels[2] == "notImage") {
@@ -55,7 +56,7 @@ export default function Navigation(terms) {
       }
       console.log(info);
       setMenu(info);
-      console.log("Now using menuState");
+      console.log("Now using menuState");}
     };
     fetchTerms();
   }, []);
