@@ -6,12 +6,7 @@ import { FaBeer, FaBox } from "react-icons/fa";
 import { GiMoneyStack, GiPodiumWinner, GiProgression } from "react-icons/gi";
 import { GrStatusWarning, GrStatusGood } from "react-icons/gr";
 import { Popup } from "@fluentui/react-northstar";
-import {
-  ArrowDownIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-} from "@fluentui/react-icons-northstar";
+import { ProjectStatusDialog } from "./ProjectStatusDialog/index";
 
 export const StatusBox = () => (
   <Box
@@ -77,19 +72,7 @@ export const TestStatus = [
   {
     header: "Status",
     content: "Aktiv",
-    media: (
-      <Popup
-        trigger={
-          <Button
-            size="largest"
-            icon={<GrStatusGood size="30px" />}
-            circular
-            styles={{ cursor: "pointer" }}
-          />
-        }
-        content="Hello from popup!"
-      />
-    ),
+    media: <ProjectStatusDialog data={"test"} trigger={"testTrigger"} />,
   },
   {
     header: "Økonomi",

@@ -18,27 +18,61 @@ import { ImStatsBars } from "react-icons/im";
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 import { Spinner } from "office-ui-fabric-react";
 import styles from "./ProjectInfo.module.scss";
+import { GrStatusWarning } from "react-icons/gr";
 
 export const Info: FunctionComponent<IInfoProps> = (props) => {
   const [projectInformation, setProjectInformation] = useState<any>([{}]);
+  const [projectStatus, setProjectStatus] = useState<any>();
+
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   useEffect(() => {
-    fetchData();
+    fetchProjectInformation();
+    fetchProjectStatus();
   }, []);
 
   /**
    * Fetch project information
    */
-  const fetchData = () => {
+  const fetchProjectInformation = () => {
     sp.web.lists
       .getByTitle("prosjektegenskaper")
       .renderListData("<View></View>")
       .then((data) => {
-        setProjectInformation(transformItems(data.Row, props.context));
-        console.log(data);
+        setProjectInformation(
+          transformProjectInformation(data.Row, props.context)
+        );
         setIsLoading(false);
       });
+  };
+
+  // This is way too ghetto.. but it works
+  const fetchProjectStatus = () => {
+    setTimeout(() => {
+      sp.setup({
+        sp: {
+          baseUrl: "https://martdev.sharepoint.com/sites/pp365",
+        },
+      });
+
+      sp.web.lists
+        .getByTitle("Prosjektstatus")
+        .items.get()
+        .then((data) => {
+          console.log(data);
+          data.reverse();
+          const statusInformation = data.find(
+            (obj) => obj.GtSiteId === props.context.pageContext.site.id["_guid"]
+          );
+          setProjectStatus(transformProjectStatus(statusInformation));
+
+          sp.setup({
+            sp: {
+              baseUrl: "https://martdev.sharepoint.com/sites/test",
+            },
+          });
+        });
+    }, 3);
   };
 
   const teamName = props.context.sdks.microsoftTeams.context.teamName;
@@ -56,10 +90,10 @@ export const Info: FunctionComponent<IInfoProps> = (props) => {
             <div className={styles.infoElements}>
               <Flex gap="gap.small" space="between">
                 <Flex.Item size="size.half">
-                  <List items={projectInformation.slice(0, 4)} />
+                  <List items={projectInformation.slice(0, 5)} />
                 </Flex.Item>
                 <Flex.Item size="size.half" align="start">
-                  <List items={projectInformation.slice(4, 6)} />
+                  <List items={projectStatus} />
                 </Flex.Item>
               </Flex>
             </div>
@@ -84,12 +118,17 @@ const getProjectInfo2 = [
   },
 ];
 
-const transformItems = (items: any, context) => {
-  const projectInfoColumn1 = [
+const transformProjectInformation = (items: any, context) => {
+  const projectInfoColumn = [
     {
       header: "Prosjektnummer",
       content: items[0].GtProjectNumber,
       media: <AiOutlineNumber size="30px" />,
+    },
+    {
+      header: "Målsetting",
+      content: items[0].GtProjectGoals,
+      media: <GiStairsGoal size="30px" />,
     },
     {
       header: "Start- og sluttdato",
@@ -140,17 +179,29 @@ const transformItems = (items: any, context) => {
       ),
       media: <BsPersonFill size="30px" />,
     },
-    {
-      header: "Målsetting",
-      content: items[0].GtProjectGoals,
-      media: <GiStairsGoal size="30px" />,
-    },
+  ];
+
+  return projectInfoColumn;
+};
+
+const transformProjectStatus = (item: any) => {
+  const projectStatusInfo = [
     {
       header: "Overordnet status",
-      content: "test",
+      content: item.GtOverallStatus,
       media: <ImStatsBars size="30px" />,
+    },
+    {
+      header: "Økonomi",
+      content: item.GtStatusBudget,
+      media: <GiMoneyStack size="30px" />,
+    },
+    {
+      header: "Risiko",
+      content: item.GtStatusRisk,
+      media: <GrStatusWarning size="30px" />,
     },
   ];
 
-  return projectInfoColumn1;
+  return projectStatusInfo;
 };
