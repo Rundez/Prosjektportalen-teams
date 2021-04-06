@@ -36,7 +36,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
-  ],
+, "src/webparts/teams/components/Home/MiniStatus/ProjectStatusDialog"  ],
   "exclude": [
     "node_modules",
     "lib"

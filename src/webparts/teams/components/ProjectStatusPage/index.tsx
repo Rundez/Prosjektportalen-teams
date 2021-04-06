@@ -3,8 +3,7 @@ import { IProjectStatusPageProps } from "./types";
 import { sp } from "@pnp/sp";
 import HubSiteService from "sp-hubsite-service";
 import { Spinner } from "office-ui-fabric-react";
-import { ProjectPhases } from "pp365-projectwebparts/lib/components/ProjectPhases";
-import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
+
 
 export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
   context,
