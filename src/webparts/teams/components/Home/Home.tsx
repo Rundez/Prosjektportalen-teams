@@ -56,6 +56,8 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
         <Spinner />
       ) : (
         <div>
+
+        <div style={{marginTop: "10px"}}>
             <ProjectPhases
             phaseField="GtProjectPhase"
             currentPhaseViewName="Gjeldende fase"
@@ -68,6 +70,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
             isSiteAdmin
             hubSite={hubSite}
           />
+          </div>
 
           <div style={{display: "none"}}>
           <ProjectStatus

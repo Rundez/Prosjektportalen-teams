@@ -3,6 +3,8 @@ import { IProjectStatusPageProps } from "./types";
 import { sp } from "@pnp/sp";
 import HubSiteService from "sp-hubsite-service";
 import { Spinner } from "office-ui-fabric-react";
+import { ProjectPhases } from "pp365-projectwebparts/lib/components/ProjectPhases";
+import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
 
 
 export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
@@ -29,20 +31,6 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
-          <ProjectPhases
-            phaseField="GtProjectPhase"
-            currentPhaseViewName="Planlegge"
-            siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
-            webUrl="https://martdev.sharepoint.com/sites/pp365/"
-            showSubText
-            subTextTruncateLength={1}
-            syncPropertiesAfterPhaseChange
-            webPartContext={context}
-            isSiteAdmin
-            hubSite={hubSite}
-          />
-
           <ProjectStatus
             riskMatrixCalloutTemplate={callout}
             siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
@@ -52,7 +40,7 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
             webPartContext={context}
           />
         </div>
-      )}
+      ))}
     </div>
   );
 };
