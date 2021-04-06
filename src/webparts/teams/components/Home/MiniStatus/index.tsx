@@ -72,7 +72,7 @@ export const TestStatus = [
   {
     header: "Status",
     content: "Aktiv",
-    media: <ProjectStatusDialog data={"test"} trigger={"testTrigger"} />,
+    media: <ProjectStatusDialog trigger={"testTrigger"} />,
   },
   {
     header: "Økonomi",
