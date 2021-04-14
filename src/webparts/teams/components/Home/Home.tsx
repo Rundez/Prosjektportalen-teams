@@ -56,31 +56,30 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
         <Spinner />
       ) : (
         <div>
-
-        <div style={{marginTop: "10px"}}>
+          <div style={{ marginTop: "10px" }}>
             <ProjectPhases
-            phaseField="GtProjectPhase"
-            currentPhaseViewName="Gjeldende fase"
-            siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
-            webUrl="https://martdev.sharepoint.com/sites/pp365/"
-            showSubText
-            subTextTruncateLength={1}
-            syncPropertiesAfterPhaseChange
-            webPartContext={props.context}
-            isSiteAdmin
-            hubSite={hubSite}
-          />
+              phaseField="GtProjectPhase"
+              currentPhaseViewName="Gjeldende fase"
+              siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
+              webUrl="https://martdev.sharepoint.com/sites/pp365/"
+              showSubText
+              subTextTruncateLength={1}
+              syncPropertiesAfterPhaseChange
+              webPartContext={props.context}
+              isSiteAdmin
+              hubSite={hubSite}
+            />
           </div>
 
-          <div style={{display: "none"}}>
-          <ProjectStatus
-            riskMatrixCalloutTemplate={callout}
-            siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
-            hubSite={hubSite}
-            isSiteAdmin
-            webUrl="https://martdev.sharepoint.com/sites/test"
-            webPartContext={props.context}
-          />
+          <div style={{ display: "none" }}>
+            <ProjectStatus
+              riskMatrixCalloutTemplate={callout}
+              siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
+              hubSite={hubSite}
+              isSiteAdmin
+              webUrl="https://martdev.sharepoint.com/sites/test"
+              webPartContext={props.context}
+            />
           </div>
         </div>
       )}
