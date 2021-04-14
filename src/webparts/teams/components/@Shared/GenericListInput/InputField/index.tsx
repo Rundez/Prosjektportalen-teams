@@ -13,7 +13,6 @@ import {
 import {
   DateTimePicker,
   DateConvention,
-  TimeConvention,
 } from "@pnp/spfx-controls-react/lib/DateTimePicker";
 
 /**
@@ -179,10 +178,10 @@ export const InputField: FunctionComponent<any> = ({
     }
     // This can be a content type
     case FieldTypes.Computed: {
-      return <p>Computed field/innholdstype</p>;
+      return <p></p>;
     }
     case FieldTypes.Attachments: {
-      return <p>Attachment field</p>;
+      return <p></p>;
     }
     case FieldTypes.Lookup: {
       console.log(field.Title);

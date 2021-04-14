@@ -16,7 +16,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   const [fields, setFields] = useState([]); // Not in use
   const [contentTypeID, setContentTypeID] = useState([]); // Not in use. Could be needed?
   const [listFields, setListFields] = useState<any[]>([]);
-  const [value, setValue] = useState([{}]);
+  const [value, setValue] = useState([]);
 
   useEffect(() => {
     //fetchViewListData(listName);
@@ -34,8 +34,10 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     return list;
   };
 
-  // This should fetch fields for THE SELECTED list. AND IT DOES.
-  const fetchListFields = async (listName) => {
+  /**
+   * Fetches fields for the selected list.
+   */
+  const fetchListFields = async (listName: string) => {
     const list = sp.web.lists
       .getByTitle(listName)
       .fields.filter("ReadOnlyField eq false and Hidden eq false")
@@ -49,7 +51,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   };
 
   // Fetches the content type ID for the list. Currently not in use.
-  const fetchFieldData = async (listName) => {
+  const fetchFieldData = async (listName: string) => {
     const list = sp.web.lists
       .getByTitle(listName)
       .contentTypes.get()
@@ -85,8 +87,6 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
    * Adds the current items to the associated SP list
    */
   const addItemsToSpList = async (lName: string, inputValues: any) => {
-    inputValues.splice(0, 1); // Delete the first element (this should be fixed)
-
     let newValues = new Map<string, any>();
     inputValues.map((obj) => newValues.set(obj.fieldName, obj.fieldValue));
 
@@ -99,7 +99,6 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     //add an item to the list
     const result = await sp.web.lists.getByTitle(lName).items.add(obj);
     closeHandler();
-
     console.log(result);
   };
   console.log(value);

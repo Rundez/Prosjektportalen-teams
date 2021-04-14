@@ -60,8 +60,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
             <ProjectPhases
               phaseField="GtProjectPhase"
               currentPhaseViewName="Gjeldende fase"
-              siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
-              webUrl="https://martdev.sharepoint.com/sites/pp365/"
+              siteId={props.context.pageContext.site.id.toString()}
               showSubText
               subTextTruncateLength={1}
               syncPropertiesAfterPhaseChange

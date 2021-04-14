@@ -30,7 +30,6 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
 
     return super.onInit().then(_ => {
 
-      // Put the teams context and SP context in to the properties. 
       
       // Init of the graph
       graph.setup({
@@ -41,9 +40,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
       sp.setup({
         spfxContext: this.context
       });
-
     });
-
   }
 
   public render(): void {
@@ -72,7 +69,7 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
       pages: [
         {
           header: {
-            description: "Settings for all components"
+            description: "Innstillinger"
           },
           groups: [
             {
@@ -104,8 +101,8 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
               groupName:"Navigasjon",
               groupFields:[
                 PropertyFieldEnterpriseTermPicker('terms', {
-                  label: 'Select terms',
-                  panelTitle: 'Select terms',
+                  label: 'Velg navigasjonselementer',
+                  panelTitle: 'Velg navigasjonselementer',
                   initialValues: this.properties.terms,
                   allowMultipleSelections: true,
                   excludeSystemGroup: true,
@@ -114,15 +111,12 @@ export default class TeamsWebPart extends BaseClientSideWebPart<ITeamsWebPartPro
                   properties: this.properties,
                   context: this.context,
                   includeLabels: true,
-                  key: '1a58ab36-36bb-4234-abad-ad2410b0b74f'
+                  key: '1a58ab36-36bb-4234-abad-ad2410b0b74f',
                 })
-                
-                   
               ]
             }
           ],
         }
-        
       ]
     };
   }

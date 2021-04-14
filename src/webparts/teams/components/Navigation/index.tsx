@@ -21,7 +21,6 @@ export default function Navigation(terms) {
     { path: "/", name: "Page 4" },
     { path: "/", name: "Page 5" },
   ]);
-  console.log(terms);
   useEffect(() => {
     const fetchTerms = () => {
       const infos: any[] = terms.terms;
