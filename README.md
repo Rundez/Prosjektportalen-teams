@@ -1,8 +1,8 @@
-# spfx
+# Prosjektportalen for Teams
 
 ## Summary
 
-Short summary on functionality and used technologies.
+Dette er et bachelorprosjekt skrevet for Puzzlepart. Applikasjonen er en versjon av Prosjektportalen bygget for Teams. 
 
 [picture of the solution in action, if possible]
 
