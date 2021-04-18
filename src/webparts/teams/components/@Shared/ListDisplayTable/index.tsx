@@ -1,13 +1,17 @@
-import React, { useState, FunctionComponent, useEffect } from "react";
+import React, { useState, FunctionComponent, useEffect, useRef } from "react";
 import { IDisplayTableProps } from "./types";
-import { ListView, IViewField } from "@pnp/spfx-controls-react/lib/ListView";
+import {
+  ListView,
+  IViewField,
+  SelectionMode,
+} from "@pnp/spfx-controls-react/lib/ListView";
 import { sp } from "@pnp/sp";
 import { IFieldInfo } from "./types";
 import { FieldTextRenderer } from "@pnp/spfx-controls-react/lib/FieldTextRenderer";
 import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRenderer";
-import { WebPartContext } from "@microsoft/sp-webpart-base";
-import { IPrincipal } from "@pnp/spfx-controls-react/lib/common/SPEntities";
 import { IContext } from "@pnp/spfx-controls-react/lib/common/Interfaces";
+import { ListHeader } from "./ListHeader";
+import { IContextualMenuItem, Spinner } from "office-ui-fabric-react";
 
 export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
@@ -15,6 +19,9 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
 }) => {
   const [listColumns, setListColumns] = useState<IViewField[]>([]);
   const [listElements, setListElements] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const selectedItem = useRef<any>(null);
+
   useEffect(() => {
     const fetchItems = async () => {
       const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
@@ -25,6 +32,7 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
       //fetchListItems(listName, columnNames);
       const rows = await fetchItemsCaml(listName);
       setListElements(rows);
+      setIsLoading(false);
     };
     fetchItems();
   }, []);
@@ -94,10 +102,67 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
     );
   };
 
-  console.log(listElements);
+  /**
+   * Method that runs when an item is selected
+   */
+  const _getSelection = (items: any[]) => {
+    selectedItem.current = items[0];
+  };
+
+  /**
+   * Determines which button on command bar that is clicked
+   * @param event event
+   * @param value the button that is clicked
+   */
+  const _onCommandButtonClick = (
+    event:
+      | React.MouseEvent<HTMLElement, MouseEvent>
+      | React.KeyboardEvent<HTMLElement>,
+    value: IContextualMenuItem
+  ) => {
+    console.log("Delete clicked with item:", selectedItem.current);
+    console.log("Value", value);
+    console.log(selectedItem.current.ID);
+
+    if (selectedItem.current.ID && value.key === "delete") {
+      deleteListItem(listName, selectedItem.current.ID);
+    }
+  };
+
+  /**
+   * Deletes an item form the current list
+   */
+  const deleteListItem = (listName: string, id: number) => {
+    sp.web.lists
+      .getByTitle(listName)
+      .items.getById(id)
+      .delete()
+      .then(() => {
+        const updatedElements = listElements.filter((row) => row.ID != id);
+        setListElements(updatedElements);
+      });
+  };
+
   return (
     <div>
-      <ListView items={listElements} viewFields={listColumns} showFilter />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <ListHeader
+            selectedItem={selectedItem.current}
+            onDeleteClick={_onCommandButtonClick}
+          />
+          <ListView
+            items={listElements}
+            viewFields={listColumns}
+            showFilter
+            filterPlaceHolder="Søk"
+            selectionMode={SelectionMode.single}
+            selection={(items) => _getSelection(items)}
+          />
+        </>
+      )}
     </div>
   );
 };
@@ -138,7 +203,6 @@ const fetchItemsCaml = async (listName: string) => {
     return r;
   });
 
-  console.log(rows.Row);
   return rows.Row;
 };
 
@@ -155,7 +219,6 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
     .expand("")
     .get();
 
-  console.log(items);
   return items;
 };
 

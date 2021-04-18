@@ -101,8 +101,6 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     closeHandler();
     console.log(result);
   };
-  console.log(value);
-  console.log(listFields);
   return (
     <>
       <form>
