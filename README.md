@@ -2,7 +2,7 @@
 
 ## Summary
 
-Dette er et bachelorprosjekt skrevet for Puzzlepart. Applikasjonen er en versjon av Prosjektportalen bygget for Teams. 
+Dette er et bachelorprosjekt skrevet for Puzzlepart. Applikasjonen er en versjon av [Prosjektportalen](https://github.com/Puzzlepart/prosjektportalen365) bygget for Teams. 
 
 [picture of the solution in action, if possible]
 
