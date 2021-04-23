@@ -12,49 +12,71 @@ export default function Navigation(terms) {
       path: "/",
       name: "Homes",
       image:
-        "https://puzzlepart.com/wp-content/uploads/2019/12/Pzl-web-logo-dark-single.png",
+        "https://cdn.discordapp.com/attachments/663893433420611605/821060925926015036/logo.png",
     },
     { path: "/", name: "Home" },
     { path: "/riskmatrix", name: "Usikkerhet" },
     { path: "/projectstatus", name: "Prosjektstatus" },
-    { path: "/", name: "Page 3" },
-    { path: "/", name: "Page 4" },
-    { path: "/", name: "Page 5" },
+    { path: "/prosjektleveranser", name: "Prosjektleveranser" },
+    { path: "/", name: "Intressentregister" },
+    { path: "/", name: "Kommunikasjonsplan" },
+    { path: "/", name: "Ressursallokering" },
   ]);
   useEffect(() => {
     const fetchTerms = () => {
       const infos: any[] = terms.terms;
       console.log(infos);
       let info = [];
-
-      for (let index = 0; index < infos.length; index++) {
-        //Check if the 3 label from sharepoint contains the string notImage then creates add a menuItem object that contains only the name and path
-        if (infos[index].labels[2] == "notImage") {
-          info.push({
-            path: infos[index].labels[1],
-            name: infos[index].labels[0],
-          });
-          console.log(info[index]);
-        } else {
-          // Add both the picture and add another iteam in to the menu array with a name to the path, meant for home
-          //Image
-          info.push({
-            path: infos[index].labels[1],
-            name: infos[index].labels[0],
-            image: infos[index].labels[2],
-          });
-          //Name
-
-          info.push({
-            path: infos[index].labels[1],
-            name: infos[index].labels[0],
-          });
-          console.log(info[index]);
+      console.log(terms.terms);
+      try {
+        if (terms.terms.length !== 0) {
+          for (let index = 0; index < infos.length; index++) {
+            console.log(infos[index].labels[0]);
+            if (infos[index].labels[0] === "Hjem") {
+              info.unshift({
+                path: infos[index].labels[1],
+                name: infos[index].labels[0],
+              });
+              info.unshift({
+                path: infos[index].labels[1],
+                name: infos[index].labels[0],
+                image: infos[index].labels[2],
+              });
+            }
+            //Check if the 3 label from sharepoint contains the string notImage then creates add a menuItem object that contains only the name and path
+            if (infos[index].labels[2] == "notImage") {
+              info.push({
+                path: infos[index].labels[1],
+                name: infos[index].labels[0],
+              });
+              console.log(info[index]);
+            }
+          }
+          console.log(info);
+          setMenu(info);
+          console.log("Now using menuState");
         }
+      } catch (e) {
+        console.error(
+          e,
+          "Error in Navigation/index.tsx, terms not set correct. Try to add terms to settings or check if navigation terms are correctly set in the term store"
+        );
+        setMenu([
+          {
+            path: "/",
+            name: "Homes",
+            image:
+              "https://cdn.discordapp.com/attachments/663893433420611605/821060925926015036/logo.png",
+          },
+          { path: "/", name: "Home" },
+          { path: "/riskmatrix", name: "Usikkerhet" },
+          { path: "/projectstatus", name: "Prosjektstatus" },
+          { path: "/prosjektleveranser", name: "Prosjektleveranser" },
+          { path: "/", name: "Intressentregister" },
+          { path: "/", name: "Kommunikasjonsplan" },
+          { path: "/", name: "Ressursallokering" },
+        ]);
       }
-      console.log(info);
-      setMenu(info);
-      console.log("Now using menuState");
     };
     fetchTerms();
   }, []);
