@@ -1,15 +1,17 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { Flex, Divider } from "@fluentui/react-northstar";
+import { Flex, Divider, List, Button } from "@fluentui/react-northstar";
+import { CloseIcon } from "@fluentui/react-icons-northstar";
 import { IMenuProps } from "./Menu/types";
 import { Menu } from "./Menu/Menu";
 import { sp } from "@pnp/sp";
-import MobileDetect from "mobile-detect"
-import { BurgerMenu } from "./Menu/burgermenu";
+import MobileDetect from "mobile-detect";
+
 let md = new MobileDetect(window.navigator.userAgent);
 
 export default function Navigation(terms) {
   const [active, setActive] = React.useState("Home");
+  const [open, setOpen] = React.useState(false);
   const [menu, setMenu] = React.useState([
     {
       path: "/",
@@ -61,7 +63,6 @@ export default function Navigation(terms) {
         }
       } catch (e) {
         console.error(
-          
           "Error in Navigation, terms not set correct. Try to add terms to settings or check if navigation terms are correctly set in the term store",
           e
         );
@@ -90,43 +91,73 @@ export default function Navigation(terms) {
   };
 
   function getMenu(menu) {
-    if (md.mobile != null) {
-      return menu.map((menu) => (
-        <li>
-        <BurgerMenu
+    console.log(md.mobile());
+    if (md.mobile() != null || undefined) {
+      return menu.menu.map((menu) => (
+        <ul>
+          <Menu
+            active={() => handleClick(menu.name)}
+            activeState={active}
+            path={menu.path}
+            image={menu.image}
+            name={menu.name}
+          ></Menu>
+        </ul>
+      ));
+    } else {
+      return menu.menu.map((menu) => (
+        <Menu
           active={() => handleClick(menu.name)}
           activeState={active}
           path={menu.path}
           image={menu.image}
           name={menu.name}
-        ></BurgerMenu>
-        </li>
+        ></Menu>
       ));
-      
+    }
+  }
+  function Phone(menu) {
+    if (md.mobile() != null) {
+      console.log(menu);
+      return (
+        <>
+          <Button
+            icon={<CloseIcon />}
+            iconOnly
+            onClick={() => {
+              setOpen(!open);
+              if (open) {
+                burgerStyle.display = "inline";
+              } else {
+                burgerStyle.display = "none";
+              }
+            }}
+          />
+          <List style={burgerStyle} items={getMenu(menu)} />
+        </>
+      );
+
+      //;
     } else {
+      return (
+        <>
+          <div style={style}>
+            <Flex space="between">{getMenu(menu)}</Flex>
+            <Divider />
+          </div>
+        </>
+      );
+    }
+  }
 
-    return menu.map((menu) => (
-      <Menu
-        active={() => handleClick(menu.name)}
-        activeState={active}
-        path={menu.path}
-        image={menu.image}
-        name={menu.name}
-      ></Menu>
-    ));
-  }}
-
-  return (
-    <>
-      <div style={style}>
-        <Flex space="between">{getMenu(menu)}</Flex>
-        <Divider />
-      </div>
-    </>
-  );
+  return <Phone menu={menu} />;
 }
 
 const style = {
   marginTop: 0,
   textDecoration: "none",
+};
+
+const burgerStyle = {
+  display: "none",
 };
