@@ -10,7 +10,7 @@ import { ProjectStatusDialog } from "./ProjectStatusDialog/index";
 
 export const StatusBox = () => (
   <Box
-    content="Prosjekt Status"
+    //content="Prosjekt Status"
     styles={{
       backgroundColor: "White",
       boxShadow: " 2px 2px 2px #888888",
@@ -72,7 +72,7 @@ export const TestStatus = [
   {
     header: "Status",
     content: "Aktiv",
-    media: <ProjectStatusDialog trigger={"testTrigger"} />,
+    //media: <ProjectStatusDialog trigger={"testTrigger"} />,
   },
   {
     header: "Økonomi",

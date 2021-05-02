@@ -58,6 +58,7 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
               path="/prosjektleveranser"
               render={() => <ProjectDeliveries context={props.context} />}
             />
+         
             <Redirect to="/" />
           </Switch>
         </div>

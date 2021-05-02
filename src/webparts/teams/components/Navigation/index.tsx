@@ -4,6 +4,9 @@ import { Flex, Divider } from "@fluentui/react-northstar";
 import { IMenuProps } from "./Menu/types";
 import { Menu } from "./Menu/Menu";
 import { sp } from "@pnp/sp";
+import MobileDetect from "mobile-detect"
+import { BurgerMenu } from "./Menu/burgermenu";
+let md = new MobileDetect(window.navigator.userAgent);
 
 export default function Navigation(terms) {
   const [active, setActive] = React.useState("Home");
@@ -58,8 +61,9 @@ export default function Navigation(terms) {
         }
       } catch (e) {
         console.error(
-          e,
-          "Error in Navigation/index.tsx, terms not set correct. Try to add terms to settings or check if navigation terms are correctly set in the term store"
+          
+          "Error in Navigation, terms not set correct. Try to add terms to settings or check if navigation terms are correctly set in the term store",
+          e
         );
         setMenu([
           {
@@ -86,6 +90,21 @@ export default function Navigation(terms) {
   };
 
   function getMenu(menu) {
+    if (md.mobile != null) {
+      return menu.map((menu) => (
+        <li>
+        <BurgerMenu
+          active={() => handleClick(menu.name)}
+          activeState={active}
+          path={menu.path}
+          image={menu.image}
+          name={menu.name}
+        ></BurgerMenu>
+        </li>
+      ));
+      
+    } else {
+
     return menu.map((menu) => (
       <Menu
         active={() => handleClick(menu.name)}
@@ -95,7 +114,7 @@ export default function Navigation(terms) {
         name={menu.name}
       ></Menu>
     ));
-  }
+  }}
 
   return (
     <>
