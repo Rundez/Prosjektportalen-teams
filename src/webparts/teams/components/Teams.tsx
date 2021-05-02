@@ -21,6 +21,9 @@ import { Home } from "./Home/Home";
 import Navbar from "./Navigation/index";
 import { ProjectStatusPage } from "./ProjectStatusPage";
 import { ProjectDeliveries } from "./Pages/Projectdeliveries";
+import { Intressentregister } from "./Pages/Intressentregister/Intressentregister";
+import { Resourceallocation } from "./Pages/Resourceallocation/Resoucreallocation";
+import { Communicationplan } from "./Pages/Communicationplan/Communicationplan";
 
 export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
   return (
@@ -58,7 +61,19 @@ export const Teams: React.FunctionComponent<ITeamsWebPartProps> = (props) => {
               path="/prosjektleveranser"
               render={() => <ProjectDeliveries context={props.context} />}
             />
-         
+            <Route
+              path="/intressentregister"
+              render={() => <Intressentregister context={props.context} />}
+            />
+            <Route
+              path="/kommunikasjonsplan"
+              render={() => <Communicationplan context={props.context} />}
+            />
+            <Route
+              path="/ressursallokering"
+              render={() => <Resourceallocation context={props.context} />}
+            />
+
             <Redirect to="/" />
           </Switch>
         </div>
