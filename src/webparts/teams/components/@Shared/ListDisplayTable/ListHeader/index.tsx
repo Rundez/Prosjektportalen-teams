@@ -29,15 +29,6 @@ export const ListHeader: React.FunctionComponent<any> = (props) => {
       disabled: false,
       onClick: (ev, it) => props.onDeleteClick(ev, it),
     },
-    {
-      key: "download",
-      text: "Download",
-      ariaLabel: "Download",
-      iconProps: { iconName: "Download" },
-      iconOnly: true,
-      disabled: true,
-      style: { backgroundColor: "white" },
-    },
   ];
 
   return (

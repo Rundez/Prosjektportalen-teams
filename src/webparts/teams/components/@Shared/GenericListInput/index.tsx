@@ -2,10 +2,6 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import { IGenericListInputProps } from "./types";
 import { Button, createClassResolver, Flex } from "@fluentui/react-northstar";
 import { InputField } from "./InputField/index";
-
-//import { sp, IFieldInfo } from "@pnp/sp/presets/all";
-//import { IItemAddResult } from "@pnp/sp/items";
-
 import { sp } from "@pnp/sp";
 
 export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({

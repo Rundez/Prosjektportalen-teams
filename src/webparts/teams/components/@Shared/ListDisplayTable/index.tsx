@@ -46,8 +46,6 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   ): Promise<IViewField[]> => {
     const list = columns.map((field: any) => {
       if (field["odata.type"] === "SP.FieldUser") {
-        console.log("Dette er et brukerfelt:");
-        console.log(field);
         return {
           name: field.InternalName,
           displayName: field.Title,
@@ -65,7 +63,6 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
         isResizable: true,
         minWidth: 50,
         maxWidth: 100,
-        //render: _renderColumn,
       };
     });
 
@@ -73,31 +70,31 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
     return sortedList;
   };
 
-  const _renderColumn = (text) => {
-    return <FieldTextRenderer text={text["GtRiskStrategy"]} />;
-  };
-
-  const _renderUserColumn = (user: any) => {
+  const _renderUserColumn = (row: any, event: any, fieldData: any) => {
     let spContext: IContext = {
       pageContext: context.pageContext,
       spHttpClient: context.spHttpClient,
     };
+
+    console.log("Field data:", fieldData);
+    console.log("Rowdata:", row);
+
     return (
       <FieldUserRenderer
-        context={spContext}
+        context={context}
         users={[
           {
-            id: user["GtResourceUser.0.id"],
-            email: user["GtResourceUser.0.email"],
-            department: user["GtResourceUser.0.department"],
-            jobTitle: user["GtResourceUser.0.jobtitle"],
+            id: "9",
+            email: 'user["GtResourceUser.0.email"]',
+            department: 'user["GtResourceUser.0.department"]',
+            jobTitle: 'user["GtResourceUser.0.jobtitle"]',
             picture: "GtResourceUser.0.picture",
             sip: "GtResourceUser.0.sip",
-            title: user["GtResourceUser.0.title"],
-            value: user["GtResourceUser.0.key"],
+            title: row[fieldData.fieldName],
+            value: "",
           },
         ]}
-        key={user["Editor.0.key"]}
+        key={1}
       />
     );
   };

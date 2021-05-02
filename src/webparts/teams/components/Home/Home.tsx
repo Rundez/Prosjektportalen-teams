@@ -50,6 +50,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
     });
   }
 
+  console.log(props.context);
   return (
     <div>
       {isLoading ? (
@@ -73,10 +74,10 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
           <div style={{ display: "none" }}>
             <ProjectStatus
               riskMatrixCalloutTemplate={callout}
-              siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
+              siteId={props.context.pageContext.site.id.toString()}
               hubSite={hubSite}
               isSiteAdmin
-              webUrl="https://martdev.sharepoint.com/sites/test"
+              webUrl={props.context.pageContext.web.absoluteUrl}
               webPartContext={props.context}
             />
           </div>
