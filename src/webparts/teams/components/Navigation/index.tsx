@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { Flex, Divider, List, Button } from "@fluentui/react-northstar";
-import { CloseIcon } from "@fluentui/react-icons-northstar";
+import { MenuIcon } from "@fluentui/react-icons-northstar";
 import { IMenuProps } from "./Menu/types";
 import { Menu } from "./Menu/Menu";
 import { sp } from "@pnp/sp";
@@ -122,7 +122,7 @@ export default function Navigation(terms) {
       return (
         <>
           <Button
-            icon={<CloseIcon />}
+            icon={<MenuIcon />}
             iconOnly
             onClick={() => {
               setOpen(!open);
