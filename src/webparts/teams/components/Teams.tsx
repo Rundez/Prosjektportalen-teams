@@ -20,7 +20,7 @@ import { RiskPage } from "./RiskPage/index";
 import { Home } from "./Home/Home";
 import Navbar from "./Navigation/index";
 import { ProjectStatusPage } from "./ProjectStatusPage";
-import { ProjectDeliveries } from "./Pages/Projectdeliveries";
+import { ProjectDeliveries } from "./Pages/Projectdeliveris/Projectdeliveries";
 import { Intressentregister } from "./Pages/Intressentregister/Intressentregister";
 import { Resourceallocation } from "./Pages/Resourceallocation/Resoucreallocation";
 import { Communicationplan } from "./Pages/Communicationplan/Communicationplan";

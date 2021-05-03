@@ -30,15 +30,14 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
       {isLoading ? (
         <Spinner />
       ) : (
-       /* <ProjectStatus
+        <ProjectStatus
           riskMatrixCalloutTemplate={callout}
           siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
           hubSite={hubSite}
           isSiteAdmin
           webUrl="https://martdev.sharepoint.com/sites/test"
           webPartContext={context}
-        />*/
-        <div></div>
+        />
       )}
     </div>
   );
