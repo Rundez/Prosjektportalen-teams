@@ -12,6 +12,7 @@ import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRendere
 import { IContext } from "@pnp/spfx-controls-react/lib/common/Interfaces";
 import { ListHeader } from "./ListHeader";
 import { IContextualMenuItem, Spinner } from "office-ui-fabric-react";
+import { AddElementDialog } from "../DialogPopup";
 
 export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
@@ -21,6 +22,8 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   const [listElements, setListElements] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const selectedItem = useRef<any>(null);
+  const [isItemSelected, setIsItemSelected] = useState<boolean>(false);
+  const [displayDialog, setDisplayDialog] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -104,6 +107,7 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
    */
   const _getSelection = (items: any[]) => {
     selectedItem.current = items[0];
+    setIsItemSelected(true);
   };
 
   /**
@@ -117,13 +121,18 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
       | React.KeyboardEvent<HTMLElement>,
     value: IContextualMenuItem
   ) => {
-    console.log("Delete clicked with item:", selectedItem.current);
-    console.log("Value", value);
-    console.log(selectedItem.current.ID);
-
     if (selectedItem.current.ID && value.key === "delete") {
       deleteListItem(listName, selectedItem.current.ID);
     }
+  };
+
+  const _onAddItemClick = () => {
+    setDisplayDialog(true);
+    console.log("Adding item....");
+  };
+
+  const _onCloseDialog = () => {
+    setDisplayDialog(false);
   };
 
   /**
@@ -146,9 +155,19 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
         <Spinner />
       ) : (
         <>
+          {displayDialog && (
+            <AddElementDialog
+              context={context}
+              listName={listName}
+              shouldPanelOpen={displayDialog}
+              onClose={_onCloseDialog}
+            />
+          )}
           <ListHeader
             selectedItem={selectedItem.current}
-            onDeleteClick={_onCommandButtonClick}
+            onClick={_onCommandButtonClick}
+            onAddItemClick={_onAddItemClick}
+            isButtonsDisabled={!isItemSelected}
           />
           <ListView
             items={listElements}

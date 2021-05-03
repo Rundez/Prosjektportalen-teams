@@ -1,15 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { useBoolean } from "@uifabric/react-hooks";
-import {
-  Button,
-  Flex,
-  FlexItem,
-  Input,
-  Dropdown,
-  Text,
-  TextArea,
-  Form,
-} from "@fluentui/react-northstar";
+import { Form } from "@fluentui/react-northstar";
 import { Panel } from "office-ui-fabric-react/lib/Panel";
 import { useForm } from "react-hook-form";
 import { GenericListInput } from "../GenericListInput/";
@@ -21,34 +12,33 @@ import { ISideBarProps } from "./types";
 export const AddElementDialog: FunctionComponent<ISideBarProps> = ({
   context,
   listName,
+  shouldPanelOpen,
+  onClose,
 }) => {
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(
     false
   );
   const { register, handleSubmit } = useForm();
-
   const printData = (data) => console.log(data);
 
+  useEffect(() => {
+    shouldPanelOpen ? openPanel() : "";
+  }, []);
   /**
    * Closes the window when either "Add item" og "Dismiss is pressed"
    */
   const onClickHandler = () => {
     dismissPanel();
+    onClose();
   };
 
   return (
     <>
-      <Button
-        primary
-        content="Legg til"
-        onClick={openPanel}
-        style={{ marginBottom: 10 }}
-      />
       <Panel
         headerText="Legg til"
         isOpen={isOpen}
         onDismiss={dismissPanel}
-        closeButtonAriaLabel="Close"
+        closeButtonAriaLabel="Avbryt"
       >
         <div>
           <Form onSubmit={handleSubmit(printData)}>

@@ -112,10 +112,10 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
         <Flex gap="gap.medium" style={{ marginTop: 10 }}>
           <Button
             primary
-            content="Add Item"
+            content="Legg til"
             onClick={() => addItemsToSpList(listName, value)}
           />
-          <Button secondary content="Cancel" onClick={closeHandler} />
+          <Button secondary content="Avbryt" onClick={closeHandler} />
         </Flex>
       </form>
     </>
