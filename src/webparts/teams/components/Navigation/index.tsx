@@ -116,7 +116,7 @@ export default function Navigation(terms) {
       ));
     }
   }
-  function Phone(menu) {
+  function CheckForPhone(menu) {
     if (md.mobile() != null) {
       console.log(menu);
       return (
@@ -124,6 +124,7 @@ export default function Navigation(terms) {
           <Button
             icon={<MenuIcon />}
             iconOnly
+            text
             onClick={() => {
               setOpen(!open);
               if (open) {
@@ -150,7 +151,7 @@ export default function Navigation(terms) {
     }
   }
 
-  return <Phone menu={menu} />;
+  return <CheckForPhone menu={menu} />;
 }
 
 const style = {
