@@ -6,6 +6,7 @@ import { IMenuProps } from "./Menu/types";
 import { Menu } from "./Menu/Menu";
 import { sp } from "@pnp/sp";
 import MobileDetect from "mobile-detect";
+import styles from "./Navigation.module.scss"
 
 let md = new MobileDetect(window.navigator.userAgent);
 
@@ -119,19 +120,16 @@ export default function Navigation(terms) {
   function CheckForPhone(menu) {
     if (md.mobile() != null) {
       console.log(menu);
+    
       return (
         <>
           <Button
             icon={<MenuIcon />}
             iconOnly
             text
+            className={open == true ? burgerStyle.display="inline" : burgerStyle.display = "none"}
             onClick={() => {
               setOpen(!open);
-              if (open) {
-                burgerStyle.display = "inline";
-              } else {
-                burgerStyle.display = "none";
-              }
             }}
           />
           <List style={burgerStyle} items={getMenu(menu)} />
@@ -142,7 +140,7 @@ export default function Navigation(terms) {
     } else {
       return (
         <>
-          <div style={style}>
+          <div className={styles.menu}>
             <Flex space="between">{getMenu(menu)}</Flex>
             <Divider />
           </div>
@@ -154,10 +152,7 @@ export default function Navigation(terms) {
   return <CheckForPhone menu={menu} />;
 }
 
-const style = {
-  marginTop: 0,
-  textDecoration: "none",
-};
+
 
 const burgerStyle = {
   display: "none",

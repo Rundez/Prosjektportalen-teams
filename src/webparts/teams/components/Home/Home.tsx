@@ -55,7 +55,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+       /* <div>
           <div style={{ marginTop: "10px" }}>
             <ProjectPhases
               phaseField="GtProjectPhase"
@@ -80,7 +80,8 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
               webPartContext={props.context}
             />
           </div>
-        </div>
+        </div>*/
+        <div></div>
       )}
       <Flex
         gap="gap.small"
@@ -94,6 +95,8 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
         <Status items={TestStatus} />
       </Flex>
     </div>
+  
+    
   );
 };
 
