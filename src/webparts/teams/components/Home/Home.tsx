@@ -14,6 +14,7 @@ import { StatusBox, Status, TestStatus, TestStatus2 } from "./MiniStatus/index";
 import { Info } from "./ProjectInfo/index";
 
 import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
+import { Cards } from "./InfoCards";
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
   const [hubSite, setHubSite] = useState<any>();
@@ -55,7 +56,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
       {isLoading ? (
         <Spinner />
       ) : (
-       /* <div>
+        /* <div>
           <div style={{ marginTop: "10px" }}>
             <ProjectPhases
               phaseField="GtProjectPhase"
@@ -89,14 +90,33 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
         space="around"
         style={{ display: "block" }} // Should get rid of this
       >
+        <Flex gap="gap.small" hAlign="center" vAlign="center">
+          <Flex column>
+            <Flex.Item size="size.large" align="start">
+              <Cards
+                header="Prosjektinfo"
+                height={23}
+                width={23}
+                context={props.context}
+              ></Cards>
+            </Flex.Item>
+            <Flex.Item size="size.half" align="start">
+              <Cards header="Økonomi" height={23} width={23}></Cards>
+            </Flex.Item>
+            <Flex.Item size="size.half" align="end">
+              <Cards header="Kvalitet" height={23} width={23}></Cards>
+            </Flex.Item>
+          </Flex>
+          <Flex.Item size="size.smallest">
+            <Cards header="Risiko" height={23} width={23}></Cards>
+          </Flex.Item>
+        </Flex>
         <Info context={props.context} />
       </Flex>
       <Flex padding="padding.medium" space="around">
         <Status items={TestStatus} />
       </Flex>
     </div>
-  
-    
   );
 };
 
