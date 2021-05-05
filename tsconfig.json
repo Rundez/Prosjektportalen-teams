@@ -1,7 +1,8 @@
 {
   "extends": "./node_modules/@microsoft/rush-stack-compiler-3.3/includes/tsconfig-web.json",
   "compilerOptions": {
-    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2016",
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -14,6 +15,7 @@
     "inlineSources": false,
     "strictNullChecks": false,
     "noUnusedLocals": false,
+    "downlevelIteration": true,
     "typeRoots": [
       "./node_modules/@types",
       "./node_modules/@microsoft"
@@ -24,14 +26,17 @@
     ],
     "lib": [
       "es5",
+      "es6",
+      "es7",
       "dom",
-      "es2015.collection"
+      "es2016",
+      "es2017",
     ]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
-  ],
+, "src/webparts/teams/components/Home/MiniStatus/ProjectStatusDialog"  ],
   "exclude": [
     "node_modules",
     "lib"
