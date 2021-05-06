@@ -23,7 +23,6 @@ export const InputField: FunctionComponent<any> = ({
   field,
   onChange,
   context,
-  listName,
 }) => {
   switch (field.FieldTypeKind) {
     case FieldTypes.Text: {
@@ -36,6 +35,7 @@ export const InputField: FunctionComponent<any> = ({
               onChange={(e: any) =>
                 onChange(e.target.value, field.EntityPropertyName)
               }
+              value={field.value}
             />
           </Flex>
         </>
@@ -71,18 +71,13 @@ export const InputField: FunctionComponent<any> = ({
       );
     }
     case FieldTypes.Calculated: {
-      console.log(field.Title);
-
       return <p>Calculated field</p>;
     }
     case FieldTypes.Integer: {
-      console.log(field.Title);
-
       return <p>Integer field</p>;
     }
     case FieldTypes.DateTime: {
       const handleChange = (date: Date) => {
-        console.log(date);
         onChange(date.toISOString(), field.EntityPropertyName);
       };
 
@@ -96,8 +91,6 @@ export const InputField: FunctionComponent<any> = ({
       );
     }
     case FieldTypes.MultiChoice: {
-      console.log(field.Title);
-
       return <p>Multichoice</p>;
     }
     case FieldTypes.Note: {
@@ -121,7 +114,6 @@ export const InputField: FunctionComponent<any> = ({
     // ID is appended to the name since it is a lookup field..
     case FieldTypes.User: {
       const _getPeoplePickerItems = (items: any[]) => {
-        console.log("Items:", items);
         const id: string = items[0].id;
         const propertyName: string = field.EntityPropertyName + "Id";
         onChange(id, propertyName);
@@ -143,8 +135,6 @@ export const InputField: FunctionComponent<any> = ({
     // This should really be a taxonomy field
     case FieldTypes.Invalid: {
       const onTaxPickerChange = (terms: IPickerTerms) => {
-        console.log("Terms", terms);
-
         // call the onchange function and pass the whole term element.
         // Should be refactored to also work with multiple terms
         onChange(terms[0], field.EntityPropertyName);
@@ -184,7 +174,6 @@ export const InputField: FunctionComponent<any> = ({
       return <p></p>;
     }
     case FieldTypes.Lookup: {
-      console.log(field.Title);
       return <p>Lookup field</p>;
     }
     default: {

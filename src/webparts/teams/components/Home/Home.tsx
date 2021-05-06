@@ -12,8 +12,9 @@ import { Chart } from "react-google-charts";
 import { TimeLine } from "../@Shared/Timeline";
 import { StatusBox, Status, TestStatus, TestStatus2 } from "./MiniStatus/index";
 import { Info } from "./ProjectInfo/index";
-
 import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
+import styles from "./Home.module.scss";
+
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
   const [hubSite, setHubSite] = useState<any>();
@@ -50,14 +51,13 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
     });
   }
 
-  console.log(props.context);
   return (
     <div>
       {isLoading ? (
         <Spinner />
       ) : (
         <div>
-          <div style={{ marginTop: "10px" }}>
+          <div className={styles.phaseContainer}>
             <ProjectPhases
               phaseField="GtProjectPhase"
               currentPhaseViewName="Gjeldende fase"

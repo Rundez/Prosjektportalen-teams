@@ -14,6 +14,7 @@ export const AddElementDialog: FunctionComponent<ISideBarProps> = ({
   listName,
   shouldPanelOpen,
   onClose,
+  editData,
 }) => {
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(
     false
@@ -46,6 +47,7 @@ export const AddElementDialog: FunctionComponent<ISideBarProps> = ({
               listName={listName}
               context={context}
               closeHandler={onClickHandler}
+              editData={editData}
             />
           </Form>
         </div>

@@ -7,7 +7,6 @@ import {
 } from "@pnp/spfx-controls-react/lib/ListView";
 import { sp } from "@pnp/sp";
 import { IFieldInfo } from "./types";
-import { FieldTextRenderer } from "@pnp/spfx-controls-react/lib/FieldTextRenderer";
 import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRenderer";
 import { IContext } from "@pnp/spfx-controls-react/lib/common/Interfaces";
 import { ListHeader } from "./ListHeader";
@@ -24,21 +23,19 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   const selectedItem = useRef<any>(null);
   const [isItemSelected, setIsItemSelected] = useState<boolean>(false);
   const [displayDialog, setDisplayDialog] = useState<boolean>(false);
+  const [editData, setEditData] = useState<{}>();
 
   useEffect(() => {
     const fetchItems = async () => {
       const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
       const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
       setListColumns(columnFormatted); // set the list columns to state
-      //const rows = await fetchListItems(listName, columnNames); // Fetch the items based on the view query
-      //setListElements(rows);
-      //fetchListItems(listName, columnNames);
       const rows = await fetchItemsCaml(listName);
       setListElements(rows);
       setIsLoading(false);
     };
     fetchItems();
-  }, []);
+  }, [displayDialog]);
 
   /**
    * Convert the columns to the accepted format
@@ -126,6 +123,9 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
     }
   };
 
+  /**
+   * When "Add item" command button is pressed, open the item adder dialog.
+   */
   const _onAddItemClick = () => {
     setDisplayDialog(true);
     console.log("Adding item....");
@@ -149,6 +149,18 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
       });
   };
 
+  const _updateListItem = (
+    event:
+      | React.MouseEvent<HTMLElement, MouseEvent>
+      | React.KeyboardEvent<HTMLElement>,
+    value: IContextualMenuItem
+  ) => {
+    if (selectedItem.current.ID && value.key === "edit") {
+      setEditData({ editMode: true, row: selectedItem.current.ID });
+      setDisplayDialog(true);
+    }
+  };
+
   return (
     <div>
       {isLoading ? (
@@ -161,12 +173,14 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
               listName={listName}
               shouldPanelOpen={displayDialog}
               onClose={_onCloseDialog}
+              editData={editData}
             />
           )}
           <ListHeader
             selectedItem={selectedItem.current}
             onClick={_onCommandButtonClick}
             onAddItemClick={_onAddItemClick}
+            onEditClick={_updateListItem}
             isButtonsDisabled={!isItemSelected}
           />
           <ListView

@@ -7,7 +7,6 @@ import {
 } from "office-ui-fabric-react/lib/CommandBar";
 
 export const ListHeader: React.FunctionComponent<any> = (props) => {
-  console.log(props.isButtonsDisabled);
   const _items: ICommandBarItemProps[] = [
     {
       key: "newItem",
@@ -22,7 +21,7 @@ export const ListHeader: React.FunctionComponent<any> = (props) => {
       iconProps: { iconName: "Upload" },
       split: true,
       disabled: props.isButtonsDisabled,
-      onClick: (ev, it) => props.onClick(ev, it),
+      onClick: (ev, it) => props.onEditClick(ev, it),
     },
     {
       key: "delete",

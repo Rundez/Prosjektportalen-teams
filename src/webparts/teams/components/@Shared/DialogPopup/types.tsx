@@ -4,5 +4,6 @@ export interface ISideBarProps {
   listName: string;
   context: WebPartContext;
   shouldPanelOpen?: boolean;
+  editData?: any;
   onClose?: () => void;
 }

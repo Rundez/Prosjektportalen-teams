@@ -1,59 +1,86 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import { IGenericListInputProps } from "./types";
-import { Button, createClassResolver, Flex } from "@fluentui/react-northstar";
+import {
+  Button,
+  compose,
+  createClassResolver,
+  Flex,
+} from "@fluentui/react-northstar";
 import { InputField } from "./InputField/index";
 import { sp } from "@pnp/sp";
+import { Spinner } from "office-ui-fabric-react";
 
 export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   listName,
   context,
   closeHandler,
+  editData = null,
 }) => {
-  const [fields, setFields] = useState([]); // Not in use
-  const [contentTypeID, setContentTypeID] = useState([]); // Not in use. Could be needed?
   const [listFields, setListFields] = useState<any[]>([]);
+  const [updatedListFields, setUpdatedListFields] = useState<any[]>();
   const [value, setValue] = useState([]);
+  const [editMode, setEditMode] = useState(false);
+  const rowData = useRef<any>(null);
 
   useEffect(() => {
-    //fetchViewListData(listName);
-    //fetchFieldData(listName);
-    fetchListFields(listName);
+    const fetchData = async () => {
+      rowData.current = await fetchRowData();
+      await fetchListFields();
+    };
+    if (editMode != null) {
+      fetchData();
+    }
   }, []);
 
-  // Fetch the standard view fields. Currently not in use.
-  const fetchViewListData = async (listName) => {
-    const list = sp.web.lists
+  useEffect(() => {
+    setUpdatedListFields(transformRowData());
+  }, [listFields]);
+
+  /**
+   * Transforms the selected row to match the input fields structure
+   */
+  const transformRowData = () => {
+    if (listFields.length > 0 && rowData.current[0] != null) {
+      console.log(rowData.current[0]);
+      console.log(listFields);
+
+      const updatedFields = listFields.map((field) => {
+        const updatedField = {
+          value: rowData.current[0][field.StaticName],
+          ...field,
+        };
+        return updatedField;
+        //console.log(rowData.current[0][field.StaticName]);
+      });
+      console.log(updatedFields);
+      return updatedFields;
+    }
+  };
+
+  /**
+   * Fetches values for the selected row if editMode is on
+   */
+  const fetchRowData = async () => {
+    const rows = await sp.web.lists
       .getByTitle(listName)
-      .views.getByTitle("Alle elementer")
-      .fields.get()
-      .then((data) => setFields(data["Items"]));
-    return list;
+      .renderListData("<View></View>");
+
+    return rows.Row.filter((row) => row.ID == editData.row);
   };
 
   /**
    * Fetches fields for the selected list.
    */
-  const fetchListFields = async (listName: string) => {
-    const list = sp.web.lists
+  const fetchListFields = async () => {
+    const list = await sp.web.lists
       .getByTitle(listName)
       .fields.filter("ReadOnlyField eq false and Hidden eq false")
-      .get()
-      .then((fields) =>
-        fields.map((field) => {
-          setListFields((current) => [...current, field]);
-        })
-      );
-    return list;
-  };
+      .get();
 
-  // Fetches the content type ID for the list. Currently not in use.
-  const fetchFieldData = async (listName: string) => {
-    const list = sp.web.lists
-      .getByTitle(listName)
-      .contentTypes.get()
-      .then((ct) =>
-        ct.map((ct) => setContentTypeID((current) => [...current, ct.Id]))
-      );
+    //list.map((field) => {
+    //  setListFields((current) => [...current, field]);
+    //});
+    setListFields(list);
   };
 
   /**
@@ -86,7 +113,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     let newValues = new Map<string, any>();
     inputValues.map((obj) => newValues.set(obj.fieldName, obj.fieldValue));
 
-    // Convert the map to a object according
+    // Convert the map to a object
     let obj = [...newValues.entries()].reduce(
       (obj, [key, value]) => ((obj[key] = value), obj),
       {}
@@ -94,21 +121,23 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     console.log(obj);
     //add an item to the list
     const result = await sp.web.lists.getByTitle(lName).items.add(obj);
-    closeHandler();
     console.log(result);
+    closeHandler();
   };
+
   return (
     <>
       <form>
-        {listFields.map((field, index) => (
-          <InputField
-            field={field}
-            key={index}
-            onChange={handleInput}
-            context={context}
-            listName={listName}
-          />
-        ))}
+        {updatedListFields &&
+          updatedListFields.map((field, index) => (
+            <InputField
+              field={field}
+              key={index}
+              onChange={handleInput}
+              context={context}
+              listName={listName}
+            />
+          ))}
         <Flex gap="gap.medium" style={{ marginTop: 10 }}>
           <Button
             primary
