@@ -92,7 +92,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
       >
         <Flex gap="gap.small" hAlign="center" vAlign="center">
           <Flex column>
-            <Flex.Item size="size.large" align="start">
+            <Flex.Item size="size.half" align="start">
               <Cards
                 header="Prosjektinfo"
                 height={23}
@@ -101,14 +101,25 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
               ></Cards>
             </Flex.Item>
             <Flex.Item size="size.half" align="start">
-              <Cards header="Økonomi" height={23} width={23}></Cards>
+              <Flex gap="gap.small">
+               <FlexItem>
+                <Cards header="Økonomi" height={23} width={23}></Cards>
+               </FlexItem>
+               <FlexItem>
+                <Flex column>
+                  <Cards header="Kvalitet" height={23} width={23}></Cards>
+                  <Cards header="Gevinstoppnåelse" height={23} width={23}></Cards>
+                </Flex>
+               </FlexItem>
+              </Flex>
             </Flex.Item>
-            <Flex.Item size="size.half" align="end">
-              <Cards header="Kvalitet" height={23} width={23}></Cards>
-            </Flex.Item>
+         
           </Flex>
-          <Flex.Item size="size.smallest">
+          <Flex.Item size="size.1/4">
+          <Flex column>
             <Cards header="Risiko" height={23} width={23}></Cards>
+            <Cards header="Fremdrift" height={23} width={23}></Cards>
+           </Flex>
           </Flex.Item>
         </Flex>
         <Info context={props.context} />
