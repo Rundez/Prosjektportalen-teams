@@ -32,19 +32,18 @@ export const InfoRiskMatrix = () => {
   }
 
   return (
-    <Flex column size="size.small">
+    <Flex column style={{ paddingBottom: "2%" }}>
       <Flex gap="gap.small">
         <GrStatusWarning size="40px" style={{ marginTop: "18.760px" }} />
         <h1>Usikkerhet</h1>
       </Flex>
       <h3>Høy</h3>
-      <Segment style={{ marginBottom: "20px" }}>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
-      </Segment>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+
       <RiskMatrix
         calloutTemplate={callout}
         height={320}
-        width={500}
+        width={400}
         items={data}
       />
     </Flex>

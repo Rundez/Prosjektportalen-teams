@@ -34,6 +34,7 @@
     "pp365-projectwebparts": "^1.2.8",
     "react": "16.8.5",
     "react-calendar-timeline": "^0.27.0",
+    "react-circular-progressbar": "^2.0.4",
     "react-dom": "16.8.5",
     "react-google-charts": "^3.0.15",
     "react-hook-form": "^6.14.2",

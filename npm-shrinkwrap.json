@@ -16623,6 +16623,11 @@
                 "memoize-one": "^5.1.1"
             }
         },
+        "react-circular-progressbar": {
+            "version": "2.0.4",
+            "resolved": "https://registry.npmjs.org/react-circular-progressbar/-/react-circular-progressbar-2.0.4.tgz",
+            "integrity": "sha512-OfX0ThSxRYEVGaQSt0DlXfyl5w4DbXHsXetyeivmoQrh9xA9bzVPHNf8aAhOIiwiaxX2WYWpLDB3gcpsDJ9oww=="
+        },
         "react-dom": {
             "version": "16.8.5",
             "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-16.8.5.tgz",
