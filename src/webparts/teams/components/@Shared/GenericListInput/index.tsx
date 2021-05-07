@@ -1,60 +1,55 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import { IGenericListInputProps } from "./types";
-import {
-  Button,
-  compose,
-  createClassResolver,
-  Flex,
-} from "@fluentui/react-northstar";
+import { Button, Flex } from "@fluentui/react-northstar";
 import { InputField } from "./InputField/index";
 import { sp } from "@pnp/sp";
-import { Spinner } from "office-ui-fabric-react";
 
 export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   listName,
   context,
   closeHandler,
-  editData = null,
+  editData,
 }) => {
-  const [listFields, setListFields] = useState<any[]>([]);
+  const [listFields, setListFields] = useState<any[]>();
   const [updatedListFields, setUpdatedListFields] = useState<any[]>();
   const [value, setValue] = useState([]);
-  const [editMode, setEditMode] = useState(false);
   const rowData = useRef<any>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchEditData = async () => {
       rowData.current = await fetchRowData();
       await fetchListFields();
     };
-    if (editMode != null) {
-      fetchData();
+    if (editData.editMode) {
+      fetchEditData();
+    } else {
+      fetchListFields();
     }
   }, []);
 
   useEffect(() => {
-    setUpdatedListFields(transformRowData());
+    if (editData.editMode && listFields != undefined) {
+      setUpdatedListFields(transformRowData());
+    }
   }, [listFields]);
 
   /**
    * Transforms the selected row to match the input fields structure
    */
   const transformRowData = () => {
-    if (listFields.length > 0 && rowData.current[0] != null) {
-      console.log(rowData.current[0]);
-      console.log(listFields);
+    console.log(rowData.current[0]);
+    console.log(listFields);
 
-      const updatedFields = listFields.map((field) => {
-        const updatedField = {
-          value: rowData.current[0][field.StaticName],
-          ...field,
-        };
-        return updatedField;
-        //console.log(rowData.current[0][field.StaticName]);
-      });
-      console.log(updatedFields);
-      return updatedFields;
-    }
+    const updatedFields = listFields.map((field) => {
+      const updatedField = {
+        value: rowData.current[0][field.StaticName],
+        ...field,
+      };
+      return updatedField;
+      //console.log(rowData.current[0][field.StaticName]);
+    });
+    console.log(updatedFields);
+    return updatedFields;
   };
 
   /**
@@ -77,9 +72,6 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
       .fields.filter("ReadOnlyField eq false and Hidden eq false")
       .get();
 
-    //list.map((field) => {
-    //  setListFields((current) => [...current, field]);
-    //});
     setListFields(list);
   };
 
@@ -128,8 +120,20 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   return (
     <>
       <form>
-        {updatedListFields &&
+        {editData.editMode &&
+          updatedListFields != undefined &&
           updatedListFields.map((field, index) => (
+            <InputField
+              field={field}
+              key={index}
+              onChange={handleInput}
+              context={context}
+              listName={listName}
+            />
+          ))}
+        {!editData.editMode &&
+          listFields != undefined &&
+          listFields.map((field, index) => (
             <InputField
               field={field}
               key={index}

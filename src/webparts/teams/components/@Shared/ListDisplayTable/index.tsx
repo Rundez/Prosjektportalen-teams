@@ -128,6 +128,7 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
    */
   const _onAddItemClick = () => {
     setDisplayDialog(true);
+    setEditData({ editMode: false, row: null });
     console.log("Adding item....");
   };
 

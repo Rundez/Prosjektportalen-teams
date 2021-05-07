@@ -1,5 +1,5 @@
 import { FieldTypes } from "./types";
-import React, { useState, FunctionComponent } from "react";
+import React, { useState, FunctionComponent, useEffect } from "react";
 import { Input, Flex, TextArea, Dropdown } from "@fluentui/react-northstar";
 import { Toggle } from "office-ui-fabric-react";
 import {
@@ -24,6 +24,16 @@ export const InputField: FunctionComponent<any> = ({
   onChange,
   context,
 }) => {
+  const [value, setValue] = useState<any>();
+
+  useEffect(() => {
+    field.value != undefined ? setValue(field.value) : null;
+  }, []);
+
+  const internalOnChange = (value: any) => {
+    setValue(value);
+  };
+
   switch (field.FieldTypeKind) {
     case FieldTypes.Text: {
       return (
@@ -32,10 +42,11 @@ export const InputField: FunctionComponent<any> = ({
             <Input
               label={field.Title}
               fluid
-              onChange={(e: any) =>
-                onChange(e.target.value, field.EntityPropertyName)
-              }
-              value={field.value}
+              onChange={(e: any) => {
+                onChange(e.target.value, field.EntityPropertyName);
+                internalOnChange(e.target.value);
+              }}
+              value={value}
             />
           </Flex>
         </>
@@ -65,6 +76,8 @@ export const InputField: FunctionComponent<any> = ({
               getA11ySelectionMessage={{
                 onAdd: (item) => onChange(item, field.EntityPropertyName),
               }}
+              onChange={(e, data) => setValue(data.value)}
+              value={value}
             />
           </Flex>
         </>

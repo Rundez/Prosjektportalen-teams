@@ -63,7 +63,6 @@ export const TimeLine: FunctionComponent<ITimelineProps> = ({ listName }) => {
     );
   };
 
-  console.log(selectedItem);
   return (
     <div className={styles.timeline}>
       {!isLoading ? (
