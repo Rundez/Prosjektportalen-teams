@@ -102,30 +102,29 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
             </Flex.Item>
             <Flex.Item size="size.half" align="start">
               <Flex gap="gap.small">
-               <FlexItem>
-                <Cards header="Økonomi" height={23} width={23}></Cards>
-               </FlexItem>
-               <FlexItem>
-                <Flex column>
-                  <Cards header="Kvalitet" height={23} width={23}></Cards>
-                  <Cards header="Gevinstoppnåelse" height={23} width={23}></Cards>
-                </Flex>
-               </FlexItem>
+                <FlexItem>
+                  <Cards header="Økonomi" height={23} width={23}></Cards>
+                </FlexItem>
+                <FlexItem>
+                  <Flex column>
+                    <Cards header="Kvalitet" height={23} width={23}></Cards>
+                    <Cards
+                      header="Gevinstoppnåelse"
+                      height={23}
+                      width={23}
+                    ></Cards>
+                  </Flex>
+                </FlexItem>
               </Flex>
             </Flex.Item>
-         
           </Flex>
           <Flex.Item size="size.1/4">
-          <Flex column>
-            <Cards header="Risiko" height={23} width={23}></Cards>
-            <Cards header="Fremdrift" height={23} width={23}></Cards>
-           </Flex>
+            <Flex column>
+              <Cards header="Risiko" height={23} width={23}></Cards>
+              <Cards header="Fremdrift" height={23} width={23}></Cards>
+            </Flex>
           </Flex.Item>
         </Flex>
-        <Info context={props.context} />
-      </Flex>
-      <Flex padding="padding.medium" space="around">
-        <Status items={TestStatus} />
       </Flex>
     </div>
   );
@@ -135,3 +134,7 @@ const callout = `<h3>{Title}</h3>
 <p><strong>Usikkerhetstrategi: </strong>{GtRiskStrategy}</p>
 <p><strong>Nærhet: </strong>{GtRiskProximity}</p>
 <p><strong>Status usikkerhet: </strong>{GtRiskStatus}</p>`;
+// <Info context={props.context} />
+/*<Flex padding="padding.medium" space="around">
+        <Status items={TestStatus} />
+      </Flex>*/
