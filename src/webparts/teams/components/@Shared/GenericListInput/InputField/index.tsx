@@ -14,6 +14,7 @@ import {
   DateTimePicker,
   DateConvention,
 } from "@pnp/spfx-controls-react/lib/DateTimePicker";
+import moment from "moment";
 
 /**
  * Returns a corresponding component based on the fieldtype.
@@ -27,7 +28,7 @@ export const InputField: FunctionComponent<any> = ({
   const [value, setValue] = useState<any>();
 
   useEffect(() => {
-    field.value != undefined ? setValue(field.value) : null;
+    field.value != undefined ? setValue(field.value) : setValue(undefined);
   }, []);
 
   const internalOnChange = (value: any) => {
@@ -91,17 +92,39 @@ export const InputField: FunctionComponent<any> = ({
     }
     case FieldTypes.DateTime: {
       const handleChange = (date: Date) => {
+        console.log("Default date", date);
         onChange(date.toISOString(), field.EntityPropertyName);
       };
 
-      return (
-        <DateTimePicker
-          label={field.Title}
-          dateConvention={DateConvention.Date}
-          showLabels={false}
-          onChange={(date) => handleChange(date)}
-        />
-      );
+      if (field.value != undefined) {
+        const newDate = field.value.replace(/\./g, "/");
+        const realDate = moment(newDate, "DD-MM-YYYY");
+        console.log(realDate.toDate());
+        return (
+          <DateTimePicker
+            label={field.Title}
+            dateConvention={DateConvention.Date}
+            showLabels={false}
+            onChange={(date) => {
+              handleChange(date);
+              setValue(date);
+            }}
+            value={realDate.toDate()}
+          />
+        );
+      } else {
+        return (
+          <DateTimePicker
+            label={field.Title}
+            dateConvention={DateConvention.Date}
+            showLabels={false}
+            onChange={(date) => {
+              handleChange(date);
+              setValue(date);
+            }}
+          />
+        );
+      }
     }
     case FieldTypes.MultiChoice: {
       return <p>Multichoice</p>;
