@@ -1,5 +1,5 @@
 import { FieldTypes } from "./types";
-import React, { useState, FunctionComponent, useEffect } from "react";
+import React, { useState, FunctionComponent, useEffect, useRef } from "react";
 import { Input, Flex, TextArea, Dropdown } from "@fluentui/react-northstar";
 import { Toggle } from "office-ui-fabric-react";
 import {
@@ -26,6 +26,7 @@ export const InputField: FunctionComponent<any> = ({
   context,
 }) => {
   const [value, setValue] = useState<any>();
+  const [dateValue, setDateValue] = useState<Date>(undefined);
 
   useEffect(() => {
     field.value != undefined ? setValue(field.value) : setValue(undefined);
@@ -37,6 +38,10 @@ export const InputField: FunctionComponent<any> = ({
 
   switch (field.FieldTypeKind) {
     case FieldTypes.Text: {
+      // field.value != undefined
+      //   ? onChange(field.value, field.EntityPropertyName)
+      //   : null;
+
       return (
         <>
           <Flex>
@@ -97,9 +102,12 @@ export const InputField: FunctionComponent<any> = ({
       };
 
       if (field.value != undefined) {
-        const newDate = field.value.replace(/\./g, "/");
-        const realDate = moment(newDate, "DD-MM-YYYY");
-        console.log(realDate.toDate());
+        if (dateValue == undefined) {
+          const newDate = field.value.replace(/\./g, "/");
+          const realDate = moment(newDate, "DD-MM-YYYY");
+          setDateValue(realDate.toDate());
+        }
+
         return (
           <DateTimePicker
             label={field.Title}
@@ -107,9 +115,9 @@ export const InputField: FunctionComponent<any> = ({
             showLabels={false}
             onChange={(date) => {
               handleChange(date);
-              setValue(date);
+              setDateValue(date);
             }}
-            value={realDate.toDate()}
+            value={dateValue}
           />
         );
       } else {
@@ -138,9 +146,11 @@ export const InputField: FunctionComponent<any> = ({
               placeholder={field.TypeShortDescription}
               fluid
               name={field.EntityPropertyName}
-              onChange={(e: any) =>
-                onChange(e.target.value, field.EntityPropertyName)
-              }
+              onChange={(e: any) => {
+                onChange(e.target.value, field.EntityPropertyName);
+                setValue(e.target.value);
+              }}
+              value={value}
             />
           </Flex>
         </>
@@ -152,6 +162,7 @@ export const InputField: FunctionComponent<any> = ({
       const _getPeoplePickerItems = (items: any[]) => {
         const id: string = items[0].id;
         const propertyName: string = field.EntityPropertyName + "Id";
+        setValue(items[0]);
         onChange(id, propertyName);
       };
 
@@ -163,8 +174,11 @@ export const InputField: FunctionComponent<any> = ({
           onChange={_getPeoplePickerItems}
           principalTypes={[PrincipalType.User]}
           ensureUser
-          resolveDelay={1000}
+          resolveDelay={200}
           groupName=""
+          defaultSelectedUsers={
+            field.value != undefined ? [field.value[0].email] : [undefined]
+          }
         />
       );
     }

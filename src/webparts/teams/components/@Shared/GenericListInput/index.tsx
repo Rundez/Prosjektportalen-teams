@@ -16,6 +16,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   const rowData = useRef<any>(null);
 
   useEffect(() => {
+    console.log(editData);
     const fetchEditData = async () => {
       rowData.current = await fetchRowData();
       await fetchListFields();
@@ -117,6 +118,28 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     closeHandler();
   };
 
+  /**
+   * Updates the selected row
+   */
+  const updateSpRow = async (lName: string, inputValues: any) => {
+    let newValues = new Map<string, any>();
+    inputValues.map((obj) => newValues.set(obj.fieldName, obj.fieldValue));
+
+    // Convert the map to a object
+    let obj = [...newValues.entries()].reduce(
+      (obj, [key, value]) => ((obj[key] = value), obj),
+      {}
+    );
+    console.log(obj);
+    //add an item to the list
+    const result = await sp.web.lists
+      .getByTitle(lName)
+      .items.getById(editData.row)
+      .update(obj);
+    console.log(`Updated row ${editData.row}`);
+    closeHandler();
+  };
+
   return (
     <>
       <form>
@@ -146,7 +169,11 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
           <Button
             primary
             content="Legg til"
-            onClick={() => addItemsToSpList(listName, value)}
+            onClick={() => {
+              editData.editMode == true
+                ? updateSpRow(listName, value)
+                : addItemsToSpList(listName, value);
+            }}
           />
           <Button secondary content="Avbryt" onClick={closeHandler} />
         </Flex>
