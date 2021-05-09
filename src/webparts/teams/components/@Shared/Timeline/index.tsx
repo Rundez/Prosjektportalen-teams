@@ -63,7 +63,6 @@ export const TimeLine: FunctionComponent<ITimelineProps> = ({ listName }) => {
     );
   };
 
-  console.log(selectedItem);
   return (
     <div className={styles.timeline}>
       {!isLoading ? (
@@ -97,7 +96,7 @@ export const TimeLine: FunctionComponent<ITimelineProps> = ({ listName }) => {
 
 /**
  * Fetch items
- * @param listName 
+ * @param listName
  */
 const fetchItems = async (listName: string) => {
   const items = await sp.web.lists

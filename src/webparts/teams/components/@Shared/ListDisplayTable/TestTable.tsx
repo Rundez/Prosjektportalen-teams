@@ -56,7 +56,6 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
         };
       }
       if (field["odata.type"] === "SP.Taxonomy.TaxonomyField") {
-        console.log(field);
         return {
           name: field.InternalName,
           displayName: field.Title,
@@ -64,7 +63,7 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
           isResizable: true,
           minWidth: 50,
           maxWidth: 100,
-          render: _renderTaxonomyColumn,
+          //render: _renderTaxonomyColumn,
         };
       }
       return {
@@ -90,7 +89,7 @@ export const TestTable: FunctionComponent<IDisplayTableProps> = ({
   };
 
   const _renderUserColumn = (user: any) => {
-    console.error(user);
+    console.log(user);
     return (
       <FieldUserRenderer
         context={context as IContext}

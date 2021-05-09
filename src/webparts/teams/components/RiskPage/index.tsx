@@ -6,6 +6,7 @@ import { AddElementDialog } from "../@Shared/DialogPopup";
 import { DisplayTable } from "../@Shared/ListDisplayTable/index";
 import { RiskMatrix } from "pp365-projectwebparts/lib/components/RiskMatrix";
 import { sp } from "@pnp/sp";
+import { TestTable } from "../@Shared/ListDisplayTable/TestTable";
 
 export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
   //items = [],
@@ -55,7 +56,7 @@ export const RiskPage: React.FunctionComponent<IRiskMatrixProps> = ({
             width={width}
             items={data}
           />
-          <Divider />
+          <Divider style={{ marginBottom: "10px" }} />
           <AddElementDialog context={context} listName={listName} />
           <DisplayTable listName={listName} context={context} />
         </div>

@@ -1,5 +1,5 @@
 import { FieldTypes } from "./types";
-import React, { useState, FunctionComponent } from "react";
+import React, { useState, FunctionComponent, useEffect, useRef } from "react";
 import { Input, Flex, TextArea, Dropdown } from "@fluentui/react-northstar";
 import { Toggle } from "office-ui-fabric-react";
 import {
@@ -14,6 +14,7 @@ import {
   DateTimePicker,
   DateConvention,
 } from "@pnp/spfx-controls-react/lib/DateTimePicker";
+import moment from "moment";
 
 /**
  * Returns a corresponding component based on the fieldtype.
@@ -23,19 +24,35 @@ export const InputField: FunctionComponent<any> = ({
   field,
   onChange,
   context,
-  listName,
 }) => {
+  const [value, setValue] = useState<any>();
+  const [dateValue, setDateValue] = useState<Date>(undefined);
+
+  useEffect(() => {
+    field.value != undefined ? setValue(field.value) : setValue(undefined);
+  }, []);
+
+  const internalOnChange = (value: any) => {
+    setValue(value);
+  };
+
   switch (field.FieldTypeKind) {
     case FieldTypes.Text: {
+      // field.value != undefined
+      //   ? onChange(field.value, field.EntityPropertyName)
+      //   : null;
+
       return (
         <>
           <Flex>
             <Input
               label={field.Title}
               fluid
-              onChange={(e: any) =>
-                onChange(e.target.value, field.EntityPropertyName)
-              }
+              onChange={(e: any) => {
+                onChange(e.target.value, field.EntityPropertyName);
+                internalOnChange(e.target.value);
+              }}
+              value={value}
             />
           </Flex>
         </>
@@ -65,39 +82,59 @@ export const InputField: FunctionComponent<any> = ({
               getA11ySelectionMessage={{
                 onAdd: (item) => onChange(item, field.EntityPropertyName),
               }}
+              onChange={(e, data) => setValue(data.value)}
+              value={value}
             />
           </Flex>
         </>
       );
     }
     case FieldTypes.Calculated: {
-      console.log(field.Title);
-
       return <p>Calculated field</p>;
     }
     case FieldTypes.Integer: {
-      console.log(field.Title);
-
       return <p>Integer field</p>;
     }
     case FieldTypes.DateTime: {
       const handleChange = (date: Date) => {
-        console.log(date);
+        console.log("Default date", date);
         onChange(date.toISOString(), field.EntityPropertyName);
       };
 
-      return (
-        <DateTimePicker
-          label={field.Title}
-          dateConvention={DateConvention.Date}
-          showLabels={false}
-          onChange={(date) => handleChange(date)}
-        />
-      );
+      if (field.value != undefined) {
+        if (dateValue == undefined) {
+          const newDate = field.value.replace(/\./g, "/");
+          const realDate = moment(newDate, "DD-MM-YYYY");
+          setDateValue(realDate.toDate());
+        }
+
+        return (
+          <DateTimePicker
+            label={field.Title}
+            dateConvention={DateConvention.Date}
+            showLabels={false}
+            onChange={(date) => {
+              handleChange(date);
+              setDateValue(date);
+            }}
+            value={dateValue}
+          />
+        );
+      } else {
+        return (
+          <DateTimePicker
+            label={field.Title}
+            dateConvention={DateConvention.Date}
+            showLabels={false}
+            onChange={(date) => {
+              handleChange(date);
+              setValue(date);
+            }}
+          />
+        );
+      }
     }
     case FieldTypes.MultiChoice: {
-      console.log(field.Title);
-
       return <p>Multichoice</p>;
     }
     case FieldTypes.Note: {
@@ -109,9 +146,11 @@ export const InputField: FunctionComponent<any> = ({
               placeholder={field.TypeShortDescription}
               fluid
               name={field.EntityPropertyName}
-              onChange={(e: any) =>
-                onChange(e.target.value, field.EntityPropertyName)
-              }
+              onChange={(e: any) => {
+                onChange(e.target.value, field.EntityPropertyName);
+                setValue(e.target.value);
+              }}
+              value={value}
             />
           </Flex>
         </>
@@ -121,9 +160,9 @@ export const InputField: FunctionComponent<any> = ({
     // ID is appended to the name since it is a lookup field..
     case FieldTypes.User: {
       const _getPeoplePickerItems = (items: any[]) => {
-        console.log("Items:", items);
         const id: string = items[0].id;
         const propertyName: string = field.EntityPropertyName + "Id";
+        setValue(items[0]);
         onChange(id, propertyName);
       };
 
@@ -135,16 +174,17 @@ export const InputField: FunctionComponent<any> = ({
           onChange={_getPeoplePickerItems}
           principalTypes={[PrincipalType.User]}
           ensureUser
-          resolveDelay={1000}
+          resolveDelay={200}
           groupName=""
+          defaultSelectedUsers={
+            field.value != undefined ? [field.value[0].email] : [undefined]
+          }
         />
       );
     }
     // This should really be a taxonomy field
     case FieldTypes.Invalid: {
       const onTaxPickerChange = (terms: IPickerTerms) => {
-        console.log("Terms", terms);
-
         // call the onchange function and pass the whole term element.
         // Should be refactored to also work with multiple terms
         onChange(terms[0], field.EntityPropertyName);
@@ -184,7 +224,6 @@ export const InputField: FunctionComponent<any> = ({
       return <p></p>;
     }
     case FieldTypes.Lookup: {
-      console.log(field.Title);
       return <p>Lookup field</p>;
     }
     default: {

@@ -103,20 +103,6 @@ export const Info: FunctionComponent<IInfoProps> = (props) => {
     </div>
   );
 };
-const getProjectInfo2 = [
-  {
-    header: "Målsetting",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent maximus mollis nulla id dapibus.",
-    media: <GiStairsGoal size="30px" />,
-  },
-  {
-    header: "Overordnet status",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent maximus mollis nulla id dapibus. Nulla aliquam eget arcu ut dictum. Nullam in quam ut erat tincidunt tempor.",
-    media: <ImStatsBars size="30px" />,
-  },
-];
 
 const transformProjectInformation = (items: any, context) => {
   const projectInfoColumn = [
@@ -128,7 +114,7 @@ const transformProjectInformation = (items: any, context) => {
     {
       header: "Målsetting",
       content: items[0].GtProjectGoals,
-      media: <GiStairsGoal size="30px" />,
+      media: <GiStairsGoal size="30px" style={{ color: "red" }} />,
     },
     {
       header: "Start- og sluttdato",
@@ -155,7 +141,7 @@ const transformProjectInformation = (items: any, context) => {
           key={1}
         />
       ),
-      media: <BsPersonFill size="30px" />,
+      media: <BsPersonFill size="30px" style={{ color: "blue" }} />,
     },
     {
       header: "Prosjekteier",

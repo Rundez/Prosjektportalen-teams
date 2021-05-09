@@ -1,63 +1,79 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import { IGenericListInputProps } from "./types";
-import { Button, createClassResolver, Flex } from "@fluentui/react-northstar";
+import { Button, Flex } from "@fluentui/react-northstar";
 import { InputField } from "./InputField/index";
-
-//import { sp, IFieldInfo } from "@pnp/sp/presets/all";
-//import { IItemAddResult } from "@pnp/sp/items";
-
 import { sp } from "@pnp/sp";
 
 export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
   listName,
   context,
   closeHandler,
+  editData,
 }) => {
-  const [fields, setFields] = useState([]); // Not in use
-  const [contentTypeID, setContentTypeID] = useState([]); // Not in use. Could be needed?
-  const [listFields, setListFields] = useState<any[]>([]);
+  const [listFields, setListFields] = useState<any[]>();
+  const [updatedListFields, setUpdatedListFields] = useState<any[]>();
   const [value, setValue] = useState([]);
+  const rowData = useRef<any>(null);
 
   useEffect(() => {
-    //fetchViewListData(listName);
-    //fetchFieldData(listName);
-    fetchListFields(listName);
+    console.log(editData);
+    const fetchEditData = async () => {
+      rowData.current = await fetchRowData();
+      await fetchListFields();
+    };
+    if (editData.editMode) {
+      fetchEditData();
+    } else {
+      fetchListFields();
+    }
   }, []);
 
-  // Fetch the standard view fields. Currently not in use.
-  const fetchViewListData = async (listName) => {
-    const list = sp.web.lists
+  useEffect(() => {
+    if (editData.editMode && listFields != undefined) {
+      setUpdatedListFields(transformRowData());
+    }
+  }, [listFields]);
+
+  /**
+   * Transforms the selected row to match the input fields structure
+   */
+  const transformRowData = () => {
+    console.log(rowData.current[0]);
+    console.log(listFields);
+
+    const updatedFields = listFields.map((field) => {
+      const updatedField = {
+        value: rowData.current[0][field.StaticName],
+        ...field,
+      };
+      return updatedField;
+      //console.log(rowData.current[0][field.StaticName]);
+    });
+    console.log(updatedFields);
+    return updatedFields;
+  };
+
+  /**
+   * Fetches values for the selected row if editMode is on
+   */
+  const fetchRowData = async () => {
+    const rows = await sp.web.lists
       .getByTitle(listName)
-      .views.getByTitle("Alle elementer")
-      .fields.get()
-      .then((data) => setFields(data["Items"]));
-    return list;
+      .renderListData("<View></View>");
+
+    return rows.Row.filter((row) => row.ID == editData.row);
   };
 
   /**
    * Fetches fields for the selected list.
    */
-  const fetchListFields = async (listName: string) => {
-    const list = sp.web.lists
+  const fetchListFields = async () => {
+    const list = await sp.web.lists
       .getByTitle(listName)
       .fields.filter("ReadOnlyField eq false and Hidden eq false")
-      .get()
-      .then((fields) =>
-        fields.map((field) => {
-          setListFields((current) => [...current, field]);
-        })
-      );
-    return list;
-  };
+      .get();
 
-  // Fetches the content type ID for the list. Currently not in use.
-  const fetchFieldData = async (listName: string) => {
-    const list = sp.web.lists
-      .getByTitle(listName)
-      .contentTypes.get()
-      .then((ct) =>
-        ct.map((ct) => setContentTypeID((current) => [...current, ct.Id]))
-      );
+    setListFields(list);
   };
 
   /**
@@ -90,7 +106,7 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     let newValues = new Map<string, any>();
     inputValues.map((obj) => newValues.set(obj.fieldName, obj.fieldValue));
 
-    // Convert the map to a object according
+    // Convert the map to a object
     let obj = [...newValues.entries()].reduce(
       (obj, [key, value]) => ((obj[key] = value), obj),
       {}
@@ -98,30 +114,68 @@ export const GenericListInput: FunctionComponent<IGenericListInputProps> = ({
     console.log(obj);
     //add an item to the list
     const result = await sp.web.lists.getByTitle(lName).items.add(obj);
-    closeHandler();
     console.log(result);
+    closeHandler();
   };
-  console.log(value);
-  console.log(listFields);
+
+  /**
+   * Updates the selected row
+   */
+  const updateSpRow = async (lName: string, inputValues: any) => {
+    let newValues = new Map<string, any>();
+    inputValues.map((obj) => newValues.set(obj.fieldName, obj.fieldValue));
+
+    // Convert the map to a object
+    let obj = [...newValues.entries()].reduce(
+      (obj, [key, value]) => ((obj[key] = value), obj),
+      {}
+    );
+    console.log(obj);
+    //add an item to the list
+    const result = await sp.web.lists
+      .getByTitle(lName)
+      .items.getById(editData.row)
+      .update(obj);
+    console.log(`Updated row ${editData.row}`);
+    closeHandler();
+  };
+
   return (
     <>
       <form>
-        {listFields.map((field, index) => (
-          <InputField
-            field={field}
-            key={index}
-            onChange={handleInput}
-            context={context}
-            listName={listName}
-          />
-        ))}
+        {editData.editMode &&
+          updatedListFields != undefined &&
+          updatedListFields.map((field, index) => (
+            <InputField
+              field={field}
+              key={index}
+              onChange={handleInput}
+              context={context}
+              listName={listName}
+            />
+          ))}
+        {!editData.editMode &&
+          listFields != undefined &&
+          listFields.map((field, index) => (
+            <InputField
+              field={field}
+              key={index}
+              onChange={handleInput}
+              context={context}
+              listName={listName}
+            />
+          ))}
         <Flex gap="gap.medium" style={{ marginTop: 10 }}>
           <Button
             primary
-            content="Add Item"
-            onClick={() => addItemsToSpList(listName, value)}
+            content="Legg til"
+            onClick={() => {
+              editData.editMode == true
+                ? updateSpRow(listName, value)
+                : addItemsToSpList(listName, value);
+            }}
           />
-          <Button secondary content="Cancel" onClick={closeHandler} />
+          <Button secondary content="Avbryt" onClick={closeHandler} />
         </Flex>
       </form>
     </>

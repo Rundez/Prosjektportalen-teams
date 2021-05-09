@@ -1,13 +1,17 @@
-import React, { useState, FunctionComponent, useEffect } from "react";
+import React, { useState, FunctionComponent, useEffect, useRef } from "react";
 import { IDisplayTableProps } from "./types";
-import { ListView, IViewField } from "@pnp/spfx-controls-react/lib/ListView";
+import {
+  ListView,
+  IViewField,
+  SelectionMode,
+} from "@pnp/spfx-controls-react/lib/ListView";
 import { sp } from "@pnp/sp";
 import { IFieldInfo } from "./types";
-import { FieldTextRenderer } from "@pnp/spfx-controls-react/lib/FieldTextRenderer";
 import { FieldUserRenderer } from "@pnp/spfx-controls-react/lib/FieldUserRenderer";
-import { WebPartContext } from "@microsoft/sp-webpart-base";
-import { IPrincipal } from "@pnp/spfx-controls-react/lib/common/SPEntities";
 import { IContext } from "@pnp/spfx-controls-react/lib/common/Interfaces";
+import { ListHeader } from "./ListHeader";
+import { IContextualMenuItem, Spinner } from "office-ui-fabric-react";
+import { AddElementDialog } from "../DialogPopup";
 
 export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   listName,
@@ -15,19 +19,23 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
 }) => {
   const [listColumns, setListColumns] = useState<IViewField[]>([]);
   const [listElements, setListElements] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const selectedItem = useRef<any>(null);
+  const [isItemSelected, setIsItemSelected] = useState<boolean>(false);
+  const [displayDialog, setDisplayDialog] = useState<boolean>(false);
+  const [editData, setEditData] = useState<{}>();
+
   useEffect(() => {
     const fetchItems = async () => {
       const columnNames = await fetchInternalAndExternalColumns(listName); // Fetch internal and external column names based on view
       const columnFormatted = await convertListColumns(columnNames); // Convert the column names to table format
       setListColumns(columnFormatted); // set the list columns to state
-      //const rows = await fetchListItems(listName, columnNames); // Fetch the items based on the view query
-      //setListElements(rows);
-      //fetchListItems(listName, columnNames);
       const rows = await fetchItemsCaml(listName);
       setListElements(rows);
+      setIsLoading(false);
     };
     fetchItems();
-  }, []);
+  }, [displayDialog]);
 
   /**
    * Convert the columns to the accepted format
@@ -38,8 +46,6 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
   ): Promise<IViewField[]> => {
     const list = columns.map((field: any) => {
       if (field["odata.type"] === "SP.FieldUser") {
-        console.log("Dette er et brukerfelt:");
-        console.log(field);
         return {
           name: field.InternalName,
           displayName: field.Title,
@@ -57,7 +63,6 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
         isResizable: true,
         minWidth: 50,
         maxWidth: 100,
-        //render: _renderColumn,
       };
     });
 
@@ -65,39 +70,130 @@ export const DisplayTable: FunctionComponent<IDisplayTableProps> = ({
     return sortedList;
   };
 
-  const _renderColumn = (text) => {
-    return <FieldTextRenderer text={text["GtRiskStrategy"]} />;
-  };
-
-  const _renderUserColumn = (user: any) => {
+  const _renderUserColumn = (row: any, event: any, fieldData: any) => {
     let spContext: IContext = {
       pageContext: context.pageContext,
       spHttpClient: context.spHttpClient,
     };
+
+    console.log("Field data:", fieldData);
+    console.log("Rowdata:", row);
+
     return (
       <FieldUserRenderer
-        context={spContext}
+        context={context}
         users={[
           {
-            id: user["GtResourceUser.0.id"],
-            email: user["GtResourceUser.0.email"],
-            department: user["GtResourceUser.0.department"],
-            jobTitle: user["GtResourceUser.0.jobtitle"],
+            id: "9",
+            email: 'user["GtResourceUser.0.email"]',
+            department: 'user["GtResourceUser.0.department"]',
+            jobTitle: 'user["GtResourceUser.0.jobtitle"]',
             picture: "GtResourceUser.0.picture",
             sip: "GtResourceUser.0.sip",
-            title: user["GtResourceUser.0.title"],
-            value: user["GtResourceUser.0.key"],
+            title: row[fieldData.fieldName],
+            value: "",
           },
         ]}
-        key={user["Editor.0.key"]}
+        key={1}
       />
     );
   };
 
-  console.log(listElements);
+  /**
+   * Method that runs when an item is selected
+   */
+  const _getSelection = (items: any[]) => {
+    selectedItem.current = items[0];
+    setIsItemSelected(true);
+  };
+
+  /**
+   * Determines which button on command bar that is clicked
+   * @param event event
+   * @param value the button that is clicked
+   */
+  const _onCommandButtonClick = (
+    event:
+      | React.MouseEvent<HTMLElement, MouseEvent>
+      | React.KeyboardEvent<HTMLElement>,
+    value: IContextualMenuItem
+  ) => {
+    if (selectedItem.current.ID && value.key === "delete") {
+      deleteListItem(listName, selectedItem.current.ID);
+    }
+  };
+
+  /**
+   * When "Add item" command button is pressed, open the item adder dialog.
+   */
+  const _onAddItemClick = () => {
+    setDisplayDialog(true);
+    setEditData({ editMode: false, row: null });
+    console.log("Adding item....");
+  };
+
+  const _onCloseDialog = () => {
+    setDisplayDialog(false);
+  };
+
+  /**
+   * Deletes an item form the current list
+   */
+  const deleteListItem = (listName: string, id: number) => {
+    sp.web.lists
+      .getByTitle(listName)
+      .items.getById(id)
+      .delete()
+      .then(() => {
+        const updatedElements = listElements.filter((row) => row.ID != id);
+        setListElements(updatedElements);
+      });
+  };
+
+  const _updateListItem = (
+    event:
+      | React.MouseEvent<HTMLElement, MouseEvent>
+      | React.KeyboardEvent<HTMLElement>,
+    value: IContextualMenuItem
+  ) => {
+    if (selectedItem.current.ID && value.key === "edit") {
+      setEditData({ editMode: true, row: selectedItem.current.ID });
+      setDisplayDialog(true);
+    }
+  };
+
   return (
     <div>
-      <ListView items={listElements} viewFields={listColumns} showFilter />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          {displayDialog && (
+            <AddElementDialog
+              context={context}
+              listName={listName}
+              shouldPanelOpen={displayDialog}
+              onClose={_onCloseDialog}
+              editData={editData}
+            />
+          )}
+          <ListHeader
+            selectedItem={selectedItem.current}
+            onClick={_onCommandButtonClick}
+            onAddItemClick={_onAddItemClick}
+            onEditClick={_updateListItem}
+            isButtonsDisabled={!isItemSelected}
+          />
+          <ListView
+            items={listElements}
+            viewFields={listColumns}
+            showFilter
+            filterPlaceHolder="Søk"
+            selectionMode={SelectionMode.single}
+            selection={(items) => _getSelection(items)}
+          />
+        </>
+      )}
     </div>
   );
 };
@@ -138,7 +234,6 @@ const fetchItemsCaml = async (listName: string) => {
     return r;
   });
 
-  console.log(rows.Row);
   return rows.Row;
 };
 
@@ -155,7 +250,6 @@ const fetchListItems = async (listName: string, viewFields: IFieldInfo[]) => {
     .expand("")
     .get();
 
-  console.log(items);
   return items;
 };
 

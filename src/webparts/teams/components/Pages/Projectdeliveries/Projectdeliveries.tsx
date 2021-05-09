@@ -9,7 +9,6 @@ export const ProjectDeliveries: FunctionComponent<IProjectdeliveries> = ({
   listName = "prosjektleveranser",
   context,
 }) => {
-  console.log(context);
   return (
     <>
       <div style={{ marginBottom: "2em" }}>
