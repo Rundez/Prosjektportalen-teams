@@ -177,7 +177,7 @@ export const InputField: FunctionComponent<any> = ({
           resolveDelay={200}
           groupName=""
           defaultSelectedUsers={
-            field.value != undefined ? [field.value[0].email] : [undefined]
+            field.value ? [field.value[0].email] : [undefined]
           }
         />
       );
