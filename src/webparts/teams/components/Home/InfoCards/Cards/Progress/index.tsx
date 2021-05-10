@@ -3,6 +3,7 @@ import { IProgressCard } from "./types";
 import styles from "../../InfoCards.module.scss";
 import { GiProgression } from "react-icons/gi";
 import { Divider, List, Flex } from "@fluentui/react-northstar";
+import { Icon } from "office-ui-fabric-react";
 
 export const ProgressCard: FunctionComponent<IProgressCard> = (props) => {
   const status = "På plan";
@@ -31,7 +32,13 @@ export const ProgressCard: FunctionComponent<IProgressCard> = (props) => {
   return (
     <div className={styles.projectInfoContainer}>
       <Flex gap="gap.small">
-        <GiProgression size="30px" style={{ marginTop: "18.760px" }} />
+        <Icon
+          iconName="DateTime"
+          style={{
+            marginTop: "18px",
+            fontSize: "30px",
+          }}
+        />
         <h1>{props.header}</h1>
       </Flex>
       <p className={styles.projectStatus}>{status}</p>

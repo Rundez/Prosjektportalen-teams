@@ -4,6 +4,7 @@ import styles from "../../InfoCards.module.scss";
 import { Flex, FlexItem } from "@fluentui/react-northstar";
 import { Divider } from "semantic-ui-react";
 import { GiMoneyStack } from "react-icons/gi";
+import { Icon } from "office-ui-fabric-react";
 
 export const EconomyCard: FunctionComponent<IEconomyCard> = (props) => {
   let totalbudget = 1000;
@@ -35,7 +36,13 @@ export const EconomyCard: FunctionComponent<IEconomyCard> = (props) => {
   return (
     <div className={styles.projectInfoContainer}>
       <Flex gap="gap.small">
-        <GiMoneyStack size="30px" style={{ marginTop: "18.760px" }} />
+        <Icon
+          iconName="Money"
+          style={{
+            marginTop: "18.760px",
+            fontSize: "30px",
+          }}
+        />
         <h1>{props.header}</h1>
       </Flex>
 

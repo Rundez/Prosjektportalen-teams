@@ -30,7 +30,7 @@
     "@types/es6-collections": "^0.5.32",
     "interactjs": "^1.10.8",
     "mobile-detect": "^1.4.5",
-    "office-ui-fabric-react": "6.214.0",
+    "office-ui-fabric-react": "^6.214.0",
     "pp365-projectwebparts": "^1.2.8",
     "react": "16.8.5",
     "react-calendar-timeline": "^0.27.0",

@@ -5,6 +5,7 @@ import { sp } from "@pnp/sp";
 import { IRiskMatrixProps, RiskElementModel } from "../../../RiskPage/types";
 import * as getValue from "get-value";
 import { RiskMatrix } from "pp365-projectwebparts/lib/components/RiskMatrix";
+import { Icon } from "office-ui-fabric-react";
 
 export const InfoRiskMatrix = () => {
   const [data, setData] = React.useState<RiskElementModel[]>([]);
@@ -34,7 +35,13 @@ export const InfoRiskMatrix = () => {
   return (
     <Flex column style={{ paddingBottom: "2%" }}>
       <Flex gap="gap.small">
-        <GrStatusWarning size="40px" style={{ marginTop: "18.760px" }} />
+        <Icon
+          iconName="Warning"
+          style={{
+            marginTop: "18.760px",
+            fontSize: "30px",
+          }}
+        />
         <h1>Usikkerhet</h1>
       </Flex>
       <h3>Høy</h3>

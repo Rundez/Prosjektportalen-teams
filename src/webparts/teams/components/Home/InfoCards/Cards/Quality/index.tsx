@@ -5,6 +5,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { FaBox } from "react-icons/fa";
 import "react-circular-progressbar/dist/styles.css";
 import styles from "../../InfoCards.module.scss";
+import { Icon } from "office-ui-fabric-react";
 
 export const QualityCard: FunctionComponent<IQualityCard> = (props) => {
   const status = "Ihht. spesifikasjon";
@@ -27,7 +28,13 @@ export const QualityCard: FunctionComponent<IQualityCard> = (props) => {
   return (
     <div className={styles.projectInfoContainer}>
       <Flex gap="gap.small">
-        <FaBox size="30px" style={{ marginTop: "18.760px" }} />
+        <Icon
+          iconName="Product"
+          style={{
+            marginTop: "18px",
+            fontSize: "30px",
+          }}
+        />
         <h1>{props.header}</h1>
       </Flex>
       <Flex column>
