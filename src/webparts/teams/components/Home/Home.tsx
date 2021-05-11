@@ -14,9 +14,8 @@ import { StatusBox, Status, TestStatus, TestStatus2 } from "./MiniStatus/index";
 import { Info } from "./ProjectInfo/index";
 import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
 import styles from "./Home.module.scss";
-
-import { ProjectStatus } from "pp365-projectwebparts/lib/components/ProjectStatus";
 import { Cards } from "./InfoCards";
+
 export const Home: FunctionComponent<IHomeProps> = (props) => {
   const [teamUsers, setTeamUsers] = useState([]);
   const [hubSite, setHubSite] = useState<any>();
@@ -58,7 +57,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
       {isLoading ? (
         <Spinner />
       ) : (
-        /* <div>
+        <div>
           <div style={{ marginTop: "10px" }}>
             <ProjectPhases
               phaseField="GtProjectPhase"
@@ -83,17 +82,24 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
               webPartContext={props.context}
             />
           </div>
-        </div>*/
-        <div></div>
+        </div>
       )}
+      <div style={{ display: "none" }}>
+        <Info context={props.context} />
+      </div>
       <Flex
         gap="gap.small"
         padding="padding.medium"
         space="around"
         style={{ display: "block" }} // Should get rid of this
       >
-        <Flex gap="gap.small" hAlign="center" vAlign="center">
-          <Flex column style={{marginTop: "-10%"}}>
+        <Flex
+          gap="gap.small"
+          hAlign="center"
+          vAlign="center"
+          style={{ alignItems: "flex-start" }}
+        >
+          <Flex column>
             <Flex.Item size="size.half" align="start">
               <Cards
                 header="Prosjektinfo"
