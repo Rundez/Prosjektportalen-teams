@@ -26,7 +26,7 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
   <p><strong>Nærhet: </strong>{GtRiskProximity}</p>
   <p><strong>Status usikkerhet: </strong>{GtRiskStatus}</p>`;
   return (
-    <div>
+   /* <div>
       {isLoading ? (
         <Spinner />
       ) : (
@@ -39,6 +39,7 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
           webPartContext={context}
         />
       )}
-    </div>
+    </div>*/
+    <div></div>
   );
 };
