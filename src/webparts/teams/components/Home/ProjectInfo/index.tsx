@@ -68,7 +68,7 @@ export const Info: FunctionComponent<IInfoProps> = (props) => {
 
           sp.setup({
             sp: {
-              baseUrl: "https://martdev.sharepoint.com/sites/test",
+              baseUrl: props.context.pageContext.web.absoluteUrl,
             },
           });
         });
