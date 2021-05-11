@@ -35,6 +35,7 @@ export const ProgressCard: FunctionComponent<IProgressCard> = (props) => {
         <Icon
           iconName="DateTime"
           style={{
+            color:"#28b52f",
             marginTop: "18px",
             fontSize: "30px",
           }}

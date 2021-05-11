@@ -31,6 +31,7 @@ export const QualityCard: FunctionComponent<IQualityCard> = (props) => {
         <Icon
           iconName="Product"
           style={{
+            color:"blue",
             marginTop: "18px",
             fontSize: "30px",
           }}

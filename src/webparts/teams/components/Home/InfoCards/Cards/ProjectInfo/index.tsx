@@ -103,6 +103,7 @@ export const ProjectInfoCard: FunctionComponent<IProjectInfoCard> = (props) => {
         <Icon
           iconName="BarChart4"
           style={{
+            color:"#28b52f",
             marginTop: "15px",
             fontSize: "30px",
           }}

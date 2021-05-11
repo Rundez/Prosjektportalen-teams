@@ -19,6 +19,7 @@ export const ProfitCard: FunctionComponent<IProfitCard> = (props) => {
         <Icon
           iconName="Trophy"
           style={{
+            color: "gold",
             marginTop: "18px",
             fontSize: "30px",
           }}

@@ -91,7 +91,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
         style={{ display: "block" }} // Should get rid of this
       >
         <Flex gap="gap.small" hAlign="center" vAlign="center">
-          <Flex column>
+          <Flex column style={{marginTop: "-10%"}}>
             <Flex.Item size="size.half" align="start">
               <Cards
                 header="Prosjektinfo"

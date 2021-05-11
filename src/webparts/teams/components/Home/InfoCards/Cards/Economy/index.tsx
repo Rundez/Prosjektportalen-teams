@@ -39,6 +39,7 @@ export const EconomyCard: FunctionComponent<IEconomyCard> = (props) => {
         <Icon
           iconName="Money"
           style={{
+            color:"#28b52f",
             marginTop: "18.760px",
             fontSize: "30px",
           }}

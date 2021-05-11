@@ -38,6 +38,7 @@ export const InfoRiskMatrix = () => {
         <Icon
           iconName="Warning"
           style={{
+            color:"#28b52f",
             marginTop: "18.760px",
             fontSize: "30px",
           }}
