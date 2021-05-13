@@ -81,7 +81,7 @@ export const ProjectInfoCard: FunctionComponent<IProjectInfoCard> = (props) => {
       {
         header: "Start- og sluttdato",
         content: `${items[0].GtStartDate} - ${items[0].GtEndDate}`,
-        media: <BiCalendar size="30px" />,
+        media: <BiCalendar color="green" size="30px" />,
       },
       {
         header: "Målsetting",
@@ -91,7 +91,7 @@ export const ProjectInfoCard: FunctionComponent<IProjectInfoCard> = (props) => {
       {
         header: "Overordnet status",
         content: items[0].GtProjectGoals,
-        media: <ImStatsBars size="30px" />,
+        media: <ImStatsBars color="green" size="30px" />,
       },
     ];
 
@@ -103,7 +103,7 @@ export const ProjectInfoCard: FunctionComponent<IProjectInfoCard> = (props) => {
         <Icon
           iconName="BarChart4"
           style={{
-            color:"#28b52f",
+            color: "#28b52f",
             marginTop: "15px",
             fontSize: "30px",
           }}

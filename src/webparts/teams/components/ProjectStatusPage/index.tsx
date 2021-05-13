@@ -26,20 +26,19 @@ export const ProjectStatusPage: FunctionComponent<IProjectStatusPageProps> = ({
   <p><strong>Nærhet: </strong>{GtRiskProximity}</p>
   <p><strong>Status usikkerhet: </strong>{GtRiskStatus}</p>`;
   return (
-    /*<div>
+    <div>
       {isLoading ? (
         <Spinner />
       ) : (
         <ProjectStatus
           riskMatrixCalloutTemplate={callout}
-          siteId="00fc868f-7bb8-4a29-bc94-cb73527a5e92"
+          siteId={context.pageContext.site.id.toString()}
           hubSite={hubSite}
-          isSiteAdmin
-          webUrl="https://martdev.sharepoint.com/sites/test"
+          isSiteAdmin={false}
+          webUrl={context.pageContext.web.absoluteUrl}
           webPartContext={context}
         />
       )}
-    </div>*/
-    <div></div>
+    </div>
   );
 };

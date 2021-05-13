@@ -60,7 +60,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
       {isLoading ? (
         <Spinner />
       ) : (
-        /* <div>
+        <div>
           <div style={{ marginTop: "10px" }}>
             <ProjectPhases
               phaseField="GtProjectPhase"
@@ -85,8 +85,7 @@ export const Home: FunctionComponent<IHomeProps> = (props) => {
               webPartContext={props.context}
             />
           </div>
-        </div>*/
-        <div></div>
+        </div>
       )}
       <MobileHome mobile={md.mobile()} context={props.context}></MobileHome>
     </div>

@@ -38,15 +38,18 @@ export const InfoRiskMatrix = () => {
         <Icon
           iconName="Warning"
           style={{
-            color:"#28b52f",
+            color: "#28b52f",
             marginTop: "18.760px",
             fontSize: "30px",
           }}
         />
         <h1>Usikkerhet</h1>
       </Flex>
-      <h3>Høy</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+      <h3>Medium</h3>
+      <p>
+        Det fremstår noen risikoelementer, spesielt ettersom vi er midt i en
+        pandemi. Disse er tatt hånd om, og redusert så mye som overhodet mulig.
+      </p>
 
       <RiskMatrix
         calloutTemplate={callout}
