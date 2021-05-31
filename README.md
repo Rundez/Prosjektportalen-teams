@@ -20,7 +20,8 @@ Dette er et bachelorprosjekt skrevet for Puzzlepart. Applikasjonen er en versjon
 ## Prerequisites
 
 > Gulp globally installed
-> Node v. < 11
+
+> node 10.13
 
 ## Solution
 
@@ -32,8 +33,7 @@ folder name | Author details (name, company, twitter alias with link)
 
 Version|Date|Comments
 -------|----|--------
-1.1|March 10, 2021|Update comment
-1.0|January 29, 2021|Initial release
+0.5|May 31, 2021|Beta release
 
 ## Disclaimer
 
@@ -47,7 +47,7 @@ Version|Date|Comments
 - Ensure that you are at the solution folder
 - in the command-line run:
   - **npm install**
-  - **gulp serve**
+  - **npm run serve**
 
 > Include any additional steps as needed.
 
