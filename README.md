@@ -19,7 +19,8 @@ Dette er et bachelorprosjekt skrevet for Puzzlepart. Applikasjonen er en versjon
 
 ## Prerequisites
 
-> Any special pre-requisites?
+> Gulp globally installed
+> Node v. < 11
 
 ## Solution
 
